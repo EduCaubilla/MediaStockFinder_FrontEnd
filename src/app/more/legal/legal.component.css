@@ -1,0 +1,32 @@
+main {
+  padding-top: 6rem;
+  font-family: "Lato", sans-serif;
+}
+
+h3 {
+  font-size: 3rem;
+  font-weight: 200;
+}
+
+h5 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+p {
+  color: #a0a0a0;
+  letter-spacing: 1.2px;
+}
+
+.legal-header {
+  max-width: 700px;
+}
+
+.legal-block {
+  padding: 0 10rem;
+}
+
+a {
+    text-decoration: none;
+    list-style-type: none;
+}
