@@ -1,7 +1,7 @@
 <main>
   <div class="container">
     <div class="search-header px-3 py-3 pt-md-5 pb-md-4 mr-auto">
-      <h3 class="display-4">Photo</h3>
+      <h3 class="display-4">{{search}}</h3>
       <!-- <p class="lead">
         Navigate across different categories to find what you're looking for or
         to discover something amazing on the way.
@@ -11,32 +11,33 @@
     <div class="container my-4 grid plantilla">
       <div class="row">
         <div class="column">
-          <div class="container element">
-            <a href="#exampleModal" data-toggle="modal" data-target="#exampleModal">
-              <img src="https://picsum.photos/200" />
+          <div class="container element" *ngFor="let item of arr1">
+            <a href=" #{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
+              <img [src]=item.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                (click)="getData($event)" />
             </a>
-            <div class="bottom-left">John Doe | Unsplash</div>
+            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="exampleModalLabel">
-                      John Doe | Unsplash
+                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                      {{item.authorName}} | {{item.font}}
                     </h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img src="https://picsum.photos/600" />
+                    <img [src]=item.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
-                      <h6>Title of the image</h6>
-                      <p>Description of the image</p>
+                      <h6>{{item.title}}</h6>
+                      <p>{{item.description}}</p>
                     </div>
 
                     <div class="dropdown">
@@ -45,11 +46,62 @@
                         Download
                       </a>
 
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Small</a>
-                        <a class="dropdown-item" href="#">Medium</a>
-                        <a class="dropdown-item" href="#">Large</a>
-                      </div>
+                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="column">
+          <div class="container element" *ngFor="let item of arr2">
+            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
+              <img [src]=item.imageSmall />
+            </a>
+            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+            <div class="bottom-right">
+              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            </div>
+            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                      {{item.authorName}} | {{item.font}}
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img [src]=item.imageMedium />
+                  </div>
+                  <div class="modal-footer">
+                    <div class="footer-text mr-auto align-bottom">
+                      <h6>{{item.title}}</h6>
+                      <p>{{item.description}}</p>
+                    </div>
+
+                    <div class="dropdown">
+                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a>
+
+                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
                     </div>
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
@@ -59,32 +111,34 @@
               </div>
             </div>
           </div>
-          <div class="container element">
-            <a href="#exampleModal2" data-toggle="modal" data-target="#exampleModal2">
-              <img src="https://picsum.photos/200/300" />
+        </div>
+        <div class="column">
+          <div class="container element" *ngFor="let item of arr3">
+            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
+              <img [src]=item.imageSmall />
             </a>
-            <div class="bottom-left">John Smith | Unsplash</div>
+            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog">
+            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="exampleModalLabel">
-                      John Smith | Unsplash
+                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                      {{item.authorName}} | {{item.font}}
                     </h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img src="https://picsum.photos/600" />
+                    <img [src]=item.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
-                      <h6>Title of the image</h6>
-                      <p>Description of the image</p>
+                      <h6>{{item.title}}</h6>
+                      <p>{{item.description}}</p>
                     </div>
 
                     <div class="dropdown">
@@ -93,11 +147,11 @@
                         Download
                       </a>
 
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Small</a>
-                        <a class="dropdown-item" href="#">Medium</a>
-                        <a class="dropdown-item" href="#">Large</a>
-                      </div>
+                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
                     </div>
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
@@ -107,185 +161,54 @@
               </div>
             </div>
           </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
         </div>
         <div class="column">
-          <div class="container element">
-            <img src="https://picsum.photos/200/400" />
-            <div class="bottom-left">John Doe | Unsplash</div>
+          <div class="container element" *ngFor="let item of arr4">
+            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
+              <img [src]=item.imageSmall />
+            </a>
+            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/400" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">Bottom Left</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">Bottom Left</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">Bottom Left</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/300" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200/400" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
-            </div>
-          </div>
-          <div class="container element">
-            <img src="https://picsum.photos/200" />
-            <div class="bottom-left">John Doe | Unsplash</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                      {{item.authorName}} | {{item.font}}
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img [src]=item.imageMedium />
+                  </div>
+                  <div class="modal-footer">
+                    <div class="footer-text mr-auto align-bottom">
+                      <h6>{{item.title}}</h6>
+                      <p>{{item.description}}</p>
+                    </div>
+
+                    <div class="dropdown">
+                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a>
+
+                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

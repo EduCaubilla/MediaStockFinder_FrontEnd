@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'legal', component: LegalComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'search-photo', component: SearchPhotoComponent },
-  { path: 'search-video', component: SearchVideoComponent },
+  { path: 'search-photo/:search', component: SearchPhotoComponent },
+  { path: 'search-video/:search', component: SearchVideoComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
