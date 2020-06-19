@@ -13,7 +13,7 @@
         <div class="column">
           <div class="container element" *ngFor="let item of arr1">
             <a href=" #{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
                 (click)="getData($event)" />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
@@ -32,7 +32,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item.imageMedium />
+                    <img [src]=item?.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -65,7 +65,7 @@
         <div class="column">
           <div class="container element" *ngFor="let item of arr2">
             <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item.imageSmall />
+              <img [src]=item?.imageSmall />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
@@ -83,7 +83,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item.imageMedium />
+                    <img [src]=item?.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -115,7 +115,7 @@
         <div class="column">
           <div class="container element" *ngFor="let item of arr3">
             <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item.imageSmall />
+              <img [src]=item?.imageSmall />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
@@ -133,7 +133,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item.imageMedium />
+                    <img [src]=item?.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -165,7 +165,7 @@
         <div class="column">
           <div class="container element" *ngFor="let item of arr4">
             <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item.imageSmall />
+              <img [src]=item?.imageSmall />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
@@ -183,7 +183,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item.imageMedium />
+                    <img [src]=item?.imageMedium />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
