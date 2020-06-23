@@ -1,26 +1,58 @@
 <main>
-  <div class="container">
-    <div class="search-header px-3 py-3 pt-md-5 pb-md-4 mr-auto">
-      <h3 class="display-4">{{search}}</h3>
+  <div class="container" >
+    <div class="search-header px-3 py-3 pt-md-5 pb-md-4 mr-auto" *ngIf="!searchBox">
+      <h3 class="display-4" (click)="activeSearch()">{{search}}</h3>
+    </div>
+    <div class="container px-3 py-3 pt-md-2 pb-md-4 mr-auto" *ngIf="searchBox">
+      <form>
+        <div class="form-row">
+          <div class="col-8">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control inputSearch" [placeholder]="search" name="newSearch"
+                [(ngModel)]="newSearch" [value]="search" (keyup.enter)="searchPhotos$()" />
+
+              <!-- <div class="input-group-append caja1" style="background-color: white;">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Select
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" active>Photo</a>
+                  <a class="dropdown-item">Video</a>
+                </div>
+              </div> -->
+              <div class="input-group-append caja">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchPhotos$()">
+                  <!-- <button class="btn btn-outline-secondary" type="button"> -->
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
       <!-- <p class="lead">
         Navigate across different categories to find what you're looking for or
         to discover something amazing on the way.
       </p> -->
     </div>
 
+    <div class="loading" *ngIf="loading">
+      <img src="../../assets/loader.gif" />
+    </div>
     <div class="container my-4 grid plantilla">
       <div class="row">
         <div class="column">
           <div class="container element" *ngFor="let item of arr1">
-            <a href=" #{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
+            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
               <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-                (click)="getData($event)" />
+                (dblclick)="toPhotoPage($event)" />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -32,7 +64,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item?.imageMedium />
+                    <img [src]=item?.imageLarge />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -40,20 +72,27 @@
                       <p>{{item.description}}</p>
                     </div>
 
-                    <div class="dropdown">
-                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                    <!-- <div class="dropdown"> -->
+                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
-                      </a>
+                      </a> -->
+                    <a class="btn btn-outline-secondary btn-sm">
+                      Download
+                    </a>
 
-                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                    </div>
+                    <!-- </div> -->
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                      See Photo
                     </button>
                   </div>
                 </div>
@@ -64,14 +103,15 @@
         </div>
         <div class="column">
           <div class="container element" *ngFor="let item of arr2">
-            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item?.imageSmall />
+            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                (dblclick)="toPhotoPage($event)" />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -83,7 +123,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item?.imageMedium />
+                    <img [src]=item?.imageLarge />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -91,37 +131,46 @@
                       <p>{{item.description}}</p>
                     </div>
 
-                    <div class="dropdown">
-                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                    <!-- <div class="dropdown"> -->
+                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
-                      </a>
+                      </a> -->
+                    <a class="btn btn-outline-secondary btn-sm">
+                      Download
+                    </a>
 
-                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                    </div>
+                    <!-- </div> -->
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                      See Photo
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
         <div class="column">
           <div class="container element" *ngFor="let item of arr3">
-            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item?.imageSmall />
+            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                (dblclick)="toPhotoPage($event)" />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -133,7 +182,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item?.imageMedium />
+                    <img [src]=item?.imageLarge />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -141,37 +190,46 @@
                       <p>{{item.description}}</p>
                     </div>
 
-                    <div class="dropdown">
-                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                    <!-- <div class="dropdown"> -->
+                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
-                      </a>
+                      </a> -->
+                    <a class="btn btn-outline-secondary btn-sm">
+                      Download
+                    </a>
 
-                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                    </div>
+                    <!-- </div> -->
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                      See Photo
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
         <div class="column">
           <div class="container element" *ngFor="let item of arr4">
-            <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-              <img [src]=item?.imageSmall />
+            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                (dblclick)="toPhotoPage($event)" />
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
               <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
             </div>
-            <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -183,7 +241,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <img [src]=item?.imageMedium />
+                    <img [src]=item?.imageLarge />
                   </div>
                   <div class="modal-footer">
                     <div class="footer-text mr-auto align-bottom">
@@ -191,25 +249,33 @@
                       <p>{{item.description}}</p>
                     </div>
 
-                    <div class="dropdown">
-                      <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                    <!-- <div class="dropdown"> -->
+                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
-                      </a>
+                      </a> -->
+                    <a class="btn btn-outline-secondary btn-sm">
+                      Download
+                    </a>
 
-                      <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                    </div>
+                    <!-- </div> -->
                     <button type="button" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                      See Photo
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

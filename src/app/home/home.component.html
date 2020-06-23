@@ -13,20 +13,17 @@
         <div class="form-row align-items-center">
           <div class="col-8" style="margin: 0 auto;">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Search..." name="search" [(ngModel)]="search" />
-              <!-- <div class="input-group-append caja1" style="background-color: white;">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Select
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" active>Photo</a>
-                  <a class="dropdown-item">Video</a>
-                </div>
-              </div> -->
+              <input type="text" class="form-control inputSearch" placeholder="Search..." name="search"
+                [(ngModel)]="search" (keyup.enter)="searchStart()" />
+
+              <div class="input-group-append caja1" style="background-color: white;">
+                <select class="custom-select selector_box" (change)="selectTrigger($event)">
+                  <option selected value="selectPhoto">Photo</option>
+                  <option value="selectVideo">Video</option>
+                </select>
+              </div>
               <div class="input-group-append caja">
-                <button class="btn btn-outline-secondary" type="button" (click)="searchPhotos()">
-                  <!-- <button class="btn btn-outline-secondary" type="button"> -->
+                <button class="btn btn-outline-secondary" type="button" (click)="searchStart()">
                   <i class="fas fa-search"></i>
                 </button>
               </div>
@@ -50,24 +47,29 @@
       <li class="nav-item">
         <a class="nav-link" (click)="getCatFoodDrink$()">Food & Drink</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Video</a>
-      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" (click)="getVideos$()">Video</a>
+      </li>
     </ul>
   </div>
 
-  <div class="container my-4 grid plantilla">
+  <div class="loading" *ngIf="loading">
+    <img src="../../assets/loader.gif" />
+  </div>
+
+  <div class="container my-4 grid plantilla" *ngIf="!showVideo">
     <div class="row">
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
-          <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-            <img [src]=item?.imageSmall />
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
           </a>
           <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
           <div class="bottom-right">
             <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
           </div>
-          <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -79,12 +81,263 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img [src]=item?.imageMedium />
+                  <img [src]=item?.imageLarge />
                 </div>
                 <div class="modal-footer">
                   <div class="footer-text mr-auto align-bottom">
                     <h6>{{item.title}}</h6>
                     <p>{{item.description}}</p>
+                  </div>
+
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a> -->
+                  <a class="btn btn-outline-secondary btn-sm">
+                    Download
+                  </a>
+
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                  <!-- </div> -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr2">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+          </div>
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a> -->
+                  <a class="btn btn-outline-secondary btn-sm">
+                    Download
+                  </a>
+
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                  <!-- </div> -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr3">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+          </div>
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a> -->
+                  <a class="btn btn-outline-secondary btn-sm">
+                    Download
+                  </a>
+
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                  <!-- </div> -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr4">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+          </div>
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                      </a> -->
+                  <a class="btn btn-outline-secondary btn-sm">
+                    Download
+                  </a>
+
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div> -->
+                  <!-- </div> -->
+                  <button type="button" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container my-4 grid plantilla" *ngIf="showVideo">
+    <div class="row">
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr1">
+          <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <!-- <img [src]=item?.imageSmall /> -->
+              <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
+            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+          </div>
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item?.authorName}} | {{item?.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]=item?.imageMedium type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
                   </div>
 
                   <!-- <div class="dropdown"> -->
@@ -105,6 +358,10 @@
                   <button type="button" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-plus"></i>
                   </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                    See Video
+                  </button>
                 </div>
               </div>
             </div>
@@ -113,47 +370,65 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
-          <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-            <img [src]=item?.imageSmall />
-          </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-          <div class="bottom-right">
+          <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <!-- <img [src]=item?.imageSmall /> -->
+              <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
             <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
           </div>
-          <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                    {{item?.authorName}} | {{item?.font}}
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img [src]=item?.imageMedium />
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]=item?.imageMedium type="video/mp4">
+                    </video>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <div class="footer-text mr-auto align-bottom">
-                    <h6>{{item.title}}</h6>
-                    <p>{{item.description}}</p>
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
                   </div>
 
-                  <div class="dropdown">
-                    <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
-                    </a>
+                    </a> -->
+                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                    Download
+                  </a>
 
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                  </div>
+                  <!-- </div> -->
                   <button type="button" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                    See Video
                   </button>
                 </div>
               </div>
@@ -163,47 +438,65 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
-          <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-            <img [src]=item?.imageSmall />
-          </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-          <div class="bottom-right">
+          <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <!-- <img [src]=item?.imageSmall /> -->
+              <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
             <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
           </div>
-          <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                    {{item?.authorName}} | {{item?.font}}
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img [src]=item?.imageMedium />
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]=item?.imageMedium type="video/mp4">
+                    </video>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <div class="footer-text mr-auto align-bottom">
-                    <h6>{{item.title}}</h6>
-                    <p>{{item.description}}</p>
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
                   </div>
 
-                  <div class="dropdown">
-                    <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
-                    </a>
+                    </a> -->
+                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                    Download
+                  </a>
 
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                  </div>
+                  <!-- </div> -->
                   <button type="button" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                    See Video
                   </button>
                 </div>
               </div>
@@ -213,47 +506,65 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <a href="#{{item.idFont}}" data-toggle="modal" data-target="#{{item.idFont}}">
-            <img [src]=item?.imageSmall />
-          </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-          <div class="bottom-right">
+          <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+              <!-- <img [src]=item?.imageSmall /> -->
+              <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
             <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
           </div>
-          <div class="modal fade" id="{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                    {{item?.authorName}} | {{item?.font}}
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img [src]=item?.imageMedium />
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]=item?.imageMedium type="video/mp4">
+                    </video>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <div class="footer-text mr-auto align-bottom">
-                    <h6>{{item.title}}</h6>
-                    <p>{{item.description}}</p>
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
                   </div>
 
-                  <div class="dropdown">
-                    <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                  <!-- <div class="dropdown"> -->
+                  <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
-                    </a>
+                    </a> -->
+                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                    Download
+                  </a>
 
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Small</a>
                       <a class="dropdown-item" href="#">Medium</a>
                       <a class="dropdown-item" href="#">Large</a>
                     </div> -->
-                  </div>
+                  <!-- </div> -->
                   <button type="button" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                    See Video
                   </button>
                 </div>
               </div>
@@ -263,4 +574,16 @@
       </div>
     </div>
   </div>
+
+
+  <!-- <script>
+    $('.modal').on('hidden.bs.modal', function (e) {
+      let $modals = $(e.target).find('.videowrapper source');
+      $modals.each(function (index, source) {
+        $(source).attr('[src]', $(source).attr('[src]'));
+        console.log(source);
+      });
+    })
+  </script> -->
+
 </main>

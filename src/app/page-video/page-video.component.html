@@ -1,0 +1,43 @@
+<main>
+  <div class="container">
+    <div class="search-header px-3 py-2 pt-md-4 pb-md-2 mr-auto">
+      <!-- <h3 class="display-4" (click)="activeSearch()">{{search}}</h3> -->
+      <h3>{{item[0].title}}</h3>
+
+    </div>
+
+    <div class="loading" *ngIf="loading">
+      <img src="../../assets/loader.gif" />
+    </div>
+
+    <div class="container main mt-1 mb-4">
+      <div class="row">
+        <div class="container element">
+          <!-- <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;"> -->
+            <div class="videowrapper embed-responsive embed-responsive-16by9">
+              <!-- <iframe width="1280" height="720" frameborder="0" [src]=item[0]?.imageMedium type="video/mp4" allowfullscreen></iframe> -->
+            <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+              allow="autoplay" [src]=item[0]?.imageMedium type="video/mp4">
+              <!-- <source > -->
+            </video>
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="info col-12 col-md-8 ">
+            <h3>{{item[0].authorName}}</h3>
+            <h4>{{item[0].font}}</h4>
+            <p>{{item[0].description}}</p>
+          </div>
+          <div class="download col-12 col-md-4 row">
+            <a class="btn btn-outline-secondary col-6">
+              Download
+            </a>
+            <button type="button" class="btn btn-outline-secondary col-6">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

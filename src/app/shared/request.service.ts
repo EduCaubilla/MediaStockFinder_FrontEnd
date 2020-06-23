@@ -17,10 +17,13 @@ export class RequestService {
     'Content-Type': 'application/json',
   });
 
+// ------------------ PHOTO
+
 // BUSCADOR PRINCIPAL
   searchPhotos$(search) {
-    // const URL_API_SEARCH = `http://localhost:9000/photo/${search}`;
-    const URL_API_SEARCH = `${environment.API_URL}/photo/${search}`;
+    const URL_API_SEARCH = `http://localhost:9000/photo/${search}`;
+    // const URL_API_SEARCH = `${environment.API_URL}/photo/${search}`;
+    console.log(URL_API_SEARCH);
     return this.http.get<PhotoInterface>(URL_API_SEARCH);
   }
 
@@ -57,11 +60,42 @@ export class RequestService {
     return this.http.get<PhotoInterface>(URL_API_LATEST);
   }
 
+
 // RANDOM PARA UNA FOTO - JUMBOTRON
 
   oneRandom$() {
     const URL_API_ONERANDOM = `${environment.API_URL}/photo/onerandom`;
     return this.http.get<PhotoInterface>(URL_API_ONERANDOM);
+  }
+
+// BÚSQUEDA DE UNA FOTO
+
+  searchOnePhoto$(type, id) {
+    const URL_API_ONEPHOTO = `${environment.API_URL}/photo/page/${type}/${id}`;
+    return this.http.get<PhotoInterface>(URL_API_ONEPHOTO);
+  }
+
+// ------------------ VIDEO
+
+// VIDEO RANDOM
+
+  getVideos$() {
+    const URL_API_VIDEOS = `${environment.API_URL}/video/random`;
+    return this.http.get<PhotoInterface>(URL_API_VIDEOS);
+  }
+
+// BÚSQUEDA DE LISTA DE VÍDEOS
+
+  searchVideos$(search) {
+    const URL_API_VIDEOS = `${environment.API_URL}/video/${search}`;
+    return this.http.get<PhotoInterface>(URL_API_VIDEOS);
+  }
+
+// BÚSQUEDA DE UN VÍDEO
+
+  searchOneVideo$(type, id) {
+    const URL_API_ONEVIDEO = `${environment.API_URL}/video/page/${type}/${id}`;
+    return this.http.get<PhotoInterface>(URL_API_ONEVIDEO);
   }
 
 

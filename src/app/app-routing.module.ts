@@ -12,6 +12,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SearchPhotoComponent } from './search-photo/search-photo.component';
 import { SearchVideoComponent } from './search-video/search-video.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PagePhotoComponent } from './page-photo/page-photo.component';
+import { PageVideoComponent } from './page-video/page-video.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'search-photo/:search', component: SearchPhotoComponent },
   { path: 'search-video/:search', component: SearchVideoComponent },
+  { path: 'photo-page/:type/:id', component: PagePhotoComponent },
+  { path: 'video-page/:type/:id', component: PageVideoComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

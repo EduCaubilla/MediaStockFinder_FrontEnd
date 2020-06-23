@@ -14,6 +14,8 @@ import { SignupComponent } from './signup/signup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SearchPhotoComponent } from './search-photo/search-photo.component';
 import { SearchVideoComponent } from './search-video/search-video.component';
+import { PagePhotoComponent } from './page-photo/page-photo.component';
+import { PageVideoComponent } from './page-video/page-video.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SearchVideoComponent } from './search-video/search-video.component';
     SignupComponent,
     NotFoundComponent,
     SearchPhotoComponent,
-    SearchVideoComponent
+    SearchVideoComponent,
+    PagePhotoComponent,
+    PageVideoComponent
   ],
   imports: [
     BrowserModule,
