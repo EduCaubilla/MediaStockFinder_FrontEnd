@@ -230,7 +230,7 @@ export class HomeComponent implements OnInit {
 
     this.loading = true;
 
-    this.cleanView();
+    // this.cleanView();
 
     this.showVideo = true;
 
@@ -253,7 +253,7 @@ export class HomeComponent implements OnInit {
         // console.log(this.arr3);
         // console.log(this.arr4);
 
-        // console.log(this.arrVideos);
+        console.log(this.arrVideos);
       },
       (error) => console.log(error)
     );
@@ -343,7 +343,6 @@ export class HomeComponent implements OnInit {
     }
 
     console.log(this.page);
-    
 
     // this.router.navigate([`/${this.page}`]);
 

@@ -55,7 +55,7 @@
             </div>
             <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge"
+              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
                 (click)="triggerDownloadVideo($event)"></i>
               <i class="fas fa-plus"></i>
             </div>
@@ -74,7 +74,7 @@
                     <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                       <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                         allow="autoplay">
-                        <source [src]=item?.imageMedium type="video/mp4">
+                        <source [src]="item?.imageMedium" type="video/mp4">
                       </video>
                     </div>
                   </div>
@@ -89,7 +89,7 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
                       (click)="triggerDownloadVideo($event)">
                       Download
                     </a>
@@ -104,7 +104,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
                       See Video
                     </button>
                   </div>
@@ -126,8 +126,9 @@
             </div>
             <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
+                (click)="triggerDownloadVideo($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -144,7 +145,7 @@
                     <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                       <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                         allow="autoplay">
-                        <source [src]=item?.imageMedium type="video/mp4">
+                        <source [src]="item?.imageMedium" type="video/mp4">
                       </video>
                     </div>
                   </div>
@@ -159,7 +160,7 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
                       (click)="triggerDownloadVideo($event)">
                       Download
                     </a>
@@ -174,7 +175,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
                       See Video
                     </button>
                   </div>
@@ -196,8 +197,9 @@
             </div>
             <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
+                (click)="triggerDownloadVideo($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -214,7 +216,7 @@
                     <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                       <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                         allow="autoplay">
-                        <source [src]=item?.imageMedium type="video/mp4">
+                        <source [src]="item?.imageMedium" type="video/mp4">
                       </video>
                     </div>
                   </div>
@@ -229,7 +231,7 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
                       (click)="triggerDownloadVideo($event)">
                       Download
                     </a>
@@ -244,7 +246,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
                       See Video
                     </button>
                   </div>
@@ -266,8 +268,9 @@
             </div>
             <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
+                (click)="triggerDownloadVideo($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -284,7 +287,7 @@
                     <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                       <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                         allow="autoplay">
-                        <source [src]=item?.imageMedium type="video/mp4">
+                        <source [src]="item?.imageMedium" type="video/mp4">
                       </video>
                     </div>
                   </div>
@@ -299,7 +302,7 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
                       (click)="triggerDownloadVideo($event)">
                       Download
                     </a>
@@ -314,7 +317,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toVideoPage($event)">
+                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
                       See Video
                     </button>
                   </div>
