@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HelperService } from '../shared/helper.service';
+import { environment } from 'src/environments/environment';
+
+
 
 @Component({
   selector: 'app-search-photo',
@@ -31,8 +34,10 @@ export class SearchPhotoComponent implements OnInit {
 
   type: string;
   id: string;
+  link: string;
+  page: number;
 
-  constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) { 
+  constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) {
     this.loading = true;
     this.searchBox = false;
     this.newSearch = '';
@@ -89,6 +94,10 @@ export class SearchPhotoComponent implements OnInit {
     console.log($event.target.dataset.font);
   }
 
+  cleanView() {
+    [this.arr1, this.arr2, this.arr3, this.arr4] = [[], [], [], []];
+  }
+
   activeSearch() {
     this.searchBox = true;
   }
@@ -97,18 +106,15 @@ export class SearchPhotoComponent implements OnInit {
 
     this.loading = true;
 
-    // // this.search = this.newSearch;
     // console.log(this.newSearch);
 
     this.router.navigate([`/search-photo/${this.newSearch}`]);
 
     this.searchBox = false;
 
-  //   // this.request.searchPhotos$(this.search);
-    
     this.searchWords = this.newSearch.match(/[^,(?! )]+/g).join();
     // console.log(this.searchWords);
-    
+
     this.response$ = this.request.searchPhotos$(this.searchWords);
 
     return this.response$.subscribe(
@@ -144,6 +150,65 @@ export class SearchPhotoComponent implements OnInit {
 
 
     this.router.navigate([`/photo-page/${this.type}/${this.id}`]);
+  }
+
+  triggerDownloadPhoto($event) {
+    this.link = $event.target.dataset.link;
+    this.type = $event.target.dataset.font;
+
+    console.log(this.link);
+    console.log(this.type);
+
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    window.location.assign(URL_API_DOWNLOADPHOTO);
+  }
+
+  toSearchPhotoNextPage$() {
+    this.cleanView();
+
+    window.scroll(0, 0);
+
+    this.loading = true;
+
+    this.route.params.subscribe(params => {
+      // console.log(params.search);
+      this.search = params.search;
+      this.searchWords = this.search.match(/[^,(?! )]+/g).join();
+
+      console.log(this.searchWords);
+    });
+
+    if (!this.page) {
+      this.page = 2;
+    } else {
+      this.page += 1;
+    }
+
+    console.log(this.page);
+
+    this.response$ = this.request.searchPhotosNextPage$(this.searchWords, this.page);
+
+    return this.response$.subscribe(
+      (data) => {
+      // console.log(data);
+
+      this.arrSearchPhoto = data;
+
+      console.log(this.arrSearchPhoto);
+
+      this.shufflePhotos();
+
+      this.splitter();
+
+      this.loading = false;
+
+      console.log(this.arr1);
+      console.log(this.arr2);
+      console.log(this.arr3);
+      console.log(this.arr4);
+
+      },
+    (error) => console.log(error));
   }
 
 }

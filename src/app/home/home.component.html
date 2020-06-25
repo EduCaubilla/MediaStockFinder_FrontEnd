@@ -67,7 +67,11 @@
           </a>
           <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <!-- (click)="triggerDownload($event)"></i> -->
+            <i class="fas fa-plus"></i>
+
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -94,7 +98,8 @@
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
                       </a> -->
-                  <a class="btn btn-outline-secondary btn-sm">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
+                    [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
 
@@ -126,7 +131,11 @@
           </a>
           <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <!-- (click)="triggerDownload($event)"></i> -->
+            <i class="fas fa-plus"></i>
+
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -153,7 +162,8 @@
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
                       </a> -->
-                  <a class="btn btn-outline-secondary btn-sm">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
 
@@ -185,7 +195,10 @@
           </a>
           <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <!-- (click)="triggerDownload($event)"></i> -->
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -212,7 +225,8 @@
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
                       </a> -->
-                  <a class="btn btn-outline-secondary btn-sm">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
 
@@ -244,7 +258,10 @@
           </a>
           <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <!-- (click)="triggerDownload($event)"></i> -->
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -271,7 +288,8 @@
                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Download
                       </a> -->
-                  <a class="btn btn-outline-secondary btn-sm">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
 
@@ -313,7 +331,8 @@
           </div>
           <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
           <div class="bottom-right-video">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -330,7 +349,7 @@
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
-                      <source [src]=item?.imageMedium type="video/mp4">
+                      <source [src]="item?.imageMedium" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -345,7 +364,8 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
 
@@ -381,7 +401,8 @@
           </div>
           <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
           <div class="bottom-right-video">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -413,7 +434,8 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
 
@@ -449,7 +471,8 @@
           </div>
           <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
           <div class="bottom-right-video">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -481,7 +504,8 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
 
@@ -517,7 +541,8 @@
           </div>
           <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
           <div class="bottom-right-video">
-            <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus"></i>
           </div>
           <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -549,7 +574,8 @@
                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Download
                     </a> -->
-                  <a class="btn btn-outline-secondary btn-sm" href="#">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
 
@@ -572,6 +598,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="buttonNext text-center" *ngIf="!loading">
+      <a class="btn btn-outline-secondary btn-sm" (click)="toVideoNextPage$()">
+        See more
+      </a>
     </div>
   </div>
 

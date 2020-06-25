@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HelperService } from '../shared/helper.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-search-video',
@@ -31,8 +33,10 @@ export class SearchVideoComponent implements OnInit {
 
   type: string;
   id: string;
+  link: string;
+  page: number;
 
-  constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) { 
+  constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) {
     this.loading = true;
     this.searchBox = false;
     this.newSearch = '';
@@ -82,6 +86,10 @@ export class SearchVideoComponent implements OnInit {
 
   shuffleVideos() {
     this.helper.shuffle(this.arrSearchVideo);
+  }
+
+  cleanView() {
+    [this.arr1, this.arr2, this.arr3, this.arr4] = [[], [], [], []];
   }
 
   getData($event) {
@@ -141,6 +149,66 @@ export class SearchVideoComponent implements OnInit {
 
 
     this.router.navigate([`/video-page/${this.type}/${this.id}`]);
+  }
+
+  triggerDownloadVideo($event) {
+    this.link = $event.target.dataset.link;
+
+    const link = btoa(`${this.link}`);
+
+    console.log(this.link);
+
+    const URL_API_DOWNLOADVIDEO = `${environment.API_URL}/video/download/${link}`;
+    window.location.assign(URL_API_DOWNLOADVIDEO);
+  }
+
+  toSearchVideoNextPage$() {
+
+    this.cleanView();
+
+    window.scroll(0, 0);
+
+    this.loading = true;
+
+    this.route.params.subscribe(params => {
+      // console.log(params.search);
+      this.search = params.search;
+      this.searchWords = this.search.match(/[^,(?! )]+/g).join();
+
+      console.log(this.searchWords);
+    });
+
+    if (!this.page) {
+      this.page = 2;
+    } else {
+      this.page += 1;
+    }
+
+    console.log(this.page);
+
+    this.response$ = this.request.searchVideosNextPage$(this.searchWords, this.page);
+
+    return this.response$.subscribe(
+      (data) => {
+      // console.log(data);
+
+      this.arrSearchVideo = data;
+
+      console.log(this.arrSearchVideo);
+
+      this.shuffleVideos();
+
+      this.splitter();
+
+      this.loading = false;
+
+      console.log(this.arr1);
+      console.log(this.arr2);
+      console.log(this.arr3);
+      console.log(this.arr4);
+
+      },
+    (error) => console.log(error));
   }
 
 }

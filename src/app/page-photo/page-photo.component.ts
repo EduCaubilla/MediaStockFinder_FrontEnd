@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-page-photo',
@@ -19,6 +19,7 @@ export class PagePhotoComponent implements OnInit {
 
   type: string;
   id: string;
+  link: string;
 
   constructor(private request: RequestService, private route: ActivatedRoute) {
     this.loading = true;
@@ -47,6 +48,17 @@ export class PagePhotoComponent implements OnInit {
 
       },
       (error) => console.log(error));
+  }
+
+  triggerDownloadPhoto($event) {
+    this.link = $event.target.dataset.link;
+    this.type = $event.target.dataset.font;
+
+    console.log(this.link);
+    console.log(this.type);
+
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    window.location.assign(URL_API_DOWNLOADPHOTO);
   }
 
 }

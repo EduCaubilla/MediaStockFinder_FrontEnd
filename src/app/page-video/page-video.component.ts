@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-page-video',
@@ -18,6 +20,7 @@ export class PageVideoComponent implements OnInit {
 
   type: string;
   id: string;
+  link: string;
 
   constructor(private request: RequestService, private route: ActivatedRoute) { }
 
@@ -44,6 +47,17 @@ export class PageVideoComponent implements OnInit {
 
       },
       (error) => console.log(error));
-    }
+  }
+  
+  triggerDownloadVideo($event) {
+    this.link = $event.target.dataset.link;
+
+    const link = btoa(`${this.link}`);
+
+    console.log(this.link);
+
+    const URL_API_DOWNLOADVIDEO = `${environment.API_URL}/video/download/${link}`;
+    window.location.assign(URL_API_DOWNLOADVIDEO);
+  }
 
 }

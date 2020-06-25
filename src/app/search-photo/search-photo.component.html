@@ -1,5 +1,5 @@
 <main>
-  <div class="container" >
+  <div class="container">
     <div class="search-header px-3 py-3 pt-md-5 pb-md-4 mr-auto" *ngIf="!searchBox">
       <h3 class="display-4" (click)="activeSearch()">{{search}}</h3>
     </div>
@@ -50,7 +50,10 @@
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+                (click)="triggerDownloadPhoto($event)"></i>
+              <i class="fas fa-plus"></i>
+
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -109,7 +112,9 @@
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+                (click)="triggerDownloadPhoto($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -168,7 +173,9 @@
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+                (click)="triggerDownloadPhoto($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -227,7 +234,9 @@
             </a>
             <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
             <div class="bottom-right">
-              <i class="fas fa-arrow-down"></i><i class="fas fa-plus"></i>
+              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+                (click)="triggerDownloadPhoto($event)"></i>
+              <i class="fas fa-plus"></i>
             </div>
             <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
               <div class="modal-dialog modal-lg">
@@ -278,6 +287,11 @@
 
           </div>
         </div>
+      </div>
+      <div class="buttonNext text-center" *ngIf="!loading">
+        <a class="btn btn-outline-secondary btn-sm" (click)="toSearchPhotoNextPage$()">
+          See more
+        </a>
       </div>
     </div>
   </div>

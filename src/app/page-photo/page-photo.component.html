@@ -55,7 +55,8 @@
           <p>{{item[0].description}}</p>
         </div>
         <div class="download col-12 col-md-4 row">
-          <a class="btn btn-outline-secondary col-6">
+          <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item[0].imageLarge" [attr.data-font]="item[0].font"
+            (click)="triggerDownloadPhoto($event)">
             Download
           </a>
           <button type="button" class="btn btn-outline-secondary col-6">

@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { RequestService } from '../shared/request.service';
 import { HelperService } from '../shared/helper.service';
+import { environment } from 'src/environments/environment';
+
+
+// import {rxjs/rx} from '@rxjs/rx';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +41,10 @@ export class HomeComponent implements OnInit {
   type: string;
   id: string;
 
+  link: string;
+
+  page: number;
+
   constructor(private request: RequestService, private router: Router, private helper: HelperService) {
     this.search = '';
     this.loading = true;
@@ -53,8 +61,8 @@ export class HomeComponent implements OnInit {
         this.onePhoto = data[0].imageMedium;
         // console.log(data);
         // console.log(this.onePhoto);
-
       });
+    // this.bgJumboStyle();
   }
 
   bgJumboStyle() {
@@ -117,7 +125,7 @@ export class HomeComponent implements OnInit {
 
   getCatNature$() {
     // console.log('llega el click');
-    
+
     // this.showVideo = false;
     this.loading = true;
     this.cleanView();
@@ -151,10 +159,10 @@ export class HomeComponent implements OnInit {
   getCatPeople$() {
     // console.log('llega el click');
     // this.showVideo = false;
-    
+
     this.loading = true;
     this.cleanView();
-    
+
     this.response$ = this.request.searchPhotosPeople$();
 
     return this.response$.subscribe(
@@ -245,7 +253,7 @@ export class HomeComponent implements OnInit {
         // console.log(this.arr3);
         // console.log(this.arr4);
 
-        // console.log(this.arrPhotosNature);
+        // console.log(this.arrVideos);
       },
       (error) => console.log(error)
     );
@@ -273,5 +281,159 @@ export class HomeComponent implements OnInit {
 
     this.router.navigate([`/video-page/${this.type}/${this.id}`]);
   }
+
+  triggerDownloadPhoto($event) {
+    this.link = $event.target.dataset.link;
+    this.type = $event.target.dataset.font;
+
+    console.log(this.link);
+    console.log(this.type);
+
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    window.location.assign(URL_API_DOWNLOADPHOTO);
+    // return this.http.get(URL_API_DOWNLOADPHOTO, httpOptions);
+
+    // this.response$ = this.request.triggerDownload$(this.type, this.link);
+
+    // console.log(this.response$);
+
+
+    // return this.response$.subscribe((data) => {
+    //   const blob = new Blob([data], {type: 'image/jpg'});
+
+    //   const url = window.URL.createObjectURL(blob);
+
+    //   window.open(url);
+
+
+      // console.log(downloadURL);
+
+
+      // const link = document.createElement('a');
+      // link.href = downloadURL;
+      // link.download = 'MSFimage.jpg';
+      // link.click();
+
+      // this.downloadService.getPdf()
+      // .subscribe((resultBlob: Blob) => {
+      // var downloadURL = URL.createObjectURL(resultBlob);
+      // window.open(downloadURL);});
+
+
+    // });
+  }
+
+  triggerDownloadVideo($event) {
+    this.link = $event.target.dataset.link;
+
+    const link = btoa(`${this.link}`);
+
+    console.log(this.link);
+
+    const URL_API_DOWNLOADVIDEO = `${environment.API_URL}/video/download/${link}`;
+    window.location.assign(URL_API_DOWNLOADVIDEO);
+  }
+
+  toVideoNextPage$() {
+
+    if (!this.page) {
+      this.page = 2;
+    } else {
+      this.page += 1;
+    }
+
+    console.log(this.page);
+    
+
+    // this.router.navigate([`/${this.page}`]);
+
+    // this.route.params.subscribe(params => {
+    //   // console.log(params.search);
+    //   this.page = params.page;
+    // });
+
+    this.loading = true;
+
+    this.cleanView();
+
+    this.showVideo = true;
+
+    this.response$ = this.request.getNextVideos$(this.page);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.arrVideos = data;
+
+        console.log(this.arrVideos);
+
+        this.helper.shuffle(this.arrVideos);
+
+        const numberArr: number = Math.ceil(this.arrVideos.length / 4);
+
+        [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
+
+        this.loading = false;
+
+        // console.log(this.arr1);
+        // console.log(this.arr2);
+        // console.log(this.arr3);
+        // console.log(this.arr4);
+
+        // console.log(this.arrPhotosNature);
+      },
+      (error) => console.log(error)
+    );
+
+  }
+
+  // toPhotoNextPage$() {
+  //   if (!this.page) {
+  //     this.page = 2;
+  //   } else {
+  //     this.page += 1;
+  //   }
+
+  //   console.log(this.page);
+    
+
+  //   // this.router.navigate([`/${this.page}`]);
+
+  //   // this.route.params.subscribe(params => {
+  //   //   // console.log(params.search);
+  //   //   this.page = params.page;
+  //   // });
+
+  //   this.loading = true;
+
+  //   this.cleanView();
+
+  //   this.showVideo = true;
+
+  //   this.response$ = this.request.getNextPhotos$(this.page);
+
+  //   return this.response$.subscribe(
+  //     (data) => {
+  //       this.arrVideos = data;
+
+  //       console.log(this.arrVideos);
+
+  //       this.helper.shuffle(this.arrVideos);
+
+  //       const numberArr: number = Math.ceil(this.arrVideos.length / 4);
+
+  //       [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
+
+  //       this.loading = false;
+
+  //       // console.log(this.arr1);
+  //       // console.log(this.arr2);
+  //       // console.log(this.arr3);
+  //       // console.log(this.arr4);
+
+  //       // console.log(this.arrPhotosNature);
+  //     },
+  //     (error) => console.log(error)
+  //   );
+  // }
 
 }
