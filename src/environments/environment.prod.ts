@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://media-stock-finder.herokuapp.com/photo/random'
+  API_URL: 'https://media-stock-finder.herokuapp.com'
 };
