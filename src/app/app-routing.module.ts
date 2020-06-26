@@ -17,8 +17,8 @@ import { PageVideoComponent } from './page-video/page-video.component';
 import { UserDeskComponent } from './user-desk/user-desk.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '/', component: HomeComponent},
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'more', component: MoreModule },

@@ -17,6 +17,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Source</th>
                 <th scope="col">Type</th>
+                <th scope="col">Image</th>
                 <th scope="col">Options</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -29,6 +30,45 @@
                 <th scope="row" class="lista">{{ item.title }}</th>
                 <th scope="row" class="lista">{{ item.description }}</th>
                 <th scope="row" class="lista">{{ item.font }}</th>
+                <th scope="row" class="lista">
+                  <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+                    <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" />
+                  </a>
+                  <!-- <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+                     <div class="modal-dialog modal-lg">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                             {{item.authorName}} | {{item.font}}
+                           </h6>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                           </button>
+                         </div>
+                         <div class="modal-body">
+                           <img [src]=item?.imageLarge />
+                         </div>
+                         <div class="modal-footer">
+                           <div class="footer-text mr-auto align-bottom">
+                             <h6>{{item.title}}</h6>
+                             <p>{{item.description}}</p>
+                           </div>
+                           <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                             [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
+                             Download
+                           </a>
+                           <button type="button" class="btn btn-outline-secondary btn-sm">
+                             <i class="fas fa-plus"></i>
+                           </button>
+                           <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                             [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                             See Photo
+                           </button>
+                         </div>
+                       </div>
+                     </div>
+                   </div> -->
+                </th>
                 <th scope="row" class="lista"></th>
                 <th scope="row" class="lista">
                   <button [attr.data-id]="" class="btn btn-outline-secondary">Details</button>
@@ -48,15 +88,11 @@
     </div>
   </div>
 
+  <!-- <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+  <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+    (dblclick)="toPhotoPage($event)" />
+</a> -->
 
 
-  <!-- tabla con listado de fotos favoritas
-
-      botones en cada foto de borrar y ver
-
-      boton general de buscar más
-
-
-      en home activar el símbolo más como descarga sólo para logados -->
 
 </main>
