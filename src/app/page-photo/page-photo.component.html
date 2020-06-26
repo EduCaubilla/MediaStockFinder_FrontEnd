@@ -1,67 +1,35 @@
 <main>
-  <div class="container">
+  <div class="container text-center">
     <div class="search-header px-3 py-2 pt-md-4 pb-md-2 mr-auto">
       <!-- <h3 class="display-4" (click)="activeSearch()">{{search}}</h3> -->
       <h3>{{item[0].title}}</h3>
-
     </div>
-    <!-- <div class="container px-3 py-3 pt-md-5 pb-md-4 mr-auto" *ngIf="searchBox">
-      <form>
-        <div class="form-row">
-          <div class="col-8">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control inputSearch" [placeholder]="search" name="newSearch"
-                [(ngModel)]="newSearch" [value]="search" (keyup.enter)="searchPhotos$()" /> -->
-
-    <!-- <div class="input-group-append caja1" style="background-color: white;">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Select
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" active>Photo</a>
-                  <a class="dropdown-item">Video</a>
-                </div>
-              </div> -->
-    <!-- <div class="input-group-append caja">
-                <button class="btn btn-outline-secondary" type="button" (click)="searchPhotos$()"> -->
-    <!-- <button class="btn btn-outline-secondary" type="button"> -->
-    <!-- <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form> -->
-    <!-- <p class="lead">
-        Navigate across different categories to find what you're looking for or
-        to discover something amazing on the way.
-      </p> -->
-    <!-- </div> -->
 
     <div class="loading" *ngIf="loading">
       <img src="../../assets/loader.gif" />
     </div>
     <div class="container main mt-1 mb-4">
       <div class="row">
-        <div class="container element">
+        <div class="container element text-center">
           <img [src]=item[0]?.imageLarge />
         </div>
       </div>
-      <div class="row my-4">
-        <div class="info col-12 col-md-8 ">
-          <h3>{{item[0].authorName}}</h3>
-          <h4>{{item[0].font}}</h4>
-          <p>{{item[0].description}}</p>
-        </div>
-        <div class="download col-12 col-md-4 row">
-          <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item[0].imageLarge" [attr.data-font]="item[0].font"
-            (click)="triggerDownloadPhoto($event)">
+      <div class="container text_footer">
+        <div class="row my-4">
+          <div class="info">
+            <h3>{{item[0].authorName}}</h3>
+            <h4>{{item[0].font}}</h4>
+            <p>{{item[0].description}}</p>
+          </div>
+          <!-- <div class="download col-12 col-md-4 row"> -->
+          <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item[0].imageLarge"
+            [attr.data-font]="item[0].font" (click)="triggerDownloadPhoto($event)">
             Download
           </a>
-          <button type="button" class="btn btn-outline-secondary col-6">
+          <button type="button" class="btn btn-outline-secondary">
             <i class="fas fa-plus"></i>
           </button>
+          <!-- </div> -->
         </div>
       </div>
     </div>

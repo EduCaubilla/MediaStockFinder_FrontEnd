@@ -1,21 +1,41 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { PhotoInterface } from './photo-interface';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { PhotoInterface } from './interfaces/photo-interface';
 import { environment } from 'src/environments/environment';
+import { UserInterface } from '../shared/interfaces/user-interface';
+
+import { tap, catchError } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RequestService {
 
-  constructor(private http: HttpClient) { }
+  isLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getLogged());
+
+  public user: UserInterface;
+
+  constructor(private http: HttpClient) {   }
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
+
+  setToken(token): void {
+    console.log('guarda TOKEN');
+    localStorage.setItem('accesstoken', token);
+  }
+
+ getLogged(): boolean {
+    if (localStorage.getItem('isLogged') === 'true') {
+      return true;
+    } else { return false; }
+
+  }
 
 // ------------------ PHOTO
 
@@ -125,7 +145,7 @@ export class RequestService {
 
   getNextVideos$(page) {
     console.log(page);
-    
+
     const URL_API_VIDEOS = `${environment.API_URL}/video/random/${page}`;
     return this.http.get<PhotoInterface>(URL_API_VIDEOS);
   }
@@ -147,6 +167,67 @@ export class RequestService {
   searchOneVideo$(type, id) {
     const URL_API_ONEVIDEO = `${environment.API_URL}/video/page/${type}/${id}`;
     return this.http.get<PhotoInterface>(URL_API_ONEVIDEO);
+  }
+
+
+  // ------------------------ USER
+
+  registerUser$(user: UserInterface): Observable<any> {
+    const URL_API_REGISTER = `${environment.API_URL}/user/register`;
+    return this.http.post<UserInterface>(URL_API_REGISTER, JSON.stringify(user), {
+      headers: this.headers,
+    });
+  }
+
+  loginUser$(user: UserInterface): Observable<any> {
+
+    const URL_API_LOGIN = `${environment.API_URL}/user/login`;
+
+    return this.http
+      .post<UserInterface>(
+        URL_API_LOGIN,
+        JSON.stringify(user),
+        { headers: this.headers }
+      )
+
+      .pipe(tap(data => {
+        localStorage.setItem('isLogged', 'true');
+        this.isLogged.next(true);
+        return data;
+      }),
+        catchError(error => {
+          console.log(error);
+          return throwError(error);
+        }));
+  }
+
+  logoutUser() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('isLogged');
+  }
+
+  getUserLogin$(user) {
+    const URL_API_GET_USER = `${environment.API_URL}/user/${this.user.id}`;
+
+    return this.http.post<UserInterface>(URL_API_GET_USER, JSON.stringify(user), {
+      headers: this.headers,
+    });
+  }
+
+  getUser() {
+    console.log(this.user);
+
+    return this.user;
+  }
+
+  setUser(user) {
+
+    console.log('guarda USER' + user);
+    localStorage.setItem('id', user._id);
+    this.user = user;
+
+    console.log(this.user);
+
   }
 
 }

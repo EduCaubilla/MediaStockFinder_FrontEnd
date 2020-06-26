@@ -16,6 +16,8 @@ import { SearchPhotoComponent } from './search-photo/search-photo.component';
 import { SearchVideoComponent } from './search-video/search-video.component';
 import { PagePhotoComponent } from './page-photo/page-photo.component';
 import { PageVideoComponent } from './page-video/page-video.component';
+import { UserDeskComponent } from './user-desk/user-desk.component';
+import { RequestService } from './shared/request.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { PageVideoComponent } from './page-video/page-video.component';
     SearchPhotoComponent,
     SearchVideoComponent,
     PagePhotoComponent,
-    PageVideoComponent
+    PageVideoComponent,
+    UserDeskComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,9 @@ import { PageVideoComponent } from './page-video/page-video.component';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    RequestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

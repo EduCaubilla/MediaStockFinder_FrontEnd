@@ -10,16 +10,17 @@ h3 {
   line-height: 1.1;
 }
 
+
 p {
   color: #a0a0a0;
   letter-spacing: 1.1px;
   font-weight: 100;
 }
 
-/* img {
+img {
   max-height: 65vh;
   width: auto;
-} */
+}
 
 .loading {
   width: 3rem;

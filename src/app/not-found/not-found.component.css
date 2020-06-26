@@ -1,0 +1,52 @@
+main {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: auto;
+  color: rgba(255, 255, 255, .87);
+  font-size: 16px;
+}
+
+.not_found {
+  padding-top: 6rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  height: 85vh;
+  width: auto;
+}
+
+/* .container,
+.container>.row,
+.container>.row>div {
+  height: 100%;
+} */
+
+#countUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  padding-bottom: 2rem;
+}
+
+#countUp .number {
+  font-size: 4rem;
+  font-weight: 100;
+}
+
+#countUp .text {
+  margin: 0 0 1rem;
+}
+
+.text {
+  font-weight: 600;
+  text-align: center;
+}

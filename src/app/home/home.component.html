@@ -1,11 +1,9 @@
 <main role="main">
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron hero_imagen text-center" style="
-      
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;" [ngStyle]="bgJumboStyle()">
-    <!-- background-image:url(../assets/bgedu.jpg); -->
 
     <div class="container main_search">
       <h5 class="display-3">FREE IMAGES FOR A FREE WORLD</h5>
@@ -62,6 +60,7 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
           <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
             <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
               (dblclick)="toPhotoPage($event)" />
           </a>

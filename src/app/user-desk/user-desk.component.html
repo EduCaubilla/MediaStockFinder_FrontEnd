@@ -1,0 +1,62 @@
+<main>
+  <div class="container">
+    <div class="search-header px-3 py-2 pt-md-4 pb-md-2 mr-auto">
+      <!-- <h3 class="display-4" (click)="activeSearch()">{{search}}</h3> -->
+      <h3>Welcome to your Desk</h3>
+
+      <p>Save your selected photos here.</p>
+
+      <div class="container-fluid "></div>
+      <div class="row my-4">
+        <div class="col-12" style="margin: 0 auto;">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Source</th>
+                <th scope="col">Type</th>
+                <th scope="col">Options</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of user.desk">
+                <th scope="row">1</th>
+                <th scope="row" class="lista">{{ item.title }}</th>
+                <th scope="row" class="lista">{{ item.description }}</th>
+                <th scope="row" class="lista">{{ item.font }}</th>
+                <th scope="row" class="lista"></th>
+                <th scope="row" class="lista">
+                  <button [attr.data-id]="" class="btn btn-outline-secondary">Details</button>
+                  <button [attr.data-id]="" class="btn btn-outline-secondary">See Media</button>
+                </th>
+                <th scope="row" class="lista">
+                  <button [attr.data-id]="item.id" class="btn btn-outline-danger" (click)="onDelete($event)">
+                    <!-- <button [attr.data-id]="member?._id" class="btn btn-outline-danger"> -->
+                    Delete
+                  </button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- tabla con listado de fotos favoritas
+
+      botones en cada foto de borrar y ver
+
+      boton general de buscar más
+
+
+      en home activar el símbolo más como descarga sólo para logados -->
+
+</main>

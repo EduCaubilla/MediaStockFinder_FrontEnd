@@ -22,6 +22,7 @@
     "@rxjs/rx": "^4.1.0",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
+    "jwt-decode": "^2.2.0",
     "rxjs": "~6.5.4",
     "shuffle.ts": "^1.0.1",
     "tslib": "^1.10.0",

@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getRandom$();
 
     this.response$ = this.request.oneRandom$();
@@ -230,7 +231,7 @@ export class HomeComponent implements OnInit {
 
     this.loading = true;
 
-    // this.cleanView();
+    this.cleanView();
 
     this.showVideo = true;
 
@@ -344,13 +345,6 @@ export class HomeComponent implements OnInit {
 
     console.log(this.page);
 
-    // this.router.navigate([`/${this.page}`]);
-
-    // this.route.params.subscribe(params => {
-    //   // console.log(params.search);
-    //   this.page = params.page;
-    // });
-
     this.loading = true;
 
     this.cleanView();
@@ -393,7 +387,7 @@ export class HomeComponent implements OnInit {
   //   }
 
   //   console.log(this.page);
-    
+
 
   //   // this.router.navigate([`/${this.page}`]);
 

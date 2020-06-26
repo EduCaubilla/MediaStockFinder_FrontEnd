@@ -14,9 +14,11 @@ import { SearchVideoComponent } from './search-video/search-video.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PagePhotoComponent } from './page-photo/page-photo.component';
 import { PageVideoComponent } from './page-video/page-video.component';
+import { UserDeskComponent } from './user-desk/user-desk.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '/', component: HomeComponent},
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'more', component: MoreModule },
@@ -24,13 +26,14 @@ const routes: Routes = [
   { path: 'license', component: LicenseComponent },
   { path: 'faqs', component: FAQsComponent },
   { path: 'legal', component: LegalComponent },
+  { path: 'user-desk', component: UserDeskComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'search-photo/:search', component: SearchPhotoComponent },
   { path: 'search-video/:search', component: SearchVideoComponent },
   { path: 'photo-page/:type/:id', component: PagePhotoComponent },
   { path: 'video-page/:type/:id', component: PageVideoComponent },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
