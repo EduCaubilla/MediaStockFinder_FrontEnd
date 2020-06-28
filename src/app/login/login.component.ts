@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
     return this.token$.subscribe(
       (data) => {
 
-        console.log(data);
+        // console.log(data);
 
         const token = data.token;
 
-        console.log(token);
+        // console.log(token);
 
         const user = data.user;
 

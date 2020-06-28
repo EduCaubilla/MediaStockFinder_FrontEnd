@@ -1,11 +1,15 @@
+* {
+  font-size: 16px;
+}
+
 main {
   font-family: "Lato", sans-serif;
   font-size: 16px;
 }
 
 h5 {
-  font-size: 2.1rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   color: white;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 0.75);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.4);
@@ -20,15 +24,21 @@ p {
   letter-spacing: 1.1px;
 }
 
+/*
+  -------- HERO 
+*/
+
 .dropdown-menu {
   margin-left: 1rem;
 }
 
 .hero_imagen {
   padding: 22rem 10rem;
+  max-height: 90vh;
+  width: 100vw;
 }
 
-.caja {
+.loupe {
   background-color: white;
   border-radius: 0 5px 5px 0;
 }
@@ -56,11 +66,15 @@ p {
   box-shadow: 0 0 0 .1rem rgba(214, 214, 214, 0.25);
 }
 
+/*
+  -------- SECTIONS
+*/
+
 .sections a {
   color: #a0a0a0;
   font-weight: 200;
-  padding: 0 2rem;
-  font-size: 1.2rem;
+  padding: 0 4rem;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
@@ -69,38 +83,37 @@ p {
 }
 
 .loading {
-  width: 3rem;
+  display: flex;
   height: auto;
   margin: 0 auto;
   padding: 5rem;
 }
 
-/* image grid */
+.loading img {
+  margin: 0 auto;
+}
 
-/* .container {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-} */
+/*
+  -------- GRID
+*/
+
+.container-fluid {
+  padding: 0 8rem;
+}
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  /* padding: 0 4px; */
 }
 
-/* Create four equal columns that sits next to each other */
 .column {
   flex: 25%;
   max-width: 25%;
   display: inline-block;
-  /* padding: 0 4px; */
-  /* flex-direction: column;
-  flex-basis: 100%; */
 }
 
 .column img {
-  /* margin-top: 5px; */
-  /* vertical-align: middle; */
+  vertical-align: middle;
   width: 100%;
   height: auto;
   border: solid 0.02px rgb(211, 211, 211);
@@ -126,46 +139,50 @@ p {
 }
 
 .bottom-left {
+  width: 18rem;
   color: white;
   position: relative;
-  bottom: 30px;
-  left: 12px;
+  bottom: 56px;
+  left: 14px;
   font-weight: 100px;
-  font-size: .75rem;
+  font-size: 1rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
 .bottom-left-video {
+  width: 18rem;
   color: white;
   position: relative;
-  bottom: 42px;
-  left: 8px;
+  bottom: 56px;
+  left: 14px;
   font-weight: 100px;
-  font-size: .75rem;
+  font-size: 1rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
 .bottom-right {
+  width: 3rem;
   color: rgba(255, 255, 255, 0);
   position: relative;
-  bottom: 50px;
-  left: 205px;
+  bottom: 81px;
+  left: 292px;
   font-weight: 100px;
-  font-size: .8rem;
+  font-size: 1rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
   transition: color 1s;
 }
 
 .bottom-right-video {
+  width: 3rem;
   color: rgba(255, 255, 255, 0);
   position: relative;
-  bottom: 62px;
-  left: 210px;
+  bottom: 81px;
+  left: 292px;
   font-weight: 100px;
-  font-size: .8rem;
+  font-size: 1rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
   transition: color 1s;
@@ -177,12 +194,6 @@ p {
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
   transition: color 1s;
 }
-
-/* .descarga:hover {
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-} */
 
 .element:hover .bottom-right,
 .element:hover .descarga {
@@ -205,26 +216,112 @@ p {
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
 }
 
-/* .modal-body img {
+.modal-body {
   max-height: 80vh;
-  width: auto;
+}
+
+.modal-body img {
+  max-height: 75vh;
+  max-width: 60vw;
   margin: 0 auto;
-} */
+}
 
 .footer-text p {
   margin-bottom: 0;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 1279px) {
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 6rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .container-fluid {
+    padding: 0 6rem;
+  }
+
   .column {
     flex: 50%;
     max-width: 50%;
   }
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+/*
+
+------------------- MEDIA QUERIES
+
+*/
+
+@media screen and (max-width: 799px) {
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 4rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .container-fluid {
+    padding: 0 4rem;
+  }
+
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  .jumbotron {
+    margin-bottom: 1rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 2rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .main_search {
+    margin: 0;
+  }
+
+  .sections .nav-link {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .container-fluid {
+    padding: 0 2rem;
+  }
+
   .column {
     flex: 100%;
     max-width: 100%;

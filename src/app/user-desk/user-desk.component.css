@@ -16,8 +16,16 @@ p {
   font-weight: 100;
 }
 
-img {
-  max-height: 65vh;
+.lista {
+  font-weight: 200;
+}
+
+.my_title {
+  font-weight: 400;
+}
+
+.lista img {
+  max-height: 15vh;
   width: auto;
 }
 
@@ -37,7 +45,7 @@ img {
 } */
 
 .btn {
-  margin: 1rem;
+  margin: .1rem;
 }
 
 
@@ -52,6 +60,18 @@ img {
   display: flex;
   flex-wrap: wrap;
   /* padding: 0 4px; */
+}
+
+.embed-responsive video {
+  padding: 1rem;
+}
+
+.modal-body {
+  height: 55vh;
+}
+
+.modal-body img {
+  height: 51vh !important;
 }
 
 

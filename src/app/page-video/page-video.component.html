@@ -13,32 +13,67 @@
     <div class="container main mt-1 mb-4">
       <div class="row">
         <div class="container element">
-          <!-- <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;"> -->
-            <div class="videowrapper embed-responsive embed-responsive-16by9">
-              <!-- <iframe width="1280" height="720" frameborder="0" [src]=item[0]?.imageMedium type="video/mp4" allowfullscreen></iframe> -->
+          <div class="videowrapper embed-responsive embed-responsive-16by9">
             <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
               allow="autoplay" [src]=item[0]?.imageMedium type="video/mp4">
-              <!-- <source > -->
             </video>
           </div>
         </div>
-        <div class="row my-4">
-          <div class="info col-12 col-md-8 ">
-            <h3>{{item[0].authorName}}</h3>
-            <h4>{{item[0].font}}</h4>
-            <p>{{item[0].description}}</p>
-          </div>
-          <div class="download col-12 col-md-4 row">
-            <a class="btn btn-outline-secondary col-6" [attr.data-link]="item[0].imageLarge"
-              (click)="triggerDownloadVideo($event)">
-              Download
-            </a>
-            <button type="button" class="btn btn-outline-secondary col-6">
-              <i class="fas fa-plus"></i>
-            </button>
+        <div class="container text-footer">
+          <div class="row my-4">
+            <div class="info col-12 col-md-8 ">
+              <h3>{{item[0].authorName}}</h3>
+              <h4>{{item[0].font}}</h4>
+              <p>{{item[0].description}}</p>
+            </div>
+            <div class="buttons ml-auto">
+              <a class="btn btn-outline-secondary" [attr.data-link]="item[0].imageLarge"
+                (click)="triggerDownloadVideo($event)">
+                Download
+              </a>
+              <button type="button" class="btn btn-outline-secondary" [attr.data-id]="item[0].idFont"
+                [attr.data-font]="item[0].font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                Add to My Desk
+              </button>
+              <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert"
+                *ngIf="!isLogged">
+                Add to My Desk
+              </button>
+            </div>
+            <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                      Ooops
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h3>You need to be logged in to save media.</h3>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="footer-text align-bottom text center">
+                      <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                        data-dismiss="modal">
+                        Login
+                      </button>
+                      <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                        [routerLink]="['/signup']">
+                        Register
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </main>
+<!-- <div class="modal" id="loggedAlert" tabindex="-1" role="dialog"></div> -->

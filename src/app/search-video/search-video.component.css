@@ -1,7 +1,7 @@
 main {
-  padding-top: 6rem;
   font-family: "Lato", sans-serif;
   font-size: 16px;
+  padding-top: 6rem;
 }
 
 h3 {
@@ -14,24 +14,16 @@ p {
   letter-spacing: 1.1px;
 }
 
+/*
+  -------- HEADER
+*/
+
 .search-header {
   max-width: 700px;
 }
 
 .sections {
   padding: 2rem 0;
-}
-
-.sections a {
-  color: #a0a0a0;
-  font-weight: 200;
-  padding: 0 2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.sections a:hover {
-  color: black;
 }
 
 .inputSearch {
@@ -45,11 +37,25 @@ p {
   font-weight: 100;
 }
 
+/*
+  -------- SECTIONS
+*/
+
+.sections a {
+  color: #a0a0a0;
+  font-weight: 200;
+  padding: 0 4rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.sections a:hover {
+  color: black;
+}
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  /* padding: 0 4px; */
 }
 
 .loading {
@@ -59,17 +65,29 @@ p {
   padding: 5rem;
 }
 
-/* Create four equal columns that sits next to each other */
+/*
+  -------- GRID
+*/
+
+.container-fluid {
+  padding: 0 8rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .column {
   flex: 25%;
   max-width: 25%;
-  /* padding: 0 4px; */
+  display: inline-block;
 }
 
 .column img {
-  /* margin-top: 5px; */
   vertical-align: middle;
   width: 100%;
+  height: auto;
   border: solid 0.02px rgb(211, 211, 211);
 }
 
@@ -92,45 +110,22 @@ p {
   height: 30%;
 }
 
-.bottom-left {
-  color: white;
-  position: relative;
-  bottom: 30px;
-  left: 12px;
-  font-weight: 100px;
-  font-size: .75rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-}
-
 .bottom-left-video {
   color: white;
   position: relative;
-  bottom: 42px;
-  left: 8px;
+  bottom: 56px;
+  left: 14px;
   font-weight: 100px;
   font-size: .75rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-}
-
-.bottom-right {
-  color: rgba(255, 255, 255, 0);
-  position: relative;
-  bottom: 50px;
-  left: 205px;
-  font-weight: 100px;
-  font-size: .8rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
-  transition: color 1s;
 }
 
 .bottom-right-video {
   color: rgba(255, 255, 255, 0);
   position: relative;
-  bottom: 62px;
-  left: 210px;
+  bottom: 81px;
+  left: 292px;
   font-weight: 100px;
   font-size: .8rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
@@ -158,26 +153,84 @@ p {
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
 }
 
-/* .modal-body img {
+.modal-body {
   max-height: 80vh;
-  width: auto;
+}
+
+.modal-body img {
+  max-height: 75vh;
+  max-width: 60vw;
   margin: 0 auto;
-} */
+}
 
 .footer-text p {
   margin-bottom: 0;
 }
+/*
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
+------------------- MEDIA QUERIES
+
+*/
+
+@media screen and (max-width: 1279px) {
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 6rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .container-fluid {
+    padding: 0 6rem;
+  }
+
   .column {
     flex: 50%;
     max-width: 50%;
   }
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 799px) {
+  main {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  .container-fluid {
+    padding: 0 4rem;
+  }
+
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  main {
+    font-size: 10px;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  .container-fluid {
+    padding: 0 2rem;
+  }
+
   .column {
     flex: 100%;
     max-width: 100%;

@@ -1,6 +1,7 @@
 main {
-  padding-top: 6rem;
   font-family: "Lato", sans-serif;
+  font-size: 16px;
+  padding-top: 6rem;
 }
 
 h3 {
@@ -13,9 +14,29 @@ p {
   letter-spacing: 1.1px;
 }
 
+/*
+  -------- HEADER
+*/
+
+
 .search-header {
   max-width: 700px;
 }
+
+.inputSearch {
+  line-height: 3rem;
+}
+
+.form-control {
+  height: 3.0rem;
+  padding: .375rem .75rem;
+  font-size: 2.2rem;
+  font-weight: 100;
+}
+
+/*
+  -------- SECTIONS
+*/
 
 .sections {
   padding: 2rem 0;
@@ -33,22 +54,17 @@ p {
   color: black;
 }
 
-.inputSearch {
-  line-height: 3rem;
-}
+/*
+  -------- GRID
+*/
 
-.form-control{
-height: 3.0rem;
-padding: .375rem .75rem;
-font-size: 2.2rem;
-font-weight: 100;
+.container-fluid {
+  padding: 0 8rem;
 }
-
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  /* padding: 0 4px; */
 }
 
 .loading {
@@ -58,32 +74,30 @@ font-weight: 100;
   padding: 5rem;
 }
 
-/* Create four equal columns that sits next to each other */
 .column {
   flex: 25%;
   max-width: 25%;
-  /* padding: 0 4px; */
 }
 
 .column img {
-  /* margin-top: 5px; */
   vertical-align: middle;
   width: 100%;
+  height: auto;
   border: solid 0.02px rgb(211, 211, 211);
 }
 
 .element {
-    flex: 1;
-    cursor: pointer;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+  flex: 1;
+  cursor: pointer;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
 
 .bottom-left {
   color: white;
   position: relative;
-  bottom: 30px;
-  left: 12px;
+  bottom: 56px;
+  left: 14px;
   font-weight: 100px;
   font-size: .75rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
@@ -93,8 +107,8 @@ font-weight: 100;
 .bottom-right {
   color: rgba(255, 255, 255, 0);
   position: relative;
-  bottom: 50px;
-  left: 205px;
+  bottom: 81px;
+  left: 292px;
   font-weight: 100px;
   font-size: .8rem;
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
@@ -116,26 +130,76 @@ font-weight: 100;
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
 }
 
-/* .modal-body img {
-  max-height: 80vh;
-  width: auto;
-  margin: 0 auto;
-} */
-
 .footer-text p {
   margin-bottom: 0;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
+
+/*
+
+------------------- MEDIA QUERIES
+
+*/
+
+@media screen and (max-width: 1279px) {
+  main {
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 6rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .container-fluid {
+    padding: 0 6rem;
+  }
+
   .column {
     flex: 50%;
     max-width: 50%;
   }
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 799px) {
+  main {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  .container-fluid {
+    padding: 0 4rem;
+  }
+
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  .container-fluid {
+    padding: 0 2rem;
+  }
+
   .column {
     flex: 100%;
     max-width: 100%;

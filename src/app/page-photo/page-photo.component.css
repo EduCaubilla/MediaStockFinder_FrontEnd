@@ -18,6 +18,7 @@ p {
 
 img {
   max-height: 65vh;
+  max-width: 65vw;
   width: auto;
 }
 
@@ -29,34 +30,61 @@ img {
 }
 
 .main {
-  max-height: 100vh;
+  max-height: 75vh;
 }
 
-/* .download {
-    padding: 1rem 0;
-} */
-
-.btn {
-  margin: 1rem;
+.element {
+  margin: 0 auto;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  /* padding: 0 4px; */
-}
-
-.text_footer{
-  padding: 0 5rem 2rem 10rem;
 }
 
 .btn {
-  
+  margin: 1rem;
 }
 
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 1279px) {
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+  }
+
+
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 799px) {
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 4rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .container-fluid {
+    padding: 0 4rem;
+  }
+
   .column {
     flex: 50%;
     max-width: 50%;
@@ -65,6 +93,39 @@ img {
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
+
+  main {
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  .jumbotron {
+    margin-bottom: 1rem;
+  }
+
+  .hero_imagen {
+    padding: 18rem 2rem;
+    max-height: 90vh;
+    width: 100vw;
+  }
+
+  .main_search {
+    margin: 0;
+  }
+
+  .sections .nav-link {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .container-fluid {
+    padding: 0 2rem;
+  }
+
   .column {
     flex: 100%;
     max-width: 100%;

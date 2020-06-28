@@ -4,21 +4,41 @@
   font-size: 16px;
 }
 
-.navbar-brand{
-    font-size: 1.5rem;
+.navbar-brand {
+  font-size: 1.5rem;
 }
 
-.navbar{
-    padding: 1rem 5rem;
+.logo {
+  height: 2rem;
+  width: auto;
+}
+
+.navbar {
+  padding: 1rem 2rem;
 }
 
 .nav-item {
-    font-size: 1.2rem;
-    padding-left: 1.5rem;
+  font-size: 1.2rem;
+  padding-left: 1.5rem;
 }
 
-.nav-link{
-    font-size: 1.2rem;
-    padding: 0.2rem;
-    cursor: pointer;
+.nav-link {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 799px) {
+  * {
+    font-size: 14px;
+  }
+
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+
+  * {
+    font-size: 12px;
+  }
+
 }

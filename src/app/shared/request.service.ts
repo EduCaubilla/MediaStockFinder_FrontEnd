@@ -15,15 +15,34 @@ import { tap, catchError } from 'rxjs/operators';
 
 export class RequestService {
 
-  isLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getLogged());
+  public isLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getLogged());
 
   public user: UserInterface;
 
-  constructor(private http: HttpClient) {   }
+  public response$: Observable<any>;
+
+  constructor(private http: HttpClient) {
+   }
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
+
+  refreshUser() {
+    const id = localStorage.getItem('id');
+
+    if (this.user === undefined && id !== null) {
+      this.response$ = this.searchUser$(id);
+      return this.response$.subscribe((data) => {
+        this.user = data.user;
+        console.log('ENTRA SERVICE USER ', this.user)
+      });
+    }
+  }
+
+  newRefreshUser(user) {
+  this.user = user;
+}
 
   setToken(token): void {
     console.log('guarda TOKEN');
@@ -34,10 +53,10 @@ export class RequestService {
     if (localStorage.getItem('isLogged') === 'true') {
       return true;
     } else { return false; }
-
   }
 
 // ------------------ PHOTO
+
 
 // BUSCADOR PRINCIPAL
   searchPhotos$(search) {
@@ -59,12 +78,6 @@ export class RequestService {
     return this.http.get<PhotoInterface>(URL_API_RANDOM
     );
   }
-
-  // listRandomNext$() {
-  //   const URL_API_RANDOM = `${environment.API_URL}/photo/random/1`;
-  //   return this.http.get<PhotoInterface>(URL_API_RANDOM
-  //   );
-  // }
 
 // CATEGORÍA NATURE
   searchPhotosNature$() {
@@ -107,34 +120,10 @@ export class RequestService {
     return this.http.get<PhotoInterface>(URL_API_ONEPHOTO);
   }
 
-  /*
-// DESCARGA DE FOTO ---- Directamente desde el ts
-
-  // triggerDownload$(type, link) {
-  //     const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${type}/${link}`;
-
-  //     // this.authKey = localStorage.getItem('jwt_token');
-
-  //     const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'image/jpg',
-  //       // 'Authorization': this.authKey,
-  //       responseType: 'blob',
-  //       Accept: 'image/jpg',
-  //       observe: 'response'
-  //     })
-  //   };
-
-  //   // return this.http.get(`${this.BASE_URL}/help/pdf`, httpOptions);
-  //     return this.http.get(URL_API_DOWNLOADPHOTO, httpOptions);
-
-
-  // }
-*/
-
 
 // ------------------ VIDEO
 
+  
 // VIDEO RANDOM
 
     getVideos$() {
@@ -204,30 +193,128 @@ export class RequestService {
   logoutUser() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('isLogged');
+    localStorage.removeItem('id');
+    localStorage.clear();
   }
 
-  getUserLogin$(user) {
-    const URL_API_GET_USER = `${environment.API_URL}/user/${this.user.id}`;
+  getUserLogin$(user: UserInterface) {
+    const URL_API_GET_USER = `${environment.API_URL}/user/${this.user._id}`;
 
     return this.http.post<UserInterface>(URL_API_GET_USER, JSON.stringify(user), {
       headers: this.headers,
     });
   }
 
+  searchUser$(id) {
+    // this.user = user;
+    console.log('SALE ID PARA BUSCAR USER ' + id);
+
+    const token = localStorage.getItem('accesstoken');
+    // console.log('CON EL TOKEN ' + token);
+
+    const myToken = 'bearer ' + token;
+
+    // console.log(myToken);
+
+    console.log(id);
+
+    const URL_API_UPDATE = `${environment.API_URL}/user/${id}`;
+
+    return this.http
+      .get(
+        URL_API_UPDATE, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: myToken
+        }
+      });
+
+  }
+
   getUser() {
-    console.log(this.user);
+    console.log('GET USER', this.user);
 
     return this.user;
   }
 
   setUser(user) {
 
-    console.log('guarda USER' + user);
+    console.log('guarda USER', user);
     localStorage.setItem('id', user._id);
     this.user = user;
 
     console.log(this.user);
+  }
 
+  updateUser$(user: UserInterface): Observable<any> {
+    // this.user = user;
+    console.log('SALE USER PARA UPDATE ', user);
+
+    const token = localStorage.getItem('accesstoken');
+    // console.log('CON EL TOKEN ' + token);
+
+    const myToken = 'bearer ' + token;
+
+    // console.log(myToken);
+
+    console.log(this.user._id);
+
+    const URL_API_UPDATE = `${environment.API_URL}/user/${this.user._id}`;
+
+    return this.http
+      .post<UserInterface>(
+        URL_API_UPDATE,
+        JSON.stringify(user), {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: myToken
+          }
+      })
+
+      .pipe(tap(data => {
+        console.log('ENTRA USER ACTUALIZADO ' + data);
+        this.user = data;
+        return data;
+      }),
+        catchError(error => {
+          console.log(error);
+          return throwError(error);
+        }));
+  }
+
+  addUserItem$(media: any): Observable<any> {
+    console.log('SALE ITEM PARA ADD ', media);
+
+    const token = localStorage.getItem('accesstoken');
+    // console.log('CON EL TOKEN ' + token);
+
+    const myToken = 'bearer ' + token;
+
+    // console.log(myToken);
+
+    console.log(this.user._id);
+
+    const URL_API_UPDATE = `${environment.API_URL}/user/desk/${this.user._id}`;
+
+    return this.http
+      .post<UserInterface>(
+        URL_API_UPDATE,
+        JSON.stringify(media), {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: myToken
+          }
+      })
+
+      .pipe(tap(data => {
+        console.log('ENTRA USER CON ITEM AÑADIDO ', data);
+        this.user = data;
+        return data;
+      }),
+        catchError(error => {
+          console.log(error);
+          return throwError(error);
+        }));
   }
 
 }

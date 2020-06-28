@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HelperService } from '../shared/helper.service';
 import { environment } from 'src/environments/environment';
+import { UserInterface } from '../shared/interfaces/user-interface';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class SearchVideoComponent implements OnInit {
 
   public response$: Observable<any>;
 
+  public user: UserInterface;
+
   search: string;
   searchWords: string;
   newSearch: string;
@@ -36,6 +39,10 @@ export class SearchVideoComponent implements OnInit {
   link: string;
   page: number;
 
+  isLogged: boolean;
+
+  newItem: any;
+
   constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) {
     this.loading = true;
     this.searchBox = false;
@@ -44,8 +51,13 @@ export class SearchVideoComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLogged = this.request.getLogged();
+
+    console.log(this.isLogged);
+
+    this.refreshUser();
+
     this.route.params.subscribe(params => {
-      // console.log(params.search);
       this.search = params.search;
       this.searchWords = this.search.match(/[^,(?! )]+/g).join();
 
@@ -75,6 +87,26 @@ export class SearchVideoComponent implements OnInit {
       (error) => console.log(error));
 
 }
+
+  refreshUser() {
+    this.id = localStorage.getItem('id');
+
+    this.user = this.request.getUser();
+
+    if (this.user === undefined && this.id !== null) {
+      this.response$ = this.request.searchUser$(this.id);
+
+      return this.response$.subscribe(
+      (data) => {
+        console.log('VUELVE EL USER ACTUALIZADO ', data);
+        this.user = data.user;
+        this.request.newRefreshUser(this.user);
+      },
+      (error) => console.log(error)
+    );
+    }
+  }
+
 
   splitter() {
 
@@ -162,7 +194,7 @@ export class SearchVideoComponent implements OnInit {
     window.location.assign(URL_API_DOWNLOADVIDEO);
   }
 
-  toSearchVideoNextPage$() {
+  toVideoNextPage$() {
 
     this.cleanView();
 
@@ -209,6 +241,49 @@ export class SearchVideoComponent implements OnInit {
 
       },
     (error) => console.log(error));
+  }
+
+  updateUser$() {
+    console.log('ENVIAMOS ITEM PARA USER ' + this.user);
+    
+    this.response$ = this.request.addUserItem$(this.newItem);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.user = data;
+        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+        alert('The image has been added on your Desk.')
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  saveVideoUser$($event) {
+    const id = $event.target.dataset.id;
+
+    console.log(id);
+
+    const type = $event.target.dataset.font;
+
+    console.log(type);
+
+    this.getOneVideoSave$(type, id);
+  }
+
+  getOneVideoSave$(type, id){
+    console.log(this.user);
+
+    this.response$ = this.request.searchOneVideo$(type, id);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.newItem = data;
+        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+        this.updateUser$();
+      }, (error) => {
+        console.log(error)
+      }
+    );
   }
 
 }

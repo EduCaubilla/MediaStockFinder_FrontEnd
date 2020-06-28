@@ -1,587 +1,778 @@
-<main>
-  <div class="container">
-    <div class="explore-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<main role="main">
+  <div class="container-fluid">
+    <div class="explore-header px-3 py-2 pt-md-3 pb-md-2 mx-auto text-center">
       <h3 class="display-4">Explore & Find</h3>
       <p class="lead">
         Navigate across different categories to find what you're looking for or
         to discover something amazing on the way.
       </p>
     </div>
-    <div class="container sections">
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link active" (click)="getCatLatest$()">Latest</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="getCatNature$()">Nature</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="getCatPeople$()">People</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="getCatFoodDrink$()">Food & Drink</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="getVideos$()">Video</a>
-        </li>
-      </ul>
-    </div>
+  </div>
+  <div class="container sections">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" (click)="getCatLatest$()">Latest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="getCatNature$()">Nature</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="getCatPeople$()">People</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="getCatFoodDrink$()">Food & Drink</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="getVideos$()">Video</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="loading" *ngIf="loading">
-      <img src="../../assets/loader.gif" />
-    </div>
+  <div class="loading" *ngIf="loading">
+    <img src="../../assets/loader.gif" />
+  </div>
 
-    <div class="container my-4 grid plantilla" *ngIf="!showVideo">
-      <div class="row">
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr1">
-            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-                (dblclick)="toPhotoPage($event)" />
-            </a>
-            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-                (click)="triggerDownloadPhoto($event)"></i>
-              <!-- (click)="triggerDownload($event)"></i> -->
-              <i class="fas fa-plus"></i>
+  <div class="container-fluid my-4 grid plantilla" *ngIf="!showVideo">
+    <div class="row">
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr1">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveItemUser($event)" *ngIf="isLogged"></i>
+          </div>
 
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
+                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
                     </button>
-                  </div>
-                  <div class="modal-body">
-                    <img [src]=item?.imageLarge />
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Download
-                      </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                      [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
-                      See Photo
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr2">
-            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-                (dblclick)="toPhotoPage($event)" />
-            </a>
-            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-                (click)="triggerDownloadPhoto($event)"></i>
-              <!-- (click)="triggerDownload($event)"></i> -->
-              <i class="fas fa-plus"></i>
 
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <img [src]=item?.imageLarge />
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Download
-                      </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
-                      [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
-                      See Photo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr3">
-            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-                (dblclick)="toPhotoPage($event)" />
-            </a>
-            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-                (click)="triggerDownloadPhoto($event)"></i>
-              <!-- (click)="triggerDownload($event)"></i> -->
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <img [src]=item?.imageLarge />
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Download
-                      </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
-                      [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
-                      See Photo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr4">
-            <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-              <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-                (dblclick)="toPhotoPage($event)" />
-            </a>
-            <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right">
-              <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-                (click)="triggerDownloadPhoto($event)"></i>
-              <!-- (click)="triggerDownload($event)"></i> -->
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <img [src]=item?.imageLarge />
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Download
-                      </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
-                      [attr.data-font]="item?.font" (click)="triggerDownloadPhoto($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
-                      See Photo
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
       </div>
-    </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr2">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveItemUser($event)" *ngIf="isLogged"></i>
+          </div>
 
-    <div class="container my-4 grid plantilla" *ngIf="showVideo">
-      <div class="row">
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr1">
-            <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
-              <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                <!-- <img [src]=item?.imageSmall /> -->
-                <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
-                  onmouseout="this.pause()">
-                  <source [src]=item?.imageSmall type="video/mp4">
-                </video>
-              </a>
-            </div>
-            <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i>
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
                   </div>
-                  <div class="modal-body">
-                    <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
-                      <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
-                        allow="autoplay">
-                        <source [src]="item?.imageMedium" type="video/mp4">
-                      </video>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                      id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Download
-                    </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                      (click)="triggerDownloadVideo($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
+                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
-                      See Video
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr2">
-            <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
-              <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                <!-- <img [src]=item?.imageSmall /> -->
-                <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
-                  onmouseout="this.pause()">
-                  <source [src]=item?.imageSmall type="video/mp4">
-                </video>
-              </a>
-            </div>
-            <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i>
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
-                      <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
-                        allow="autoplay">
-                        <source [src]="item?.imageMedium" type="video/mp4">
-                      </video>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
 
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                      id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Download
-                    </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                      (click)="triggerDownloadVideo($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
-                      See Video
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr3">
-            <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
-              <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                <!-- <img [src]=item?.imageSmall /> -->
-                <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
-                  onmouseout="this.pause()">
-                  <source [src]=item?.imageSmall type="video/mp4">
-                </video>
-              </a>
-            </div>
-            <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i>
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
-                      <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
-                        allow="autoplay">
-                        <source [src]="item?.imageMedium" type="video/mp4">
-                      </video>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                      id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Download
-                    </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                      (click)="triggerDownloadVideo($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
-                      See Video
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="container element" *ngFor="let item of arr4">
-            <div class="videowrapper" style="--aspect-ratio: 9 / 16;">
-              <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                <!-- <img [src]=item?.imageSmall /> -->
-                <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
-                  onmouseout="this.pause()">
-                  <source [src]=item?.imageSmall type="video/mp4">
-                </video>
-              </a>
-            </div>
-            <div class="bottom-left-video">{{item.authorName}} | {{item.font}}</div>
-            <div class="bottom-right-video">
-              <i class="fas fa-arrow-down" [attr.data-link]="item.imageLarge"
-                (click)="triggerDownloadVideo($event)"></i>
-              <i class="fas fa-plus"></i>
-            </div>
-            <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                      {{item.authorName}} | {{item.font}}
-                    </h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
-                      <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
-                        allow="autoplay">
-                        <source [src]="item?.imageMedium" type="video/mp4">
-                      </video>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <div class="footer-text mr-auto align-bottom">
-                      <h6>{{item.title}}</h6>
-                      <p>{{item.description}}</p>
-                    </div>
-
-                    <!-- <div class="dropdown"> -->
-                    <!-- <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
-                      id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Download
-                    </a> -->
-                    <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                      (click)="triggerDownloadVideo($event)">
-                      Download
-                    </a>
-
-                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
-                    </div> -->
-                    <!-- </div> -->
-                    <button type="button" class="btn btn-outline-secondary btn-sm">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                      [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
-                      See Video
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class="buttonNext text-center" *ngIf="!loading">
-        <a class="btn btn-outline-secondary btn-sm" (click)="toVideoNextPage$()">
-          See more
-        </a>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr3">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveItemUser($event)" *ngIf="isLogged"></i>
+          </div>
+
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
+                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr4">
+          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (dblclick)="toPhotoPage($event)" />
+          </a>
+          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-right">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
+              (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveItemUser($event)" *ngIf="isLogged"></i>
+          </div>
+
+          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
+                    {{item.authorName}} | {{item.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  <img [src]=item?.imageLarge />
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item.title}}</h6>
+                    <p>{{item.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
+                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                    See Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>
+
+  <div class="container-fluid my-4 grid plantilla" *ngIf="showVideo">
+    <div class="row">
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr1">
+          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          </div>
+          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
+                    {{item?.authorName}} | {{item?.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]="item?.imageMedium" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                    See Video
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr2">
+          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          </div>
+          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
+                    {{item?.authorName}} | {{item?.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]="item?.imageMedium" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                    See Video
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr3">
+          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          </div>
+          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
+                    {{item?.authorName}} | {{item?.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]="item?.imageMedium" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                    See Video
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="container element" *ngFor="let item of arr4">
+          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+                onmouseout="this.pause()">
+                <source [src]=item?.imageSmall type="video/mp4">
+              </video>
+            </a>
+          </div>
+          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-right-video">
+            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
+            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i>
+            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          </div>
+          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
+                    {{item?.authorName}} | {{item?.font}}
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                    <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
+                      allow="autoplay">
+                      <source [src]="item?.imageMedium" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text mr-auto align-bottom">
+                    <h6>{{item?.title}}</h6>
+                    <p>{{item?.description}}</p>
+                  </div>
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                    (click)="triggerDownloadVideo($event)">
+                    Download
+                  </a>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
+                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    Add to My Desk
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                    See Video
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                    Ooops
+                  </h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h3>You need to be logged in to save media.</h3>
+                </div>
+                <div class="modal-footer">
+                  <div class="footer-text align-bottom text center">
+                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                      data-dismiss="modal">
+                      Login
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                      [routerLink]="['/signup']">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttonNext text-center" *ngIf="!loading">
+      <a class="btn btn-outline-secondary btn-sm" (click)="toVideoNextPage$()">
+        See more
+      </a>
+    </div>
+  </div>
+
 </main>

@@ -14,10 +14,11 @@ import { SearchVideoComponent } from './search-video/search-video.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PagePhotoComponent } from './page-photo/page-photo.component';
 import { PageVideoComponent } from './page-video/page-video.component';
-import { UserDeskComponent } from './user-desk/user-desk.component'
+import { UserDeskComponent } from './user-desk/user-desk.component';
+import { UserGuard } from './user.guard';
+
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'license', component: LicenseComponent },
   { path: 'faqs', component: FAQsComponent },
   { path: 'legal', component: LegalComponent },
-  { path: 'user-desk', component: UserDeskComponent },
+  { path: 'user-desk', component: UserDeskComponent, canActivate: [UserGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'search-photo/:search', component: SearchPhotoComponent },

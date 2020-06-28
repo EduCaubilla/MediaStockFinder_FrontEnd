@@ -4,15 +4,14 @@ import { Router } from '@angular/router';
 import { RequestService } from '../shared/request.service';
 import { HelperService } from '../shared/helper.service';
 import { environment } from 'src/environments/environment';
-
-
-// import {rxjs/rx} from '@rxjs/rx';
+import { UserInterface } from '../shared/interfaces/user-interface';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
   search: string;
@@ -38,12 +37,16 @@ export class HomeComponent implements OnInit {
 
   public response$: Observable<any>;
 
+  public user: UserInterface;
+
+  isLogged: boolean;
+
   type: string;
   id: string;
-
   link: string;
-
   page: number;
+
+  newItem: any;
 
   constructor(private request: RequestService, private router: Router, private helper: HelperService) {
     this.search = '';
@@ -53,22 +56,49 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getRandom$();
+    this.isLogged = this.request.getLogged();
 
+    console.log(this.isLogged);
+
+    this.getOneRandom$();
+    this.getRandom$();
+    this.bgJumboStyle();
+
+    this.refreshUser();
+
+  }
+
+  refreshUser() {
+    this.id = localStorage.getItem('id');
+
+    this.user = this.request.getUser();
+
+    if (this.user === undefined && this.id !== null) {
+      this.response$ = this.request.searchUser$(this.id);
+
+      return this.response$.subscribe(
+      (data) => {
+        console.log('VUELVE EL USER ACTUALIZADO ', data);
+        this.user = data.user;
+        this.request.newRefreshUser(this.user);
+      },
+      (error) => console.log(error)
+    );
+    }
+  }
+
+  getOneRandom$() {
     this.response$ = this.request.oneRandom$();
 
     return this.response$.subscribe(
       (data) => {
         this.onePhoto = data[0].imageMedium;
-        // console.log(data);
-        // console.log(this.onePhoto);
       });
-    // this.bgJumboStyle();
   }
 
   bgJumboStyle() {
     const styles = { 'background-image': `url(${this.onePhoto})` };
-    console.log(this.onePhoto);
+    // console.log(this.onePhoto);
     return styles;
   }
 
@@ -78,8 +108,6 @@ export class HomeComponent implements OnInit {
   }
 
   searchStart() {
-    console.log(this.search);
-
     switch (this.selectType) {
       case ('selectPhoto'):
         this.router.navigate([`/search-photo/${this.search}`]);
@@ -91,11 +119,9 @@ export class HomeComponent implements OnInit {
         this.router.navigate([`/search-photo/${this.search}`]);
         break;
     }
-
   }
 
   getRandom$() {
-    // this.showVideo = false;
     this.loading = true;
     this.cleanView();
 
@@ -112,22 +138,13 @@ export class HomeComponent implements OnInit {
         [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosRandom, numberArr);
 
         this.loading = false;
-
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosRandom);
       },
       (error) => console.log(error)
     );
   }
 
   getCatNature$() {
-    // console.log('llega el click');
 
-    // this.showVideo = false;
     this.loading = true;
     this.cleanView();
 
@@ -146,21 +163,12 @@ export class HomeComponent implements OnInit {
 
         this.loading = false;
 
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
       (error) => console.log(error)
     );
   }
 
   getCatPeople$() {
-    // console.log('llega el click');
-    // this.showVideo = false;
-
     this.loading = true;
     this.cleanView();
 
@@ -179,21 +187,12 @@ export class HomeComponent implements OnInit {
 
         this.loading = false;
 
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
       (error) => console.log(error)
     );
   }
 
   getCatFoodDrink$() {
-    // console.log('llega el click');
-
-    // this.showVideo = false;
     this.loading = true;
     this.cleanView();
 
@@ -212,12 +211,6 @@ export class HomeComponent implements OnInit {
 
         this.loading = false;
 
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
       (error) => console.log(error)
     );
@@ -228,7 +221,6 @@ export class HomeComponent implements OnInit {
   }
 
   getVideos$() {
-
     this.loading = true;
 
     this.cleanView();
@@ -249,11 +241,6 @@ export class HomeComponent implements OnInit {
 
         this.loading = false;
 
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
         console.log(this.arrVideos);
       },
       (error) => console.log(error)
@@ -268,7 +255,6 @@ export class HomeComponent implements OnInit {
     console.log(this.type);
     console.log(this.id);
 
-
     this.router.navigate([`/photo-page/${this.type}/${this.id}`]);
   }
 
@@ -278,7 +264,6 @@ export class HomeComponent implements OnInit {
 
     console.log(this.type);
     console.log(this.id);
-
 
     this.router.navigate([`/video-page/${this.type}/${this.id}`]);
   }
@@ -292,36 +277,7 @@ export class HomeComponent implements OnInit {
 
     const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
     window.location.assign(URL_API_DOWNLOADPHOTO);
-    // return this.http.get(URL_API_DOWNLOADPHOTO, httpOptions);
-
-    // this.response$ = this.request.triggerDownload$(this.type, this.link);
-
-    // console.log(this.response$);
-
-
-    // return this.response$.subscribe((data) => {
-    //   const blob = new Blob([data], {type: 'image/jpg'});
-
-    //   const url = window.URL.createObjectURL(blob);
-
-    //   window.open(url);
-
-
-      // console.log(downloadURL);
-
-
-      // const link = document.createElement('a');
-      // link.href = downloadURL;
-      // link.download = 'MSFimage.jpg';
-      // link.click();
-
-      // this.downloadService.getPdf()
-      // .subscribe((resultBlob: Blob) => {
-      // var downloadURL = URL.createObjectURL(resultBlob);
-      // window.open(downloadURL);});
-
-
-    // });
+    
   }
 
   triggerDownloadVideo($event) {
@@ -336,7 +292,6 @@ export class HomeComponent implements OnInit {
   }
 
   toVideoNextPage$() {
-
     if (!this.page) {
       this.page = 2;
     } else {
@@ -366,67 +321,84 @@ export class HomeComponent implements OnInit {
         [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
 
         this.loading = false;
-
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
       (error) => console.log(error)
     );
 
   }
 
-  // toPhotoNextPage$() {
-  //   if (!this.page) {
-  //     this.page = 2;
-  //   } else {
-  //     this.page += 1;
-  //   }
+  saveItemUser($event) {
 
-  //   console.log(this.page);
+    const id = $event.target.dataset.id;
 
+    console.log(id);
 
-  //   // this.router.navigate([`/${this.page}`]);
+    const type = $event.target.dataset.font;
 
-  //   // this.route.params.subscribe(params => {
-  //   //   // console.log(params.search);
-  //   //   this.page = params.page;
-  //   // });
+    console.log(type);
 
-  //   this.loading = true;
+    this.getOneImageSave$(type, id);
 
-  //   this.cleanView();
+  }
 
-  //   this.showVideo = true;
+  getOneImageSave$(type, id) {
 
-  //   this.response$ = this.request.getNextPhotos$(this.page);
+    console.log(this.user);
 
-  //   return this.response$.subscribe(
-  //     (data) => {
-  //       this.arrVideos = data;
+    this.response$ = this.request.searchOnePhoto$(type, id);
 
-  //       console.log(this.arrVideos);
+    return this.response$.subscribe(
+      (data) => {
+        this.newItem = data;
+        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+        this.updateUser$();
+      }, (error) => {
+        console.log(error)
+      }
+    );
+  }
 
-  //       this.helper.shuffle(this.arrVideos);
+  updateUser$() {
+    console.log('ENVIAMOS ITEM PARA USER ', this.user);
+    
+    this.response$ = this.request.addUserItem$(this.newItem);
 
-  //       const numberArr: number = Math.ceil(this.arrVideos.length / 4);
+    return this.response$.subscribe(
+      (data) => {
+        this.user = data;
+        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+        alert('The image has been added on your Desk.')
+      },
+      (error) => console.log(error)
+    );
+  }
 
-  //       [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
+  saveVideoUser$($event) {
+    const id = $event.target.dataset.id;
 
-  //       this.loading = false;
+    console.log(id);
 
-  //       // console.log(this.arr1);
-  //       // console.log(this.arr2);
-  //       // console.log(this.arr3);
-  //       // console.log(this.arr4);
+    const type = $event.target.dataset.font;
 
-  //       // console.log(this.arrPhotosNature);
-  //     },
-  //     (error) => console.log(error)
-  //   );
-  // }
+    console.log(type);
+
+    this.getOneVideoSave$(type, id);
+  }
+
+  getOneVideoSave$(type, id){
+    console.log(this.user);
+
+    this.response$ = this.request.searchOneVideo$(type, id);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.newItem = data;
+        console.log('RECIBIMOS ITEM PARA AÑADIR ', this.newItem);
+        this.updateUser$();
+      }, (error) => {
+        console.log(error)
+      }
+    );
+  }
 
 }

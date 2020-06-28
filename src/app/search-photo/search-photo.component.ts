@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HelperService } from '../shared/helper.service';
 import { environment } from 'src/environments/environment';
+import { UserInterface } from '../shared/interfaces/user-interface';
 
 
 
@@ -28,6 +29,8 @@ export class SearchPhotoComponent implements OnInit {
 
   public response$: Observable<any>;
 
+  user: UserInterface;
+
   search: string;
   searchWords: string;
   newSearch: string;
@@ -37,6 +40,10 @@ export class SearchPhotoComponent implements OnInit {
   link: string;
   page: number;
 
+  isLogged: boolean;
+
+  newItem: any;
+
   constructor(private request: RequestService, private route: ActivatedRoute, private helper: HelperService, private router: Router) {
     this.loading = true;
     this.searchBox = false;
@@ -44,6 +51,12 @@ export class SearchPhotoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.isLogged = this.request.getLogged();
+
+    console.log(this.isLogged);
+
+    this.refreshUser();
 
     this.route.params.subscribe(params => {
       // console.log(params.search);
@@ -58,7 +71,6 @@ export class SearchPhotoComponent implements OnInit {
     return this.response$.subscribe(
         (data) => {
         this.arrSearchPhoto = data;
-        // this.arrShuffle = this.arrSearchPhoto;
 
         this.shufflePhotos();
 
@@ -71,11 +83,29 @@ export class SearchPhotoComponent implements OnInit {
         console.log(this.arr3);
         console.log(this.arr4);
 
-        // console.log(this.arrSearchPhoto);
         },
       (error) => console.log(error));
 
 }
+
+  refreshUser() {
+    this.id = localStorage.getItem('id');
+
+    this.user = this.request.getUser();
+
+    if (this.user === undefined && this.id !== null) {
+      this.response$ = this.request.searchUser$(this.id);
+
+      return this.response$.subscribe(
+      (data) => {
+        console.log('VUELVE EL USER ACTUALIZADO ', data);
+        this.user = data.user;
+        this.request.newRefreshUser(this.user);
+      },
+      (error) => console.log(error)
+    );
+    }
+  }
 
   splitter() {
 
@@ -209,6 +239,52 @@ export class SearchPhotoComponent implements OnInit {
 
       },
     (error) => console.log(error));
+  }
+
+  saveItemUser($event) {
+
+    const id = $event.target.dataset.id;
+
+    console.log(id);
+
+    const type = $event.target.dataset.font;
+
+    console.log(type);
+
+    this.getOneImageSave$(type, id);
+
+  }
+
+  getOneImageSave$(type, id) {
+
+    console.log(this.user);
+
+    this.response$ = this.request.searchOnePhoto$(type, id);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.newItem = data;
+        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+        this.updateUser$();
+      }, (error) => {
+        console.log(error)
+      }
+    );
+  }
+
+  updateUser$() {
+    console.log('ENVIAMOS ITEM PARA USER ' + this.user);
+    
+    this.response$ = this.request.addUserItem$(this.newItem);
+
+    return this.response$.subscribe(
+      (data) => {
+        this.user = data;
+        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+        alert('The image has been added on your Desk.')
+      },
+      (error) => console.log(error)
+    );
   }
 
 }
