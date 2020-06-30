@@ -267,21 +267,21 @@ export class SearchPhotoComponent implements OnInit {
         console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
         this.updateUser$();
       }, (error) => {
-        console.log(error)
+        console.log(error);
       }
     );
   }
 
   updateUser$() {
     console.log('ENVIAMOS ITEM PARA USER ' + this.user);
-    
+
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
       (data) => {
         this.user = data;
         console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-        alert('The image has been added on your Desk.')
+        alert('The image has been added on your Desk.');
       },
       (error) => console.log(error)
     );

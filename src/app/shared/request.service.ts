@@ -35,7 +35,7 @@ export class RequestService {
       this.response$ = this.searchUser$(id);
       return this.response$.subscribe((data) => {
         this.user = data.user;
-        console.log('ENTRA SERVICE USER ', this.user)
+        console.log('ENTRA SERVICE USER ', this.user);
       });
     }
   }
@@ -60,14 +60,14 @@ export class RequestService {
 
 // BUSCADOR PRINCIPAL
   searchPhotos$(search) {
-    const URL_API_SEARCH = `http://localhost:9000/photo/${search}/1`;
+    const URL_API_SEARCH = `${environment.API_URL}/photo/${search}/1`;
     // const URL_API_SEARCH = `${environment.API_URL}/photo/${search}`;
     console.log(URL_API_SEARCH);
     return this.http.get<PhotoInterface>(URL_API_SEARCH);
   }
 
   searchPhotosNextPage$(search, page) {
-    const URL_API_SEARCH_PAGE = `http://localhost:9000/photo/${search}/${page}`;
+    const URL_API_SEARCH_PAGE = `${environment.API_URL}/photo/${search}/${page}`;
     // const URL_API_SEARCH = `${environment.API_URL}/photo/${search}`;
     return this.http.get<PhotoInterface>(URL_API_SEARCH_PAGE);
   }
@@ -123,7 +123,7 @@ export class RequestService {
 
 // ------------------ VIDEO
 
-  
+
 // VIDEO RANDOM
 
     getVideos$() {
