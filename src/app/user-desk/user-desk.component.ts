@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './user-desk.component.html',
   styleUrls: ['./user-desk.component.css']
 })
-  
+
 export class UserDeskComponent implements OnInit {
 
   public user: UserInterface;

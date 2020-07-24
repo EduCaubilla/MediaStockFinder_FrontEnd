@@ -1,31 +1,59 @@
 <main>
   <div class="container text-center">
-    <form class="form-signin">
-      <!-- <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" /> -->
+    <form class="form-signup" novalidate [formGroup]="signUpForm">
       <h1 class="h3 mb-3 font-weight-normal my-4">Join us</h1>
+      <div class="form-group">
+        <label class="mt-2">Name</label>
+        <input type="text" class="form-control mb-2" name="name" formControlName="name"
+          placeholder="Insert your first name" autofocus="" />
+        <p class="error" *ngIf="signUpForm.controls.name.errors?.required && signUpForm.controls.name.touched">
+          This
+          field can't be empty</p>
+        <p class="error" *ngIf="signUpForm.controls.name.errors?.minlength">The name must have, at least, 2
+          characters.
+        </p>
+      </div>
 
-      <label for="inputName" class="mt-2">Name</label>
-      <input [(ngModel)]=userData.name id="inputName" class="form-control mb-2" name="name"
-        placeholder="Insert your first name" required="" autofocus="" />
-
-      <label for="inputLastName" class="mt-2">Last Name</label>
-      <input [(ngModel)]=userData.lastName class="form-control mb-4" name="lastName" placeholder="Insert your last name" required="" autofocus="" />
+      <div class="form-group">
+        <label class="mt-2">Last Name</label>
+        <input type="text" class="form-control mb-4" name="lastName" formControlName="lastName"
+          placeholder="Insert your last name" autofocus="" />
+        <p class="error" *ngIf="signUpForm.controls.lastName.errors?.required && signUpForm.controls.lastName.touched">
+          This field can't be empty</p>
+        <p class="error" *ngIf="signUpForm.controls.lastName.errors?.minlength">The last name must have, at least, 2
+          characters.
+        </p>
+      </div>
 
       <hr>
 
-      <label for="inputEmail" class="mt-2">Email</label>
-      <input [(ngModel)]=userData.email id="inputEmail" class="form-control mb-2" name="email"
-        placeholder="Insert your email" required="" autofocus="" />
+      <div class="form-group">
+        <label class="mt-2">Email</label>
+        <input type="text" class="form-control mb-2" name="email" formControlName="email"
+          placeholder="Insert your email" autofocus="" />
+        <p class="error" *ngIf="signUpForm.controls.email.errors?.required && signUpForm.controls.email.touched">This
+          field can't be
+          empty
+        </p>
+        <p class="error" *ngIf="signUpForm.controls.email.errors?.pattern">Please insert a valid email.
+        </p>
+      </div>
 
-      <label for="inputPassword" class="mt-2">Password</label>
-      <input type="password" [(ngModel)]=userData.password id="inputPassword" class="form-control mb-4" name="password"
-        placeholder="Insert your password" required="" />
-      <!-- <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
-        </label>
-      </div> -->
-      <button class="btn btn-lg btn-outline-secondary btn-block my-4" (click)="onRegister()">
+      <div class="form-group">
+        <label class="mt-2">Password</label>
+        <input type="password" class="form-control mb-4" name="password" formControlName="password"
+          placeholder="Insert a password" />
+        <p class="error" *ngIf="signUpForm.controls.password.errors?.required && signUpForm.controls.password.touched">
+          This field can't be empty </p>
+        <p class="error" *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.errors?.passValid">
+          {{signUpForm.controls.password.errors.passValid}}
+        </p>
+      </div>
+
+      <!-- <button type="button" [disabled]="!loginForm.valid">Save</button> -->
+
+      <button type="button" [disabled]="!signUpForm.valid" class="btn btn-lg btn-outline-secondary btn-block my-4"
+        (click)="onRegister()">
         Sign in
       </button>
     </form>

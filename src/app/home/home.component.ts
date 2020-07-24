@@ -27,7 +27,8 @@ export class HomeComponent implements OnInit {
   arr3: Array<any>;
   arr4: Array<any>;
 
-  onePhoto: Array<any>;
+  onePhoto: any;
+  mainPhoto: string;
 
   public selectType: string;
 
@@ -55,6 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.scroll();
 
     this.isLogged = this.request.getLogged();
 
@@ -92,12 +95,17 @@ export class HomeComponent implements OnInit {
 
     return this.response$.subscribe(
       (data) => {
-        this.onePhoto = data[0].imageMedium;
+        this.onePhoto = data[0];
+        console.log(this.onePhoto);
+        
+        this.mainPhoto = data[0].imageLarge;
+        console.log(this.mainPhoto);
+        
       });
   }
 
   bgJumboStyle() {
-    const styles = { 'background-image': `url(${this.onePhoto})` };
+    const styles = { 'background-image': `url(${this.mainPhoto})` };
     // console.log(this.onePhoto);
     return styles;
   }
@@ -129,13 +137,15 @@ export class HomeComponent implements OnInit {
 
     return this.response$.subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.arrPhotosRandom = data;
         this.helper.shuffle(this.arrPhotosRandom);
 
         const numberArr: number = Math.ceil(this.arrPhotosRandom.length / 4);
 
         [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosRandom, numberArr);
+
+        console.log(this.arr1);
 
         this.loading = false;
       },
@@ -248,36 +258,28 @@ export class HomeComponent implements OnInit {
 
   }
 
-  toPhotoPage($event) {
-    this.type = $event.target.dataset.font;
-    this.id = $event.target.dataset.id;
+  // toVideoPage($event) {
+  //   this.type = $event.target.dataset.font;
+  //   this.id = $event.target.dataset.id;
 
-    console.log(this.type);
-    console.log(this.id);
+  //   console.log(this.type);
+  //   console.log(this.id);
 
-    this.router.navigate([`/photo-page/${this.type}/${this.id}`]);
-  }
-
-  toVideoPage($event) {
-    this.type = $event.target.dataset.font;
-    this.id = $event.target.dataset.id;
-
-    console.log(this.type);
-    console.log(this.id);
-
-    this.router.navigate([`/video-page/${this.type}/${this.id}`]);
-  }
+  //   this.router.navigate([`/video-page/${this.type}/${this.id}`]);
+  // }
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
     this.type = $event.target.dataset.font;
+    this.id = $event.target.dataset.id;
 
     console.log(this.link);
     console.log(this.type);
+    console.log(this.id);
 
-    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
     window.location.assign(URL_API_DOWNLOADPHOTO);
-    
+
   }
 
   triggerDownloadVideo($event) {
@@ -353,21 +355,21 @@ export class HomeComponent implements OnInit {
         console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
         this.updateUser$();
       }, (error) => {
-        console.log(error)
+        console.log(error);
       }
     );
   }
 
   updateUser$() {
     console.log('ENVIAMOS ITEM PARA USER ', this.user);
-    
+
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
       (data) => {
         this.user = data;
         console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-        alert('The image has been added on your Desk.')
+        alert('The image has been added on your Desk.');
       },
       (error) => console.log(error)
     );
@@ -396,9 +398,26 @@ export class HomeComponent implements OnInit {
         console.log('RECIBIMOS ITEM PARA AÑADIR ', this.newItem);
         this.updateUser$();
       }, (error) => {
-        console.log(error)
+        console.log(error);
       }
     );
+  }
+
+  scroll() {
+  window.onscroll = () => { this.scrollFunction(); };
+  }
+
+  scrollFunction() {
+    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
+    document.getElementById('btnTop').style.display = 'block';
+    } else {
+    document.getElementById('btnTop').style.display = 'none';
+    }
+  }
+
+  topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
 }

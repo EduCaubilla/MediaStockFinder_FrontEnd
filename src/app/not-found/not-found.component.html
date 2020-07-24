@@ -1,12 +1,15 @@
 <div class="main not_found">
-  <div class="container wrapper" [ngStyle]="bgJumboStyle()">
-    <div class="row">
+  <div class="container wrapper">
+    <div class="row mx-auto" [ngStyle]="bgJumboStyle()">
       <div class="xs-12 md-6 mx-auto">
-        <div id="countUp">
+        <div id="content">
           <div class="number">404</div>
           <div class="text">Page not found</div>
-          <div class="text">Please return to the home page and start your search again.</div>
           <div class="text">Sorry for the inconvenience.</div>
+          <button type="button" class="btn btn-outline-secondary btn-lg my-2" style="margin: 0 auto;"
+            [routerLink]="['/home']">
+            Go back home
+          </button>
         </div>
       </div>
     </div>

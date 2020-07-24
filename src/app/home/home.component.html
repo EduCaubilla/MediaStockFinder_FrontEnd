@@ -1,5 +1,5 @@
 <main role="main">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
+
   <div class="jumbotron hero_imagen text-center" style="
       background-size: cover;
       background-repeat: no-repeat;
@@ -30,7 +30,92 @@
         </div>
       </form>
     </div>
+
+
+    <div class="main-bottom-left" *ngIf="onePhoto.source==='pexels'"><a class="linkAuthor" [href]=onePhoto.authorLink
+        target="_blank">
+        {{onePhoto.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+        Pexels
+      </a>
+    </div>
+    <div class="main-bottom-left" *ngIf="onePhoto.source==='pixabay'"><a class="linkAuthor" [href]=onePhoto.authorLink
+        target="_blank">
+        {{onePhoto.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+        Pixabay
+      </a>
+    </div>
+    <div class="main-bottom-left" *ngIf="onePhoto.source==='unsplash'"><a class="linkAuthor"
+        href="{{onePhoto.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+        {{onePhoto.authorName}}</a> via <a class="linkSource"
+        href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+        Unsplash
+      </a>
+    </div>
+    <div class="modal fade" id="ref{{onePhoto.idSource}}" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='pexels'">
+              <a class="linkAuthor" [href]=onePhoto.authorLink target="_blank">
+                {{onePhoto.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                target="_blank">
+                Pexels
+              </a>
+            </h6>
+            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='pixabay'">
+              <a class="linkAuthor" [href]=onePhoto.authorLink target="_blank">
+                {{onePhoto.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                target="_blank">
+                Pixabay
+              </a>
+            </h6>
+            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='unsplash'">
+              <a class="linkAuthor" href="{{onePhoto.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+                target="_blank">
+                {{onePhoto.authorName}}</a> via <a class="linkSourceModal"
+                href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                Unsplash
+              </a>
+            </h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+            <img [src]=onePhoto?.imageLarge />
+          </div>
+          <div class="modal-footer">
+            <div class="footer-text mr-auto align-bottom">
+              <h6>{{onePhoto.title}}</h6>
+              <p>{{onePhoto.description}}</p>
+            </div>
+            <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="onePhoto?.idSource"
+              [attr.data-link]="onePhoto.imageLarge" [attr.data-font]="onePhoto.source"
+              (click)="triggerDownloadPhoto($event)">
+              Download
+            </a>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-dismiss="modal"
+              data-target="#loggedAlert" *ngIf="!isLogged">
+              Add to My Desk
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="onePhoto?.idSource"
+              [attr.data-font]="onePhoto?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
+              Add to My Desk
+            </button>
+            <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+              [routerLink]="['/photo-page', onePhoto.source, onePhoto.idSource]">
+              See Photo
+            </a>
+            <a type="button" class="btn btn-outline-secondary btn-sm" [href]=onePhoto.imageSourceLink target="_blank">
+              To Source
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
   <div class="container sections my-4">
     <ul class="nav justify-content-center">
       <li class="nav-item">
@@ -59,27 +144,60 @@
     <div class="row">
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
-          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+          <a href=" #ref{{item.idSource}}" data-toggle="modal" data-target="#ref{{item.idSource}}">
             <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
-            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-              (dblclick)="toPhotoPage($event)" />
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='unsplash'"><a class="linkAuthor"
+              href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource"
+              href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              Unsplash
+            </a></div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-              (click)="triggerDownloadPhoto($event)"></i>
-            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="icon fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="icon fas fa-plus" data-toggle="modal" data-target="#loggedAlert"
+              data-dismiss="modal" *ngIf="!isLogged"></i>
+            <i class="icon fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveItemUser($event)" *ngIf="isLogged"></i>
           </div>
 
-          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='unsplash'">
+                    <a class="linkAuthor" href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+                      target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal"
+                      href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                      Unsplash
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -93,22 +211,26 @@
                     <h6>{{item.title}}</h6>
                     <p>{{item.description}}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -148,27 +270,60 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
-          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+          <a href=" #ref{{item.idSource}}" data-toggle="modal" data-target="#ref{{item.idSource}}">
             <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
-            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-              (dblclick)="toPhotoPage($event)" />
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='unsplash'"><a class="linkAuthor"
+              href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource"
+              href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              Unsplash
+            </a></div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-              (click)="triggerDownloadPhoto($event)"></i>
-            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="icon fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="icon fas fa-plus" data-toggle="modal" data-target="#loggedAlert"
+              data-dismiss="modal" *ngIf="!isLogged"></i>
+            <i class="icon fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveItemUser($event)" *ngIf="isLogged"></i>
           </div>
 
-          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='unsplash'">
+                    <a class="linkAuthor" href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+                      target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal"
+                      href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                      Unsplash
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -182,22 +337,26 @@
                     <h6>{{item.title}}</h6>
                     <p>{{item.description}}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -237,27 +396,60 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
-          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+          <a href=" #ref{{item.idSource}}" data-toggle="modal" data-target="#ref{{item.idSource}}">
             <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
-            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-              (dblclick)="toPhotoPage($event)" />
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='unsplash'"><a class="linkAuthor"
+              href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource"
+              href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              Unsplash
+            </a></div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-              (click)="triggerDownloadPhoto($event)"></i>
-            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="icon fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="icon fas fa-plus" data-toggle="modal" data-target="#loggedAlert"
+              data-dismiss="modal" *ngIf="!isLogged"></i>
+            <i class="icon fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveItemUser($event)" *ngIf="isLogged"></i>
           </div>
 
-          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='unsplash'">
+                    <a class="linkAuthor" href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+                      target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal"
+                      href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                      Unsplash
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -271,22 +463,26 @@
                     <h6>{{item.title}}</h6>
                     <p>{{item.description}}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -326,27 +522,60 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <a href=" #ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
+          <a href=" #ref{{item.idSource}}" data-toggle="modal" data-target="#ref{{item.idSource}}">
             <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
-            <img [src]=item?.imageSmall [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
-              (dblclick)="toPhotoPage($event)" />
+            <img [src]=item?.imageSmall [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left">{{item.authorName}} | {{item.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='unsplash'"><a class="linkAuthor"
+              href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource"
+              href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              Unsplash
+            </a></div>
           <div class="bottom-right">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.font"
-              (click)="triggerDownloadPhoto($event)"></i>
-            <i id="modalButton" class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="icon fas fa-arrow-down" [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)"></i>
+            <i id="modalButton" class="icon fas fa-plus" data-toggle="modal" data-target="#loggedAlert"
+              data-dismiss="modal" *ngIf="!isLogged"></i>
+            <i class="icon fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveItemUser($event)" *ngIf="isLogged"></i>
           </div>
 
-          <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                    {{item.authorName}} | {{item.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='unsplash'">
+                    <a class="linkAuthor" href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+                      target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal"
+                      href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                      Unsplash
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -360,22 +589,26 @@
                     <h6>{{item.title}}</h6>
                     <p>{{item.description}}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item.imageLarge"
-                    [attr.data-font]="item.font" (click)="triggerDownloadPhoto($event)">
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveItemUser($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toPhotoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -421,27 +654,47 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
           <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
-            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+            <a href="#ref{{item?.idSource}}" data-toggle="modal" data-target="#ref{{item?.idSource}}">
               <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
-          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
           <div class="bottom-right-video">
             <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
             <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
               *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
           </div>
-          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item?.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
-                    {{item?.authorName}} | {{item?.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -451,7 +704,7 @@
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
-                      <source [src]="item?.imageMedium" type="video/mp4">
+                      <source [src]="item?.imageLarge" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -468,14 +721,17 @@
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -514,27 +770,47 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
           <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
-            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+            <a href="#ref{{item?.idSource}}" data-toggle="modal" data-target="#ref{{item?.idSource}}">
               <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
-          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
           <div class="bottom-right-video">
             <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
             <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
               *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
           </div>
-          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item?.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
-                    {{item?.authorName}} | {{item?.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -544,7 +820,7 @@
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
-                      <source [src]="item?.imageMedium" type="video/mp4">
+                      <source [src]="item?.imageLarge" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -561,14 +837,17 @@
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -607,27 +886,47 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
           <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
-            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+            <a href="#ref{{item?.idSource}}" data-toggle="modal" data-target="#ref{{item?.idSource}}">
               <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
-          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
           <div class="bottom-right-video">
             <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
             <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
               *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
           </div>
-          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item?.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
-                    {{item?.authorName}} | {{item?.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -637,7 +936,7 @@
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
-                      <source [src]="item?.imageMedium" type="video/mp4">
+                      <source [src]="item?.imageLarge" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -654,14 +953,17 @@
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -700,27 +1002,47 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
           <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
-            <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+            <a href="#ref{{item?.idSource}}" data-toggle="modal" data-target="#ref{{item?.idSource}}">
               <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
-          <div class="bottom-left-video">{{item?.authorName}} | {{item?.font}}</div>
+          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></div>
+          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+              target="_blank">
+              {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></div>
           <div class="bottom-right-video">
             <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
             <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
               *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
           </div>
-          <div class="modal fade" id="ref{{item?.idFont}}" tabindex="-1" role="dialog">
+          <div class="modal fade" id="ref{{item?.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idFont}}Label">
-                    {{item?.authorName}} | {{item?.font}}
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pexels'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
+                      target="_blank">
+                      Pexels
+                    </a>
+                  </h6>
+                  <h6 class="modal-title mr-auto" id="{{item.idSource}}Label" *ngIf="item.source==='pixabay'">
+                    <a class="linkAuthor" [href]=item.authorLink target="_blank">
+                      {{item.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
+                      target="_blank">
+                      Pixabay
+                    </a>
                   </h6>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -730,7 +1052,7 @@
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
-                      <source [src]="item?.imageMedium" type="video/mp4">
+                      <source [src]="item?.imageLarge" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -747,14 +1069,17 @@
                     data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idFont"
-                    [attr.data-font]="item?.font" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
+                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                    [attr.data-id]="item.idFont" [attr.data-font]="item.font" (click)="toVideoPage($event)">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                    [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
-                  </button>
+                  </a>
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]=item.imageSourceLink target="_blank">
+                    To Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -795,6 +1120,12 @@
       <a class="btn btn-outline-secondary" (click)="toVideoNextPage$()">
         See more
       </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="btn btn-outline-secondary" (click)="topFunction()" id="btnTop" title="Go to top">To Top
+      <!-- <i class="fas fa-arrow-up"></i> -->
     </div>
   </div>
 

@@ -1,21 +1,28 @@
 <main>
   <div class="container text-center">
-    <form class="form-signin" #form>
-      <!-- <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" /> -->
+    <form class="form-signin" novalidate [formGroup]="loginForm">
       <h1 class="h3 mb-3 font-weight-normal my-4">Please log in</h1>
-      <label for="inputEmail" class="mt-2">Email</label>
-      <input type="email" id="inputEmail" class="form-control mb-2" [placeholder]="placeholder.username" required=""
-        autofocus="" #inputEmail/>
-      <label for="inputPassword" class="mt-2">Password</label>
-      <input type="password" id="inputPassword" class="form-control mb-4" [placeholder]="placeholder.userpass"
-        required="" #inputPassword/>
-      <!-- <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
-        </label>
-      </div> -->
-      <button class="btn btn-lg btn-outline-secondary btn-block my-4" type="submit"
-        (click)="onSubmit($event, form)">
+      <div class="form group">
+        <label class="mt-2">Email</label>
+        <input type="text" class="form-control mb-2" name="email" formControlName="email"
+          [placeholder]="placeholder.username" autofocus="" />
+        <p class="error" *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">This
+          field can't be empty</p>
+        <p class="error" *ngIf="loginForm.controls.email.errors?.pattern">Please insert a valid email.</p>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="mt-2">Password</label>
+        <input type="password" class="form-control mb-4" name="password" formControlName="password"
+          [placeholder]="placeholder.userpass" />
+        <p class="error" *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+          This field can't be empty </p>
+        <p class="error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.passValid">
+          {{loginForm.controls.password.errors.passValid}}
+        </p>
+      </div>
+
+      <button type="button" [disabled]="!loginForm.valid" class="btn btn-lg btn-outline-secondary btn-block my-4"
+        (click)="onSubmit($event)">
         Sign in
       </button>
     </form>

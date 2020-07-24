@@ -1,8 +1,8 @@
 <main>
   <div class="container">
-    <div class="search-header px-3 py-2 pt-md-4 pb-md-2 mr-auto">
-      <h3>Welcome to your Desk</h3>
-      <p>Save your selected photos here.</p>
+    <div class="search-header px-3 py-4 pt-md-4 pb-md-2 mr-auto">
+      <h3>Hi {{user.name}}, welcome to your Desk</h3>
+      <p>This is your personal space to manage saved assets.</p>
     </div>
   </div>
   <div class="container-fluid ">
@@ -29,7 +29,7 @@
               <th scope="row" class="lista my_title">{{ item.title }}</th>
               <th scope="row" class="lista">{{ item.description }}</th>
               <th scope="row" class="lista">{{ item.font }}</th>
-              <th scope="row" class="lista">{{ item.type }}</th>
+              <th scope="row" class="lista">{{ item.media }}</th>
               <th scope="row" class="lista text-center">
                 <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
                   <img [src]=item?.imageThumb [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
@@ -103,10 +103,14 @@
             </tr>
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
-
+  <div class="row">
+    <button type="button" class="btn btn-outline-secondary btn-lg col-4" style="margin: 0 auto;"
+      [routerLink]="['/home']">
+      Go search
+    </button>
+  </div>
 
 </main>

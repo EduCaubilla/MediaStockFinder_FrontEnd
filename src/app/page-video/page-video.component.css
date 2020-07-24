@@ -24,16 +24,36 @@ p {
 }
 
 .main {
-  max-height: 75vh;
-}
-
-.btn {
-  margin: 1rem;
+  max-height: 85vh;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+}
+
+.authorImage {
+  width: auto;
+  height: 3rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.btn {
+  margin-left: .7rem;
+}
+
+.btn-outline-secondary {
+  border-color: #a0a0a0;
+  color: #a0a0a0;
+}
+
+.btn-outline-secondary:hover,
+.fa:hover,
+.dropdown-menu:hover {
+  border-color: rgb(85, 85, 85);
+  background: white;
+  color: black;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */

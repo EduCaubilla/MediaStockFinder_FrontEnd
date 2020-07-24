@@ -22,3 +22,29 @@ p {
 *, ::after, ::before {
     box-sizing: border-box;
 }
+
+.btn-outline-secondary {
+  border-color: #a0a0a0;
+  color: #a0a0a0;
+}
+
+.btn-outline-secondary:hover,
+.fa:hover,
+.dropdown-menu:hover {
+  border-color: rgb(85, 85, 85);
+  background: white;
+  color: black;
+}
+
+.form-group .ng-valid.ng-touched {
+  box-shadow: 0 0 0 .2rem rgba(2, 138, 2, 0.3)
+}
+
+.form-group .ng-invalid.ng-touched {
+  border: .5px solid rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 0 .2rem rgba(255, 0, 0, 0.3)
+}
+
+.error {
+  color: red;
+}

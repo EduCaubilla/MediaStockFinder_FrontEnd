@@ -14,6 +14,19 @@ p {
   letter-spacing: 1.1px;
 }
 
+.btn-outline-secondary {
+  border-color: #a0a0a0;
+  color: #a0a0a0;
+}
+
+.btn-outline-secondary:hover,
+.fa:hover,
+.dropdown-menu:hover {
+  border-color: rgb(85, 85, 85);
+  background: white;
+  color: black;
+}
+
 /*
   -------- HEADER
 */

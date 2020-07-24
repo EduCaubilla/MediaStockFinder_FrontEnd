@@ -1,64 +1,79 @@
 <main>
   <div class="container total">
-    <div class="search-header px-4 py-2 pt-md-4 pb-md-2 mr-auto">
+    <div class="page-header pb-2 pt-4 mr-auto">
       <h3>{{item[0].title}}</h3>
     </div>
 
     <div class="loading" *ngIf="loading">
       <img src="../../assets/loader.gif" />
     </div>
-    <div class="container main mt-1 mb-4">
+    <div class="container main mt-1 mb-3">
       <div class="row">
-        <div class="container element">
-          <img class="mx-auto" [src]=item[0]?.imageLarge />
-        </div>
+        <img class="mainImage mx-auto" [src]=item[0]?.imageLarge />
       </div>
-      <div class="container text_footer">
-        <div class="row my-4">
-          <div class="info">
-            <h3>{{item[0].authorName}}</h3>
-            <h4>{{item[0].font}}</h4>
-            <p>{{item[0].description}}</p>
-          </div>
-          <div class="buttons ml-auto">
-            <a class="btn btn-outline-secondary" [attr.data-link]="item[0].imageLarge"
-              [attr.data-font]="item[0].font" (click)="triggerDownloadPhoto($event)">
-              Download
-            </a>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-              data-target="#loggedAlert" *ngIf="!isLogged">
-              Add to My Desk
-            </button>
-            <button type="button" class="btn btn-outline-secondary " [attr.data-id]="item[0].idFont"
-              [attr.data-font]="item[0].font" (click)="saveItemUser($event)" *ngIf="isLogged">
-              Add to My Desk
-            </button>
-          </div>
-          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
-                    Ooops
-                  </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+      <div class="row my-3">
+        <img class="authorImage align-self-center" [src]=item[0].authorImage>
+        <div class="info mt-2">
+          <h4 *ngIf="item[0].source==='pexels'">
+            <a class="linkAuthorPage" [href]=item[0].authorLink target="_blank">
+              {{item[0].authorName}}</a> via <a class="linkSourcePage" href="https://www.pexels.com" target="_blank">
+              Pexels
+            </a></h4>
+          <h4 *ngIf="item[0].source==='pixabay'">
+            <a class="linkAuthorPage" [href]=item[0].authorLink target="_blank">
+              {{item[0].authorName}}</a> via <a class="linkSourcePage" href="https://www.pixabay.com" target="_blank">
+              Pixabay
+            </a></h4>
+          <h4 *ngIf="item[0].source==='unsplash'">
+            <a class="linkAuthorPage" href="{{item[0].authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
+              target="_blank">
+              {{item[0].authorName}}</a> via <a class="linkSourcePage"
+              href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+              Unsplash
+            </a></h4>
+          <p>{{item[0].description}}</p>
+        </div>
+        <div class="buttons ml-auto align-self-center">
+          <a class="btn btn-outline-secondary" [attr.data-id]="item[0].idSource" [attr.data-link]="item[0].imageLarge"
+            [attr.data-font]="item[0].font" (click)="triggerDownloadPhoto($event)">
+            Download
+          </a>
+          <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert"
+            *ngIf="!isLogged">
+            Add to My Desk
+          </button>
+          <button type="button" class="btn btn-outline-secondary " [attr.data-id]="item[0].idFont"
+            [attr.data-font]="item[0].font" (click)="saveItemUser($event)" *ngIf="isLogged">
+            Add to My Desk
+          </button>
+          <a type="button" class="btn btn-outline-secondary" [href]=item[0].imageSourceLink target="_blank">
+            To Source
+          </a>
+        </div>
+        <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  Ooops
+                </h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h3>You need to be logged in to save media.</h3>
+              </div>
+              <div class="modal-footer">
+                <div class="footer-text align-bottom text center">
+                  <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
+                    data-dismiss="modal">
+                    Login
                   </button>
-                </div>
-                <div class="modal-body">
-                  <h3>You need to be logged in to save media.</h3>
-                </div>
-                <div class="modal-footer">
-                  <div class="footer-text align-bottom text center">
-                    <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                      data-dismiss="modal">
-                      Login
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
-                      [routerLink]="['/signup']">
-                      Register
-                    </button>
-                  </div>
+                  <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                    [routerLink]="['/signup']">
+                    Register
+                  </button>
                 </div>
               </div>
             </div>

@@ -27,9 +27,9 @@ export class NotFoundComponent implements OnInit {
   }
 
    bgJumboStyle() {
-    const styles = { 'vertical-align': 'text-top', 'background-repeat': 'no-repeat', 'background-image': `url(${this.onePhoto})` };
-    console.log(this.onePhoto);
-    return styles;
+     const styles = { 'vertical-align': 'text-top', 'background-repeat': 'no-repeat', 'background-image': `url(${this.onePhoto})` };
+     console.log(this.onePhoto);
+     return styles;
   }
 
 }
