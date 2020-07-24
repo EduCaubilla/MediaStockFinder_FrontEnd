@@ -51,68 +51,6 @@
         Unsplash
       </a>
     </div>
-    <div class="modal fade" id="ref{{onePhoto.idSource}}" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='pexels'">
-              <a class="linkAuthor" [href]=onePhoto.authorLink target="_blank">
-                {{onePhoto.authorName}}</a> via <a class="linkSourceModal" href="https://www.pexels.com"
-                target="_blank">
-                Pexels
-              </a>
-            </h6>
-            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='pixabay'">
-              <a class="linkAuthor" [href]=onePhoto.authorLink target="_blank">
-                {{onePhoto.authorName}}</a> via <a class="linkSourceModal" href="https://www.pixabay.com"
-                target="_blank">
-                Pixabay
-              </a>
-            </h6>
-            <h6 class="modal-title mr-auto" id="{{onePhoto.idSource}}Label" *ngIf="onePhoto.source==='unsplash'">
-              <a class="linkAuthor" href="{{onePhoto.authorLink}}?utm_source=mediastockfinder&utm_medium=referral"
-                target="_blank">
-                {{onePhoto.authorName}}</a> via <a class="linkSourceModal"
-                href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
-                Unsplash
-              </a>
-            </h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body mx-auto">
-            <img [src]=onePhoto?.imageLarge />
-          </div>
-          <div class="modal-footer">
-            <div class="footer-text mr-auto align-bottom">
-              <h6>{{onePhoto.title}}</h6>
-              <p>{{onePhoto.description}}</p>
-            </div>
-            <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="onePhoto?.idSource"
-              [attr.data-link]="onePhoto.imageLarge" [attr.data-font]="onePhoto.source"
-              (click)="triggerDownloadPhoto($event)">
-              Download
-            </a>
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-dismiss="modal"
-              data-target="#loggedAlert" *ngIf="!isLogged">
-              Add to My Desk
-            </button>
-            <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="onePhoto?.idSource"
-              [attr.data-font]="onePhoto?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
-              Add to My Desk
-            </button>
-            <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
-              [routerLink]="['/photo-page', onePhoto.source, onePhoto.idSource]">
-              See Photo
-            </a>
-            <a type="button" class="btn btn-outline-secondary btn-sm" [href]=onePhoto.imageSourceLink target="_blank">
-              To Source
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -148,17 +86,17 @@
             <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
             <img [src]=item?.imageSmall [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left" *ngIf="item.source==='pexels'"><a class="linkAuthor" [href]=item.authorLink
+          <div class="bottom-left" *ngIf="item.source=='pexels'"><a class="linkAuthor" [href]=item.authorLink
               target="_blank">
               {{item.authorName}}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
               Pexels
             </a></div>
-          <div class="bottom-left" *ngIf="item.source==='pixabay'"><a class="linkAuthor" [href]=item.authorLink
+          <div class="bottom-left" *ngIf="item.source=='pixabay'"><a class="linkAuthor" [href]=item.authorLink
               target="_blank">
               {{item.authorName}}</a> via <a class="linkSource" href="https://www.pixabay.com" target="_blank">
               Pixabay
             </a></div>
-          <div class="bottom-left" *ngIf="item.source==='unsplash'"><a class="linkAuthor"
+          <div class="bottom-left" *ngIf="item.source=='unsplash'"><a class="linkAuthor"
               href="{{item.authorLink}}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
               {{item.authorName}}</a> via <a class="linkSource"
               href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -224,7 +162,7 @@
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -350,7 +288,7 @@
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -476,7 +414,7 @@
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -602,7 +540,7 @@
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -725,7 +663,7 @@
                     [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
@@ -841,7 +779,7 @@
                     [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
@@ -957,7 +895,7 @@
                     [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
@@ -1073,7 +1011,7 @@
                     [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" target="_blank"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>

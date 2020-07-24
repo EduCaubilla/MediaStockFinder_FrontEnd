@@ -97,10 +97,10 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.onePhoto = data[0];
         console.log(this.onePhoto);
-        
+
         this.mainPhoto = data[0].imageLarge;
         console.log(this.mainPhoto);
-        
+
       });
   }
 
