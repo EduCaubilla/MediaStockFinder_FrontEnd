@@ -1,6 +1,9 @@
+* {
+  font-size: 16px;
+}
+
 main {
   font-family: "Lato", sans-serif;
-  font-size: 16px;
   padding-top: 6rem;
 }
 
@@ -9,9 +12,31 @@ h3 {
   font-weight: 200;
 }
 
+h6 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
+}
+
+h6 a {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
+}
+
 p {
   color: #A0A0A0;
   letter-spacing: 1.1px;
+}
+
+a {
+  color: white;
+}
+
+img:hover {
+  cursor: zoom-in;
 }
 
 .btn-outline-secondary {
@@ -20,7 +45,6 @@ p {
 }
 
 .btn-outline-secondary:hover,
-.fa:hover,
 .dropdown-menu:hover {
   border-color: rgb(85, 85, 85);
   background: white;
@@ -59,7 +83,7 @@ p {
   color: #a0a0a0;
   font-weight: 200;
   padding: 0 2rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
@@ -90,6 +114,7 @@ p {
 .column {
   flex: 25%;
   max-width: 25%;
+  display: inline-block;
 }
 
 .column img {
@@ -107,44 +132,85 @@ p {
 }
 
 .bottom-left {
+  width: 18rem;
   color: white;
   position: relative;
   bottom: 56px;
   left: 14px;
   font-weight: 100px;
-  font-size: .75rem;
+  font-size: 1rem;
+  text-shadow: 0.5px 2px 3px rgba(124, 124, 124, 1);
+  text-shadow: -0.5px -2px -3px rgba(122, 122, 122, 0.8);
+}
+
+.element:hover .linkSource {
+  text-decoration: none;
+  color: rgb(204, 255, 0);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
+.downloadIcon,
+.plusIcon {
+  height: 1rem !important;
+  width: auto !important;
+  padding: 0 0.2rem;
+  border: none !important;
+  filter: drop-shadow(
+    0.5px 2px 3px rgba(124, 124, 124, 0),
+    -0.5px -2px -3px rgba(122, 122, 122, 0)
+  ) !important;
+  cursor: pointer !important;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
 .bottom-right {
+  width: 3rem;
   color: rgba(255, 255, 255, 0);
   position: relative;
   bottom: 81px;
   left: 292px;
   font-weight: 100px;
-  font-size: .8rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
+  font-size: 1rem;
+  text-shadow: 0.5px 2px 3px rgba(124, 124, 124, 0);
+  text-shadow: -0.5px -2px -3px rgba(122, 122, 122, 0);
   transition: color 1s;
+  cursor: pointer;
 }
 
-.element:hover .bottom-right {
+.element:hover .bottom-right,
+.element:hover .downloadIcon,
+.element:hover .plusIcon {
   color: rgba(255, 255, 255, 1);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
+  opacity: 1;
 }
 
-.element .fas {
-  padding: 0 5px;
-  font-weight: 100px;
-  font-size: .75rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
+.modal-body {
+  max-height: 80vh;
+}
+
+.modal-body img {
+  max-height: 75vh;
+  max-width: 60vw;
+  margin: 0 auto;
 }
 
 .footer-text p {
   margin-bottom: 0;
+}
+
+#btnTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 18px;
 }
 
 

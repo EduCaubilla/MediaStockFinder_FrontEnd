@@ -1,12 +1,29 @@
+* {
+  font-size: 16px;
+}
+
 main {
   font-family: "Lato", sans-serif;
-  font-size: 16px;
   padding-top: 6rem;
 }
 
 h3 {
   font-size: 3rem;
   font-weight: 200;
+}
+
+h6 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
+}
+
+h6 a {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
 }
 
 p {
@@ -19,8 +36,15 @@ p {
   color: #a0a0a0;
 }
 
+a {
+  color:white;
+}
+
+img:hover {
+  cursor: zoom-in;
+}
+
 .btn-outline-secondary:hover,
-.fa:hover,
 .dropdown-menu:hover {
   border-color: rgb(85, 85, 85);
   background: white;
@@ -33,10 +57,6 @@ p {
 
 .search-header {
   max-width: 700px;
-}
-
-.sections {
-  padding: 2rem 0;
 }
 
 .inputSearch {
@@ -54,6 +74,10 @@ p {
   -------- SECTIONS
 */
 
+.sections {
+  padding: 2rem 0;
+}
+
 .sections a {
   color: #a0a0a0;
   font-weight: 200;
@@ -66,16 +90,15 @@ p {
   color: black;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .loading {
-  width: 100px;
+  display: flex;
   height: auto;
   margin: 0 auto;
   padding: 5rem;
+}
+
+.loading img {
+  margin: 0 auto;
 }
 
 /*
@@ -89,6 +112,13 @@ p {
 .row {
   display: flex;
   flex-wrap: wrap;
+}
+
+.loading {
+  width: 100px;
+  height: auto;
+  margin: 0 auto;
+  padding: 5rem;
 }
 
 .column {
@@ -123,47 +153,67 @@ p {
   height: 30%;
 }
 
-.bottom-left-video {
+.element {
+  flex: 1;
+  cursor: pointer;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.bottom-left {
+  width: 18rem;
   color: white;
   position: relative;
   bottom: 56px;
   left: 14px;
   font-weight: 100px;
-  font-size: .75rem;
+  font-size: 1rem;
+  text-shadow: 0.5px 2px 3px rgba(124, 124, 124, 1);
+  text-shadow: -0.5px -2px -3px rgba(122, 122, 122, 0.8);
+}
+
+.element:hover .linkSource {
+  text-decoration: none;
+  color: rgb(204, 255, 0);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
+.downloadIcon,
+.plusIcon {
+  height: 1rem !important;
+  width: auto !important;
+  padding: 0 0.2rem;
+  border: none !important;
+  filter: drop-shadow(
+    0.5px 2px 3px rgba(124, 124, 124, 0),
+    -0.5px -2px -3px rgba(122, 122, 122, 0)
+  ) !important;
+  cursor: pointer !important;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
 .bottom-right-video {
+  width: 3rem;
   color: rgba(255, 255, 255, 0);
   position: relative;
   bottom: 81px;
   left: 292px;
   font-weight: 100px;
-  font-size: .8rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
+  font-size: 1rem;
+  text-shadow: 0.5px 2px 3px rgba(124, 124, 124, 0);
+  text-shadow: -0.5px -2px -3px rgba(122, 122, 122, 0);
   transition: color 1s;
+  cursor: pointer;
 }
 
-.element:hover .bottom-right {
+.element:hover .bottom-right-video,
+.element:hover .downloadIcon,
+.element:hover .plusIcon {
   color: rgba(255, 255, 255, 1);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-}
-
-.element:hover .bottom-right-video {
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-}
-
-.element .fas {
-  padding: 0 5px;
-  font-weight: 100px;
-  font-size: .75rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 0);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 0);
 }
 
 .modal-body {
@@ -179,6 +229,17 @@ p {
 .footer-text p {
   margin-bottom: 0;
 }
+
+#btnTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 18px;
+}
 /*
 
 ------------------- MEDIA QUERIES
@@ -193,12 +254,6 @@ p {
 
   h5 {
     font-size: 1.4rem;
-  }
-
-  .hero_imagen {
-    padding: 18rem 6rem;
-    max-height: 90vh;
-    width: 100vw;
   }
 
   .container-fluid {

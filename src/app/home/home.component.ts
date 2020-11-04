@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
     this.search = '';
     this.loading = true;
     this.showVideo = false;
+    this.onePhoto = '';
   }
 
   ngOnInit() {
@@ -106,7 +107,6 @@ export class HomeComponent implements OnInit {
 
   bgJumboStyle() {
     const styles = { 'background-image': `url(${this.mainPhoto})` };
-    // console.log(this.onePhoto);
     return styles;
   }
 

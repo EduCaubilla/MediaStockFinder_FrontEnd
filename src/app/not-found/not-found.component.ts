@@ -22,12 +22,12 @@ export class NotFoundComponent implements OnInit {
 
     return this.response$.subscribe(
       (data) => {
-        this.onePhoto = data[0].imageMedium;
+        this.onePhoto = data[0].imageLarge;
       });
   }
 
    bgJumboStyle() {
-     const styles = { 'vertical-align': 'text-top', 'background-repeat': 'no-repeat', 'background-image': `url(${this.onePhoto})` };
+     const styles = { 'vertical-align': 'text-top', 'background-repeat': 'no-repeat', 'background-size': 'cover', 'background-image': `url(${this.onePhoto})` };
      console.log(this.onePhoto);
      return styles;
   }

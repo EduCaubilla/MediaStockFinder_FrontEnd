@@ -36,17 +36,15 @@ main {
 }
 
 .number {
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 100;
 }
 
 .text {
-  margin: 0 0 1rem;
-}
-
-.text {
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 300;
   text-align: center;
+  margin: 0 0 1rem;
 }
 
 .btn-outline-secondary {
