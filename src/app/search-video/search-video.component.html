@@ -13,7 +13,6 @@
                 [(ngModel)]="newSearch" [value]="search" (keyup.enter)="searchVideos$()" />
               <div class="input-group-append caja">
                 <button class="btn btn-outline-secondary" type="button" (click)="searchVideos$()">
-                  <!-- <button class="btn btn-outline-secondary" type="button"> -->
                   <i class="fas fa-search"></i>
                 </button>
               </div>
@@ -57,18 +56,13 @@
             </a>
           </div>
           <div class="bottom-right-video row">
-            <!-- <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i> -->
             <div [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)">
               <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
-            <!-- <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i> -->
             <div>
               <img class="plusIcon" id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
             *ngIf="!isLogged" src="../../assets/PlusIcon.png">
             </div>
-            <!-- <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i> -->
             <div>
               <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
