@@ -56,10 +56,9 @@
               Pixabay
             </a>
           </div>
-          <div class="bottom-right-video">
+          <div class="bottom-right-video row">
             <!-- <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i> -->
-            <div [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource" (click)="triggerDownloadVideo($event)">
+            <div [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)">
               <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
             <!-- <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
@@ -113,7 +112,7 @@
                     <h6>{{ item?.title }}</h6>
                     <p>{{ item?.description }}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.downloadLink"
                     (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
@@ -194,13 +193,25 @@
               Pixabay
             </a>
           </div>
-          <div class="bottom-right-video">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          <div class="bottom-right-video row">
+            <!-- <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i> -->
+            <div [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)">
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i> -->
+            <div id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+            *ngIf="!isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i> -->
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
           </div>
+
           <div class="modal fade" id="ref{{ item?.idSource }}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -238,12 +249,12 @@
                     <h6>{{ item?.title }}</h6>
                     <p>{{ item?.description }}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.downloadLink"
                     (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-dismiss="modal"
-                    data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -254,7 +265,8 @@
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink" target="_blank">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink"
+                    target="_blank">
                     To Source
                   </a>
                 </div>
@@ -318,13 +330,25 @@
               Pixabay
             </a>
           </div>
-          <div class="bottom-right-video">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          <div class="bottom-right-video row">
+            <!-- <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i> -->
+            <div [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)">
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i> -->
+            <div id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+            *ngIf="!isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i> -->
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
           </div>
+
           <div class="modal fade" id="ref{{ item?.idSource }}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -362,12 +386,12 @@
                     <h6>{{ item?.title }}</h6>
                     <p>{{ item?.description }}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.downloadLink"
                     (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-dismiss="modal"
-                    data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -378,7 +402,8 @@
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink" target="_blank">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink"
+                    target="_blank">
                     To Source
                   </a>
                 </div>
@@ -442,13 +467,25 @@
               Pixabay
             </a>
           </div>
-          <div class="bottom-right-video">
-            <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-            <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged"></i>
-            <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+          <div class="bottom-right-video row">
+            <!-- <i class="fas fa-arrow-down" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i> -->
+            <div [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)">
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+              *ngIf="!isLogged"></i> -->
+            <div id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
+            *ngIf="!isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
+            <!-- <i class="fas fa-plus" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged"></i> -->
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              (click)="saveVideoUser$($event)" *ngIf="isLogged">
+              <img class="plusIcon" src="../../assets/PlusIcon.png">
+            </div>
           </div>
+
           <div class="modal fade" id="ref{{ item?.idSource }}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -486,12 +523,12 @@
                     <h6>{{ item?.title }}</h6>
                     <p>{{ item?.description }}</p>
                   </div>
-                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.imageLarge"
+                  <a class="btn btn-outline-secondary btn-sm" [attr.data-link]="item?.downloadLink"
                     (click)="triggerDownloadVideo($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-dismiss="modal"
-                    data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -502,7 +539,8 @@
                     [routerLink]="['/video-page', item.source, item.idSource]">
                     See Video
                   </a>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink" target="_blank">
+                  <a type="button" class="btn btn-outline-secondary btn-sm" [href]="item.imageSourceLink"
+                    target="_blank">
                     To Source
                   </a>
                 </div>

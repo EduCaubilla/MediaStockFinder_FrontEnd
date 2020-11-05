@@ -65,9 +65,9 @@
               [attr.data-id]="item?.idSource"
               (click)="triggerDownloadPhoto($event)"
             ></i> -->
-            <div [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+            <div>
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
               [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
             <!-- <i
               id="modalButton"
@@ -88,8 +88,7 @@
               (click)="saveItemUser($event)"
               *ngIf="isLogged"
             ></i> -->
-            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)" *ngIf="isLogged">
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
               <img class="plusIcon" src="../../assets/PlusIcon.png">
             </div>
           </div>
@@ -138,7 +137,7 @@
                     <p>{{ item.description }}</p>
                   </div>
                   <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    [attr.data-link]="item.downloadLink" [attr.data-font]="item.source"
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
@@ -230,9 +229,9 @@
               [attr.data-id]="item?.idSource"
               (click)="triggerDownloadPhoto($event)"
             ></i> -->
-            <div [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+            <div>
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
               [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
             <!-- <i
               id="modalButton"
@@ -253,8 +252,7 @@
               (click)="saveItemUser($event)"
               *ngIf="isLogged"
             ></i> -->
-            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)" *ngIf="isLogged">
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
               <img class="plusIcon" src="../../assets/PlusIcon.png">
             </div>
           </div>
@@ -303,7 +301,7 @@
                     <p>{{ item.description }}</p>
                   </div>
                   <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    [attr.data-link]="item.downloadLink" [attr.data-font]="item.source"
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
@@ -395,9 +393,9 @@
               [attr.data-id]="item?.idSource"
               (click)="triggerDownloadPhoto($event)"
             ></i> -->
-            <div [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+            <div>
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
               [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
             <!-- <i
               id="modalButton"
@@ -418,8 +416,7 @@
               (click)="saveItemUser($event)"
               *ngIf="isLogged"
             ></i> -->
-            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)" *ngIf="isLogged">
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
               <img class="plusIcon" src="../../assets/PlusIcon.png">
             </div>
           </div>
@@ -468,7 +465,7 @@
                     <p>{{ item.description }}</p>
                   </div>
                   <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    [attr.data-link]="item.downloadLink" [attr.data-font]="item.source"
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
@@ -560,9 +557,9 @@
               [attr.data-id]="item?.idSource"
               (click)="triggerDownloadPhoto($event)"
             ></i> -->
-            <div [attr.data-link]="item?.imageLarge" [attr.data-font]="item?.source"
+            <div>
+              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
               [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png">
             </div>
             <!-- <i
               id="modalButton"
@@ -583,8 +580,7 @@
               (click)="saveItemUser($event)"
               *ngIf="isLogged"
             ></i> -->
-            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)" *ngIf="isLogged">
+            <div id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
               <img class="plusIcon" src="../../assets/PlusIcon.png">
             </div>
           </div>
@@ -633,7 +629,7 @@
                     <p>{{ item.description }}</p>
                   </div>
                   <a class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-link]="item.imageLarge" [attr.data-font]="item.source"
+                    [attr.data-link]="item.downloadLink" [attr.data-font]="item.source"
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>

@@ -114,13 +114,6 @@ img:hover {
   flex-wrap: wrap;
 }
 
-.loading {
-  width: 100px;
-  height: auto;
-  margin: 0 auto;
-  padding: 5rem;
-}
-
 .column {
   flex: 25%;
   max-width: 25%;
@@ -153,13 +146,6 @@ img:hover {
   height: 30%;
 }
 
-.element {
-  flex: 1;
-  cursor: pointer;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-}
-
 .bottom-left {
   width: 18rem;
   color: white;
@@ -181,6 +167,7 @@ img:hover {
 
 .downloadIcon,
 .plusIcon {
+  z-index: 1;
   height: 1rem !important;
   width: auto !important;
   padding: 0 0.2rem;
@@ -214,6 +201,7 @@ img:hover {
   color: rgba(255, 255, 255, 1);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
+  opacity: 1;
 }
 
 .modal-body {

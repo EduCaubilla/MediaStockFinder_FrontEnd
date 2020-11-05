@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
     this.isLogged = this.request.getLogged();
 
-    console.log(this.isLogged);
+    console.log('User logged: ', this.isLogged);
 
     this.getOneRandom$();
     this.getRandom$();
@@ -279,7 +279,6 @@ export class HomeComponent implements OnInit {
 
     const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
     window.location.assign(URL_API_DOWNLOADPHOTO);
-
   }
 
   triggerDownloadVideo($event) {

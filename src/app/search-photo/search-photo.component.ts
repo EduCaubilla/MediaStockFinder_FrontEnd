@@ -185,11 +185,13 @@ export class SearchPhotoComponent implements OnInit {
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
     this.type = $event.target.dataset.font;
+    this.id = $event.target.dataset.id;
 
     console.log(this.link);
     console.log(this.type);
+    console.log(this.id);
 
-    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
     window.location.assign(URL_API_DOWNLOADPHOTO);
   }
 
