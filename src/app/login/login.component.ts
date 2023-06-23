@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserInterface } from '../shared/interfaces/user-interface';
 import { RequestService } from '../shared/request.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,19 +16,19 @@ export class LoginComponent implements OnInit {
     userpass: 'Insert password',
   };
 
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
 
   public user: UserInterface;
 
   public token$: Observable<any>;
 
   constructor(private request: RequestService, private router: Router) {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/)
       ]),
-      password: new FormControl('', [Validators.required, this.passValid
+      password: new UntypedFormControl('', [Validators.required, this.passValid
       ])
     });
    }
