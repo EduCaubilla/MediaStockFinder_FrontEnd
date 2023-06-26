@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       password: new UntypedFormControl('', [Validators.required, this.passValid
       ])
     });
-   }
+  }
 
   ngOnInit(): void {
   }

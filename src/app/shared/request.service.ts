@@ -22,7 +22,7 @@ export class RequestService {
   public response$: Observable<any>;
 
   constructor(private http: HttpClient) {
-   }
+  }
 
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export class RequestService {
     localStorage.setItem('accesstoken', token);
   }
 
- getLogged(): boolean {
+  getLogged(): boolean {
     if (localStorage.getItem('isLogged') === 'true') {
       return true;
     } else { return false; }

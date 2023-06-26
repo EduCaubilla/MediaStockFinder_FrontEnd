@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from './shared/request.service';
 import { UserInterface } from './shared/interfaces/user-interface';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   public user: UserInterface;
 
   constructor(private router: Router, private request: RequestService) {
-   }
+  }
 
   ngOnInit(): void {
 
