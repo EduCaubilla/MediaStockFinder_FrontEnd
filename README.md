@@ -1,6 +1,6 @@
 # MediaStockFinder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7 & updated on June 2023 to version 16.1.1
 
 ## Development server
 
