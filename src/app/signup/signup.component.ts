@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../shared/request.service.js';
 import { Observable } from 'rxjs';
-import { UserInterface } from '../shared/interfaces/user-interface';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserInterface } from '../shared/interfaces/user-interface';
+import { RequestService } from '../shared/request.service';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
+  
 export class SignupComponent implements OnInit {
 
-  signUpForm: FormGroup;
+  signUpForm: UntypedFormGroup;
 
-  data$: Observable<any>;
+  public data$: Observable<any>;
 
   public userData: UserInterface = {
     name: '',
@@ -25,14 +26,19 @@ export class SignupComponent implements OnInit {
   };
 
   constructor(private request: RequestService, private router: Router) {
-    this.signUpForm = new FormGroup({
-      name: new FormControl('', [
+    this.signUpForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      email: new FormControl('', [Validators.required, Validators.pattern(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/)]),
-      password: new FormControl('', [Validators.required, this.passValid
+      lastName: new UntypedFormControl('', [
+        Validators.required, Validators.minLength(2)
+      ]),
+      email: new UntypedFormControl('', [
+        Validators.required, Validators.pattern(/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/)
+      ]),
+      password: new UntypedFormControl('', [
+        Validators.required, this.passValid
       ]),
     });
   }

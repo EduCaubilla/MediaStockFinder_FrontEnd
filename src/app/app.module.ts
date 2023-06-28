@@ -18,6 +18,7 @@ import { PagePhotoComponent } from './page-photo/page-photo.component';
 import { PageVideoComponent } from './page-video/page-video.component';
 import { UserDeskComponent } from './user-desk/user-desk.component';
 import { RequestService } from './shared/request.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RequestService } from './shared/request.service';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
     RequestService

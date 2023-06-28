@@ -12,9 +12,8 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control inputSearch" placeholder="Search..." name="search"
                 [(ngModel)]="search" (keyup.enter)="searchStart()" />
-
-              <div class="input-group-append caja1" style="background-color: white;">
-                <select class="custom-select selector_box" (change)="selectTrigger($event)">
+              <div class="input-group-append caja1">
+                <select class="custom-select selector_box align-middle" (change)="selectTrigger($event)">
                   <option selected value="selectPhoto">Photo</option>
                   <option value="selectVideo">Video</option>
                 </select>
