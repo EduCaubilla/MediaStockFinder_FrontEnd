@@ -28,6 +28,7 @@
     "enhanced-resolve": "^3.3.0",
     "jquery": "^3.7.0",
     "jwt-decode": "^3.1.2",
+    "node": "^16.14.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.1",
     "shuffle.ts": "^1.0.1",
