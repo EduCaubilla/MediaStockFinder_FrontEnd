@@ -146,12 +146,10 @@ export class HomeComponent implements OnInit {
           this.helper.shuffle(this.arrPhotosRandom);
           const numberArr: number = Math.ceil(this.arrPhotosRandom.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosRandom, numberArr);
-          console.log(this.arr1);
           this.loading = false;
         },
 
         error: (error) => console.log(error)
-      
       }
     );
   }
@@ -233,6 +231,14 @@ export class HomeComponent implements OnInit {
           const numberArr: number = Math.ceil(this.arrVideos.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
           this.loading = false;
+
+          console.log("Entrada array 2");
+          console.log(this.arr2);
+
+          console.log("Entrada array 3");
+          console.log(this.arr3);
+
+          console.log("Entrada array de vídeos");
           console.log(this.arrVideos);
         },
         error: (error) => console.log(error)
@@ -255,11 +261,15 @@ export class HomeComponent implements OnInit {
     this.type = $event.target.dataset.font;
     this.id = $event.target.dataset.id;
 
+    console.log("Datos descarga foto --------->");
     console.log(this.link);
     console.log(this.type);
     console.log(this.id);
 
     const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
+
+    console.log(URL_API_DOWNLOADPHOTO);
+
     window.location.assign(URL_API_DOWNLOADPHOTO);
   }
 
