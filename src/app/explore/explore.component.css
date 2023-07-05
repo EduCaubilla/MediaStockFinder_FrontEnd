@@ -137,11 +137,11 @@ img:hover {
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
-.linkAuthor,
+/* .linkAuthor,
 .linkSource {
   text-decoration: none;
   color: #fff;
-}
+} */
 
 .modal-title .linkAuthor,
 .modal:hover .linkAuthor {
@@ -291,6 +291,10 @@ img:hover {
   max-height: 75vh;
   max-width: 60vw;
   margin: 0 auto;
+}
+
+.footer-text {
+  width: 45%;
 }
 
 .footer-text p {

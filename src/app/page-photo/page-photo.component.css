@@ -50,12 +50,23 @@ img:hover {
 
 .row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: baseline;
+  margin: 0 auto;
 }
 
 .mainImage {
   max-width: 100vw;
   max-height: 70vh;
+}
+
+.info {
+  width: auto;
+}
+
+.buttons {
+  width: auto;
 }
 
 .authorImage {
@@ -65,8 +76,24 @@ img:hover {
   margin-right: 0.5rem;
 }
 
+/* .linkAuthorPage,
+.linkSourcePage {
+  color: #a0a0a0;
+  text-decoration: none;
+} */
+
+.linkAuthorPage:hover {
+  color: rgb(0, 204, 153);
+  text-decoration: underline;
+}
+
+.linkSourcePage:hover {
+  color: rgb(204, 255, 0);
+  text-decoration: underline;
+}
+
 .btn {
-  margin-left: .7rem;
+  margin-left: 0.7rem;
 }
 
 .btn-outline-secondary {
@@ -92,7 +119,6 @@ img:hover {
   h3 {
     font-size: 2.5rem;
   }
-
 
   .column {
     flex: 50%;
@@ -129,7 +155,6 @@ img:hover {
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-
   main {
     font-family: "Lato", sans-serif;
     font-size: 10px;
@@ -154,7 +179,7 @@ img:hover {
   }
 
   .sections .nav-link {
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
   }
 

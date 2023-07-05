@@ -147,6 +147,9 @@ export class HomeComponent implements OnInit {
           const numberArr: number = Math.ceil(this.arrPhotosRandom.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosRandom, numberArr);
           this.loading = false;
+
+          console.log("Primera carga de imágenes ----->");
+          console.log(data);
         },
 
         error: (error) => console.log(error)

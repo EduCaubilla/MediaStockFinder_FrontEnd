@@ -75,8 +75,7 @@ export class RequestService {
 // RANDOM
   listRandom$() {
     const URL_API_RANDOM = `${environment.API_URL}/photo/random/1`;
-    return this.http.get<PhotoInterface>(URL_API_RANDOM
-    );
+    return this.http.get<PhotoInterface>(URL_API_RANDOM);
   }
 
 // CATEGORÍA NATURE
