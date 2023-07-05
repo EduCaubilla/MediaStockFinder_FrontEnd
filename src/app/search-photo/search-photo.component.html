@@ -30,66 +30,47 @@
     <div class="row">
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
-          <a href=" #ref{{ item.idSource }}" data-toggle="modal" data-target="#ref{{ item.idSource }}">
+          <a data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left" *ngIf="item.source == 'pexels'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
-              Pexels
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'pixabay'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via
-            <a class="linkSource" href="https://www.pixabay.com" target="_blank">
-              Pixabay
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'unsplash'">
-            <a class="linkAuthor" href="{{
-                item.authorLink
-              }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
-              {{ item.authorName }}</a>
-            via
-            <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
-              target="_blank">
-              Unsplash
-            </a>
-          </div>
-          <div class="bottom-right row">
-            <!-- <i
-              class="icon fas fa-arrow-down"
-              [attr.data-link]="item?.imageLarge"
-              [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource"
-              (click)="triggerDownloadPhoto($event)"
-            ></i> -->
-            <div>
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+
+          <div class="bottom-legend">
+            <div class="bottom-left" *ngIf="item.source == 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
             </div>
-            <!-- <i
-              id="modalButton"
-              class="icon fas fa-plus"
-              data-toggle="modal"
-              data-target="#loggedAlert"
-              data-dismiss="modal"
-              *ngIf="!isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
             </div>
-            <!-- <i
-              class="icon fas fa-plus"
-              [attr.data-id]="item?.idSource"
-              [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)"
-              *ngIf="isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'unsplash'">
+              <a class="linkAuthor" href="{{
+                  item.authorLink
+                }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
+                target="_blank">
+                Unsplash
+              </a>
+            </div>
+            <div class="bottom-right">
+              <div>
+                <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
+                [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+              </div>
+              <div >
+                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
+                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -124,7 +105,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -132,7 +113,7 @@
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text m-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -141,15 +122,15 @@
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -168,7 +149,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -178,10 +159,10 @@
                 <div class="modal-footer">
                   <div class="footer-text align-bottom text center">
                     <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                      data-dismiss="modal">
+                      data-bs-dismiss="modal">
                       Login
                     </button>
-                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                    <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                       [routerLink]="['/signup']">
                       Register
                     </button>
@@ -194,66 +175,47 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
-          <a href=" #ref{{ item.idSource }}" data-toggle="modal" data-target="#ref{{ item.idSource }}">
+          <a href=" #ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left" *ngIf="item.source == 'pexels'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
-              Pexels
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'pixabay'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via
-            <a class="linkSource" href="https://www.pixabay.com" target="_blank">
-              Pixabay
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'unsplash'">
-            <a class="linkAuthor" href="{{
-                item.authorLink
-              }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
-              {{ item.authorName }}</a>
-            via
-            <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
-              target="_blank">
-              Unsplash
-            </a>
-          </div>
-          <div class="bottom-right row">
-            <!-- <i
-              class="icon fas fa-arrow-down"
-              [attr.data-link]="item?.imageLarge"
-              [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource"
-              (click)="triggerDownloadPhoto($event)"
-            ></i> -->
-            <div>
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+
+          <div class="bottom-legend">
+            <div class="bottom-left" *ngIf="item.source == 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
             </div>
-            <!-- <i
-              id="modalButton"
-              class="icon fas fa-plus"
-              data-toggle="modal"
-              data-target="#loggedAlert"
-              data-dismiss="modal"
-              *ngIf="!isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
             </div>
-            <!-- <i
-              class="icon fas fa-plus"
-              [attr.data-id]="item?.idSource"
-              [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)"
-              *ngIf="isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'unsplash'">
+              <a class="linkAuthor" href="{{
+                  item.authorLink
+                }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
+                target="_blank">
+                Unsplash
+              </a>
+            </div>
+            <div class="bottom-right">
+              <div>
+                <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
+                [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+              </div>
+              <div >
+                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
+                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -288,7 +250,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -296,7 +258,7 @@
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text m-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -305,15 +267,15 @@
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -332,7 +294,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -342,10 +304,10 @@
                 <div class="modal-footer">
                   <div class="footer-text align-bottom text center">
                     <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                      data-dismiss="modal">
+                      data-bs-dismiss="modal">
                       Login
                     </button>
-                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                    <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                       [routerLink]="['/signup']">
                       Register
                     </button>
@@ -358,66 +320,47 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
-          <a href=" #ref{{ item.idSource }}" data-toggle="modal" data-target="#ref{{ item.idSource }}">
+          <a href=" #ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left" *ngIf="item.source == 'pexels'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
-              Pexels
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'pixabay'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via
-            <a class="linkSource" href="https://www.pixabay.com" target="_blank">
-              Pixabay
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'unsplash'">
-            <a class="linkAuthor" href="{{
-                item.authorLink
-              }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
-              {{ item.authorName }}</a>
-            via
-            <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
-              target="_blank">
-              Unsplash
-            </a>
-          </div>
-          <div class="bottom-right row">
-            <!-- <i
-              class="icon fas fa-arrow-down"
-              [attr.data-link]="item?.imageLarge"
-              [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource"
-              (click)="triggerDownloadPhoto($event)"
-            ></i> -->
-            <div>
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+
+          <div class="bottom-legend">
+            <div class="bottom-left" *ngIf="item.source == 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
             </div>
-            <!-- <i
-              id="modalButton"
-              class="icon fas fa-plus"
-              data-toggle="modal"
-              data-target="#loggedAlert"
-              data-dismiss="modal"
-              *ngIf="!isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
             </div>
-            <!-- <i
-              class="icon fas fa-plus"
-              [attr.data-id]="item?.idSource"
-              [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)"
-              *ngIf="isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'unsplash'">
+              <a class="linkAuthor" href="{{
+                  item.authorLink
+                }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
+                target="_blank">
+                Unsplash
+              </a>
+            </div>
+            <div class="bottom-right">
+              <div>
+                <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
+                [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+              </div>
+              <div >
+                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
+                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -452,7 +395,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -460,7 +403,7 @@
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text m-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -469,15 +412,15 @@
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -496,7 +439,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -506,10 +449,10 @@
                 <div class="modal-footer">
                   <div class="footer-text align-bottom text center">
                     <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                      data-dismiss="modal">
+                      data-bs-dismiss="modal">
                       Login
                     </button>
-                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                    <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                       [routerLink]="['/signup']">
                       Register
                     </button>
@@ -522,66 +465,47 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <a href=" #ref{{ item.idSource }}" data-toggle="modal" data-target="#ref{{ item.idSource }}">
+          <a href=" #ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" />
           </a>
-          <div class="bottom-left" *ngIf="item.source == 'pexels'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
-              Pexels
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'pixabay'">
-            <a class="linkAuthor" [href]="item.authorLink" target="_blank">
-              {{ item.authorName }}</a> via
-            <a class="linkSource" href="https://www.pixabay.com" target="_blank">
-              Pixabay
-            </a>
-          </div>
-          <div class="bottom-left" *ngIf="item.source == 'unsplash'">
-            <a class="linkAuthor" href="{{
-                item.authorLink
-              }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
-              {{ item.authorName }}</a>
-            via
-            <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
-              target="_blank">
-              Unsplash
-            </a>
-          </div>
-          <div class="bottom-right row">
-            <!-- <i
-              class="icon fas fa-arrow-down"
-              [attr.data-link]="item?.imageLarge"
-              [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource"
-              (click)="triggerDownloadPhoto($event)"
-            ></i> -->
-            <div>
-              <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
-              [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+
+          <div class="bottom-legend">
+            <div class="bottom-left" *ngIf="item.source == 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
             </div>
-            <!-- <i
-              id="modalButton"
-              class="icon fas fa-plus"
-              data-toggle="modal"
-              data-target="#loggedAlert"
-              data-dismiss="modal"
-              *ngIf="!isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" data-toggle="modal" data-target="#loggedAlert" data-dismiss="modal"
-              *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a> via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
             </div>
-            <!-- <i
-              class="icon fas fa-plus"
-              [attr.data-id]="item?.idSource"
-              [attr.data-font]="item?.source"
-              (click)="saveItemUser($event)"
-              *ngIf="isLogged"
-            ></i> -->
-            <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+            <div class="bottom-left" *ngIf="item.source == 'unsplash'">
+              <a class="linkAuthor" href="{{
+                  item.authorLink
+                }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://unsplash.com/?utm_source=mediastockfinder&utm_medium=referral"
+                target="_blank">
+                Unsplash
+              </a>
+            </div>
+            <div class="bottom-right">
+              <div>
+                <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-font]="item?.source"
+                [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
+              </div>
+              <div >
+                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
+                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -616,7 +540,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -624,7 +548,7 @@
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text m-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -633,15 +557,15 @@
                     (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-                    data-dismiss="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
                     [attr.data-font]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
-                  <a type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
+                  <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
                     [routerLink]="['/photo-page', item.source, item.idSource]">
                     See Photo
                   </a>
@@ -660,7 +584,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -670,10 +594,10 @@
                 <div class="modal-footer">
                   <div class="footer-text align-bottom text center">
                     <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                      data-dismiss="modal">
+                      data-bs-dismiss="modal">
                       Login
                     </button>
-                    <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                    <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                       [routerLink]="['/signup']">
                       Register
                     </button>
