@@ -213,7 +213,7 @@ img:hover {
 
 .bottom-right {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   width: 4.8rem;
   color: rgba(255, 255, 255, 0);
