@@ -69,23 +69,24 @@ export class SearchPhotoComponent implements OnInit {
     this.response$ = this.request.searchPhotos$(this.searchWords);
 
     return this.response$.subscribe(
-        (data) => {
-        this.arrSearchPhoto = data;
+      {
+        next: (data) => {
+          this.arrSearchPhoto = data;
 
-        this.shufflePhotos();
+          this.shufflePhotos();
 
-        this.splitter();
+          this.splitter();
 
-        this.loading = false;
+          this.loading = false;
 
-        console.log(this.arr1);
-        console.log(this.arr2);
-        console.log(this.arr3);
-        console.log(this.arr4);
-
+          console.log(this.arr1);
+          console.log(this.arr2);
+          console.log(this.arr3);
+          console.log(this.arr4);
         },
-      (error) => console.log(error));
-
+        error: (error) => console.log(error)
+      }
+    );
 }
 
   refreshUser() {
@@ -97,13 +98,15 @@ export class SearchPhotoComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.request.newRefreshUser(this.user);
-      },
-      (error) => console.log(error)
-    );
+        {
+          next: (data) => {
+            console.log('VUELVE EL USER ACTUALIZADO ', data);
+            this.user = data.user;
+            this.request.newRefreshUser(this.user);
+          },
+          error: (error) => console.log(error)
+        }
+      );
     }
   }
 
@@ -121,7 +124,7 @@ export class SearchPhotoComponent implements OnInit {
 
   getData($event) {
     console.log($event.target.dataset.id);
-    console.log($event.target.dataset.font);
+    console.log($event.target.dataset.source);
   }
 
   cleanView() {
@@ -148,7 +151,8 @@ export class SearchPhotoComponent implements OnInit {
     this.response$ = this.request.searchPhotos$(this.searchWords);
 
     return this.response$.subscribe(
-      (data) => {
+    {
+      next: (data) => {
       // console.log(data);
 
       this.arrSearchPhoto = data;
@@ -161,18 +165,19 @@ export class SearchPhotoComponent implements OnInit {
 
       this.loading = false;
 
-      console.log(this.arr1);
-      console.log(this.arr2);
-      console.log(this.arr3);
-      console.log(this.arr4);
+      // console.log(this.arr1);
+      // console.log(this.arr2);
+      // console.log(this.arr3);
+      // console.log(this.arr4);
 
       },
-    (error) => console.log(error));
-
+        error: (error) => console.log(error)
+      }
+    );
   }
 
   toPhotoPage($event) {
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.type);
@@ -184,7 +189,7 @@ export class SearchPhotoComponent implements OnInit {
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.link);
@@ -215,32 +220,34 @@ export class SearchPhotoComponent implements OnInit {
     } else {
       this.page += 1;
     }
-
     console.log(this.page);
 
     this.response$ = this.request.searchPhotosNextPage$(this.searchWords, this.page);
 
     return this.response$.subscribe(
-      (data) => {
-      // console.log(data);
+      {  
+        next: (data) => {
+        // console.log(data);
 
-      this.arrSearchPhoto = data;
+        this.arrSearchPhoto = data;
 
-      console.log(this.arrSearchPhoto);
+        console.log(this.arrSearchPhoto);
 
-      this.shufflePhotos();
+        this.shufflePhotos();
 
-      this.splitter();
+        this.splitter();
 
-      this.loading = false;
+        this.loading = false;
 
-      console.log(this.arr1);
-      console.log(this.arr2);
-      console.log(this.arr3);
-      console.log(this.arr4);
+        // console.log(this.arr1);
+        // console.log(this.arr2);
+        // console.log(this.arr3);
+        // console.log(this.arr4);
 
-      },
-    (error) => console.log(error));
+        },
+        error: (error) => console.log(error)
+      }
+    );
   }
 
   saveItemUser($event) {
@@ -249,7 +256,7 @@ export class SearchPhotoComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
@@ -264,12 +271,13 @@ export class SearchPhotoComponent implements OnInit {
     this.response$ = this.request.searchOnePhoto$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
-        this.newItem = data;
-        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
-        this.updateUser$();
-      }, (error) => {
-        console.log(error);
+      {
+        next: (data) => {
+          this.newItem = data;
+          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          this.updateUser$();
+        }, 
+        error: (error) => console.log(error)
       }
     );
   }
@@ -280,30 +288,33 @@ export class SearchPhotoComponent implements OnInit {
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
-      (data) => {
-        this.user = data;
-        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-        alert('The image has been added on your Desk.');
-      },
-      (error) => console.log(error)
+      {
+        next: (data) => {
+          this.user = data;
+          console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+          alert('The image has been added on your Desk.');
+        },
+        error:(error) => console.log(error)
+      }
     );
   }
 
   scroll() {
-  window.onscroll = () => { this.scrollFunction(); };
+    window.onscroll = () => { this.scrollFunction(); };
   }
 
   scrollFunction() {
-    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
-    document.getElementById('btnTop').style.display = 'block';
+    if ((document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) && 
+    !!document.getElementById('btnTop')) {
+      document.getElementById('btnTop').style.display = 'block';
     } else {
-    document.getElementById('btnTop').style.display = 'none';
+      document.getElementById('btnTop').style.display = 'none';
     }
   }
 
   topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
 }

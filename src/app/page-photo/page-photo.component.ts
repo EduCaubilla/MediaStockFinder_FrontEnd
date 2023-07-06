@@ -30,7 +30,7 @@ export class PagePhotoComponent implements OnInit {
 
   constructor(private request: RequestService, private route: ActivatedRoute) {
     this.loading = true;
-   }
+  }
 
   ngOnInit() {
 
@@ -54,13 +54,14 @@ export class PagePhotoComponent implements OnInit {
     this.loading = false;
 
     return this.response$.subscribe(
-      (data) => {
-        this.item = data;
-
-        console.log(this.item);
-
-      },
-      (error) => console.log(error));
+      {
+        next: (data) => {
+          this.item = data;
+          console.log(this.item);
+        },
+        error: (error) => console.log(error)
+      }
+    );
   }
 
   refreshUser() {
@@ -72,19 +73,21 @@ export class PagePhotoComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.request.newRefreshUser(this.user);
-      },
-      (error) => console.log(error)
-    );
+        {
+          next: (data) => {
+            console.log('VUELVE EL USER ACTUALIZADO ', data);
+            this.user = data.user;
+            this.request.newRefreshUser(this.user);
+          },
+          error: (error) => console.log(error)
+        }
+      );
     }
   }
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.link);
@@ -101,7 +104,7 @@ export class PagePhotoComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
@@ -116,12 +119,15 @@ export class PagePhotoComponent implements OnInit {
     this.response$ = this.request.searchOnePhoto$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
-        this.newItem = data;
-        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
-        this.updateUser$();
-      }, (error) => {
-        console.log(error)
+      {
+        next: (data) => {
+          this.newItem = data;
+          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          this.updateUser$();
+        },
+        error: (error) => {
+          console.log(error)
+        }
       }
     );
   }
@@ -132,12 +138,14 @@ export class PagePhotoComponent implements OnInit {
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
-      (data) => {
-        this.user = data;
-        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-        alert('The image has been added on your Desk.')
-      },
-      (error) => console.log(error)
+      {
+        next: (data) => {
+          this.user = data;
+          console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+          alert('The image has been added on your Desk.')
+        },
+        error: (error) => console.log(error)
+      }
     );
   }
 

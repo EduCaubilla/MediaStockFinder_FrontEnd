@@ -250,7 +250,7 @@ export class HomeComponent implements OnInit {
   }
 
   // toVideoPage($event) {
-  //   this.type = $event.target.dataset.font;
+  //   this.type = $event.target.dataset.source;
   //   this.id = $event.target.dataset.id;
 
   //   console.log(this.type);
@@ -261,7 +261,7 @@ export class HomeComponent implements OnInit {
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log("Datos descarga foto --------->");
@@ -318,7 +318,7 @@ export class HomeComponent implements OnInit {
     const id = $event.target.dataset.id;
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
     console.log(type);
 
     this.getOneImageSave$(type, id);
@@ -332,7 +332,9 @@ export class HomeComponent implements OnInit {
       {
         next: (data) => {
           this.newItem = data;
-          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          console.log('RECIBIMOS ITEM PARA AÑADIR ----->');
+          console.log(data);
+          console.log(" ---------------------------------------------------- ");
           this.updateUser$();
         },
         error: (error) => {
@@ -361,7 +363,7 @@ export class HomeComponent implements OnInit {
     const id = $event.target.dataset.id;
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
     console.log(type);
 
     this.getOneVideoSave$(type, id);
@@ -385,19 +387,20 @@ export class HomeComponent implements OnInit {
   }
 
   scroll() {
-  window.onscroll = () => { this.scrollFunction(); };
+    window.onscroll = () => { this.scrollFunction(); };
   }
 
   scrollFunction() {
-    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
-    document.getElementById('btnTop').style.display = 'block';
+    if ((document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) && 
+    !!document.getElementById('btnTop')) {
+      document.getElementById('btnTop').style.display = 'block';
     } else {
-    document.getElementById('btnTop').style.display = 'none';
+      document.getElementById('btnTop').style.display = 'none';
     }
   }
 
   topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 }

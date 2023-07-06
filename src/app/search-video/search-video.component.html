@@ -11,7 +11,7 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control inputSearch" [placeholder]="search" name="newSearch"
                 [(ngModel)]="newSearch" [value]="search" (keyup.enter)="searchVideos$()" />
-              <div class="input-group-append caja">
+              <div class="input-group-append search-box">
                 <button class="btn btn-outline-secondary" type="button" (click)="searchVideos$()">
                   <i class="fas fa-search"></i>
                 </button>
@@ -67,7 +67,7 @@
             *ngIf="!isLogged" src="../../assets/PlusIcon.png">
             </div>
             <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
             </div>
             </div>
@@ -93,7 +93,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -119,7 +119,7 @@
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
                   <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
@@ -141,7 +141,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -203,7 +203,7 @@
             *ngIf="!isLogged" src="../../assets/PlusIcon.png">
             </div>
             <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
             </div>
             </div>
@@ -229,7 +229,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -255,7 +255,7 @@
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
                   <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
@@ -277,7 +277,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -339,7 +339,7 @@
             *ngIf="!isLogged" src="../../assets/PlusIcon.png">
             </div>
             <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
             </div>
             </div>
@@ -365,7 +365,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -391,7 +391,7 @@
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
                   <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
@@ -413,7 +413,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -475,7 +475,7 @@
             *ngIf="!isLogged" src="../../assets/PlusIcon.png">
             </div>
             <div>
-              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-font]="item?.source"
+              <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
               (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
             </div>
             </div>
@@ -501,7 +501,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -527,7 +527,7 @@
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
-                    [attr.data-font]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+                    [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
                     Add to My Desk
                   </button>
                   <a type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
@@ -549,7 +549,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>

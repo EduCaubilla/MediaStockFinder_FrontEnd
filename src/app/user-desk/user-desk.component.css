@@ -10,6 +10,13 @@ h3 {
   line-height: 1.1;
 }
 
+h6 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
+}
+
 p {
   color: #a0a0a0;
   letter-spacing: 1.1px;
@@ -53,13 +60,9 @@ p {
   padding: 5rem;
 }
 
-.main {
+/* .main {
   max-height: 75vh;
-}
-
-.btn {
-  margin: .1rem;
-}
+} */
 
 .container-fluid {
   padding: 0 8rem;
@@ -75,13 +78,27 @@ p {
 }
 
 .modal-body {
-  height: 55vh;
+  max-height: 80vh;
 }
 
-.modal-body img {
-  height: 51vh !important;
+.modal-body img,
+.modal-body video {
+  max-height: 75vh;
+  max-width: 60vw;
+  margin: 0 auto;
+  vertical-align: sub;
+  width: 100%;
+  height: auto;
+  border: solid 0.02px rgb(211, 211, 211);
 }
 
+.footer-text {
+  width: 79%;
+}
+
+.footer-text p {
+  margin-bottom: 0;
+}
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 799px) {

@@ -39,8 +39,24 @@ p {
   margin-right: 0.5rem;
 }
 
+.linkAuthorPage,
+.linkSourcePage {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+.linkAuthorPage:hover {
+  color: rgb(0, 204, 153);
+  text-decoration: underline;
+}
+
+.linkSourcePage:hover {
+  color: rgb(204, 255, 0);
+  text-decoration: underline;
+}
+
 .btn {
-  margin-left: .7rem;
+  margin-left: 0.7rem;
 }
 
 .btn-outline-secondary {

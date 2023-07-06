@@ -1,6 +1,6 @@
 export interface PhotoInterface {
-    idFont?: string;
-    font?: string;
+    idSource?: string;
+    source?: string;
     title?: string;
     description?: string;
     authorName?: string;
@@ -12,4 +12,5 @@ export interface PhotoInterface {
     imageMedium?: string;
     imageLarge?: string;
     downloadLink?: string;
+    media?: string;
 }

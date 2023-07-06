@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
     const myPass = parseInt(control.value.length);
     console.log(control.value.length);
     
-
     if (myPass >= 4) {
       return null;
     } else {

@@ -89,7 +89,8 @@ img:hover {
   display: inline-block;
 }
 
-.column img {
+.column img,
+.column video {
   vertical-align: sub;
   width: 100%;
   height: auto;
@@ -206,7 +207,7 @@ img:hover {
 
 .bottom-right {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   width: 4.8rem;
   color: rgba(255, 255, 255, 0);
@@ -287,7 +288,8 @@ img:hover {
   max-height: 80vh;
 }
 
-.modal-body img {
+.modal-body img,
+.modal-body video {
   max-height: 75vh;
   max-width: 60vw;
   margin: 0 auto;

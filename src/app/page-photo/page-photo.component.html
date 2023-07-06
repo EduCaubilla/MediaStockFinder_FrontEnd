@@ -35,15 +35,15 @@
         </div>
         <div class="buttons ml-auto align-self-center">
           <a class="btn btn-outline-secondary" [attr.data-id]="item[0].idSource" [attr.data-link]="item[0].imageLarge"
-            [attr.data-font]="item[0].font" (click)="triggerDownloadPhoto($event)">
+            [attr.data-source]="item[0].source" (click)="triggerDownloadPhoto($event)">
             Download
           </a>
           <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert"
             *ngIf="!isLogged">
             Add to My Desk
           </button>
-          <button type="button" class="btn btn-outline-secondary " [attr.data-id]="item[0].idFont"
-            [attr.data-font]="item[0].font" (click)="saveItemUser($event)" *ngIf="isLogged">
+          <button type="button" class="btn btn-outline-secondary " [attr.data-id]="item[0].idSource"
+            [attr.data-source]="item[0].source" (click)="saveItemUser($event)" *ngIf="isLogged">
             Add to My Desk
           </button>
           <a type="button" class="btn btn-outline-secondary" [href]=item[0].imageSourceLink target="_blank">
@@ -57,7 +57,7 @@
                 <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                   Ooops
                 </h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
