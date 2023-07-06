@@ -19,11 +19,11 @@ export class UserDeskComponent implements OnInit {
 
   arrDesk: Array<any>;
 
-  arrList: Array<any>;
-
   token: string;
 
+  type: string;
   id: string;
+  link: string;
 
   isLogged: boolean;
 
@@ -52,19 +52,17 @@ export class UserDeskComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.arrDesk = this.user.desk;
-        console.log(this.arrDesk);
-        this.request.newRefreshUser(this.user);
-        this.typeOfMedia();
-      },
-      (error) => console.log(error)
-    );
+        {
+          next: (data) => {
+            //console.log('DESK -> UPDATE USER ', data);
+            this.user = data.user;
+            this.arrDesk = this.user.desk;
+            this.request.newRefreshUser(this.user);
+          },
+          error: (error) => console.log(error)
+        });
     } else {
       this.arrDesk = this.user.desk;
-      this.typeOfMedia();
     }
   }
 
@@ -79,47 +77,41 @@ export class UserDeskComponent implements OnInit {
 
     this.response$ = this.request.updateUser$(this.user);
 
-    return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data;
-        this.arrDesk = this.user.desk;
-        this.typeOfMedia();
-      },
-      (error) => console.log(error)
-    );
-  }
+    let responseWarning = confirm('Are you sure that you want to this item?');
 
-  typeOfMedia() {
-    this.arrList = this.arrDesk;
-    const list = this.arrList;
-    for (const item of list) {
-      const type = item.imageMedium.substring(8, 14);
-      console.log(type);
-      if (type === 'player') {
-        item.media = 'video';
-      } else {
-        item.media = 'image';
+    if (!responseWarning) return;
+
+    return this.response$.subscribe(
+      {
+        next: (data) => {
+          console.log('VUELVE EL USER ACTUALIZADO ', data);
+          this.user = data;
+          this.arrDesk = this.user.desk;
+        },
+        error: (error) => console.log(error)
       }
-    }
-    console.log(this.arrList);
-    console.log(this.arrDesk);
+    );
   }
 
   triggerDownload($event) {
     const media = $event.target.dataset.media;
-    const type = $event.target.dataset.font;
-    const link = $event.target.dataset.link;
+    this.type = $event.target.dataset.source;
+    this.link = $event.target.dataset.link;
+    this.id = $event.target.dataset.id;
 
-    (media === 'video') ? this.triggerDownloadVideo(link) : this.triggerDownloadPhoto(link, type);
+    console.log("Downdload Switch ----> ");
+    console.log(media, this.type, this.link, this.id);
 
+    (media === 'video') ? this.triggerDownloadVideo(this.link) : this.triggerDownloadPhoto();
   }
 
-  triggerDownloadPhoto(link, type) {
+  triggerDownloadPhoto() {
 
-    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${type}/${link}`;
+    console.log("Donwload Photo From Desk ----> ");
+    console.log(this.id);
+
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
     window.location.assign(URL_API_DOWNLOADPHOTO);
-
   }
 
   triggerDownloadVideo(link) {
@@ -133,7 +125,7 @@ export class UserDeskComponent implements OnInit {
   }
 
   toMediaPage($event) {
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
     const id = $event.target.dataset.id;
     const media = $event.target.dataset.media;
 
@@ -142,7 +134,5 @@ export class UserDeskComponent implements OnInit {
     console.log(media);
 
     (media === 'video') ? this.router.navigate([`/video-page/${type}/${id}`]) : this.router.navigate([`/photo-page/${type}/${id}`]);
-
   }
-
 }

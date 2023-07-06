@@ -67,25 +67,27 @@ export class SearchVideoComponent implements OnInit {
     this.response$ = this.request.searchVideos$(this.searchWords);
 
     return this.response$.subscribe(
-        (data) => {
-        this.arrSearchVideo = data;
-        // this.arrShuffle = this.arrSearchPhoto;
+      {
+        next: (data) => {
+          this.arrSearchVideo = data;
+          // this.arrShuffle = this.arrSearchPhoto;
 
-        this.shuffleVideos();
+          this.shuffleVideos();
 
-        this.splitter();
+          this.splitter();
 
-        this.loading = false;
+          this.loading = false;
 
-        console.log(this.arr1);
-        console.log(this.arr2);
-        console.log(this.arr3);
-        console.log(this.arr4);
+          // console.log(this.arr1);
+          // console.log(this.arr2);
+          // console.log(this.arr3);
+          // console.log(this.arr4);
 
-        // console.log(this.arrSearchPhoto);
+          // console.log(this.arrSearchPhoto);
         },
-      (error) => console.log(error));
-
+        error: (error) => console.log(error)
+      }
+    );
 }
 
   refreshUser() {
@@ -97,13 +99,15 @@ export class SearchVideoComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.request.newRefreshUser(this.user);
-      },
-      (error) => console.log(error)
-    );
+        {
+          next: (data) => {
+            console.log('VUELVE EL USER ACTUALIZADO ', data);
+            this.user = data.user;
+            this.request.newRefreshUser(this.user);
+          },
+            error: (error) => console.log(error)
+        }
+      );
     }
   }
 
@@ -126,7 +130,7 @@ export class SearchVideoComponent implements OnInit {
 
   getData($event) {
     console.log($event.target.dataset.id);
-    console.log($event.target.dataset.font);
+    console.log($event.target.dataset.source);
   }
 
   activeSearch() {
@@ -149,31 +153,33 @@ export class SearchVideoComponent implements OnInit {
     this.response$ = this.request.searchVideos$(this.searchWords);
 
     return this.response$.subscribe(
-      (data) => {
-      // console.log(data);
+      {
+        next: (data) => {
+          // console.log(data);
 
-      this.arrSearchVideo = data;
+          this.arrSearchVideo = data;
 
-      console.log(this.arrSearchVideo);
+          console.log(this.arrSearchVideo);
 
-      this.shuffleVideos();
+          this.shuffleVideos();
 
-      this.splitter();
+          this.splitter();
 
-      this.loading = false;
+          this.loading = false;
 
-      console.log(this.arr1);
-      console.log(this.arr2);
-      console.log(this.arr3);
-      console.log(this.arr4);
-
-      },
-    (error) => console.log(error));
+          // console.log(this.arr1);
+          // console.log(this.arr2);
+          // console.log(this.arr3);
+          // console.log(this.arr4);
+        },
+        error: (error) => console.log(error)
+      }
+    );
 
   }
 
   toVideoPage($event) {
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.type);
@@ -221,26 +227,29 @@ export class SearchVideoComponent implements OnInit {
     this.response$ = this.request.searchVideosNextPage$(this.searchWords, this.page);
 
     return this.response$.subscribe(
-      (data) => {
-      // console.log(data);
+      {
+        next: (data) => {
+          // console.log(data);
 
-      this.arrSearchVideo = data;
+          this.arrSearchVideo = data;
 
-      console.log(this.arrSearchVideo);
+          console.log(this.arrSearchVideo);
 
-      this.shuffleVideos();
+          this.shuffleVideos();
 
-      this.splitter();
+          this.splitter();
 
-      this.loading = false;
+          this.loading = false;
 
-      console.log(this.arr1);
-      console.log(this.arr2);
-      console.log(this.arr3);
-      console.log(this.arr4);
+          console.log(this.arr1);
+          console.log(this.arr2);
+          console.log(this.arr3);
+          console.log(this.arr4);
 
-      },
-    (error) => console.log(error));
+        },
+        error: (error) => console.log(error)
+      } 
+    );
   }
 
   updateUser$() {
@@ -263,45 +272,48 @@ export class SearchVideoComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
     this.getOneVideoSave$(type, id);
   }
 
-  getOneVideoSave$(type, id){
+  getOneVideoSave$(type, id) {
     console.log(this.user);
 
     this.response$ = this.request.searchOneVideo$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
-        this.newItem = data;
-        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
-        this.updateUser$();
-      }, (error) => {
-        console.log(error)
+      { 
+        next: (data) => {
+          this.newItem = data;
+          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          this.updateUser$();
+        }, 
+        error: (error) => {
+          console.log(error)
+        }
       }
     );
   }
 
   scroll() {
-  window.onscroll = () => { this.scrollFunction(); };
+    window.onscroll = () => { this.scrollFunction(); };
   }
 
   scrollFunction() {
-    if (document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) {
-    document.getElementById('btnTop').style.display = 'block';
+    if ((document.body.scrollTop > 1500 || document.documentElement.scrollTop > 1500) && 
+    !!document.getElementById('btnTop')) {
+      document.getElementById('btnTop').style.display = 'block';
     } else {
-    document.getElementById('btnTop').style.display = 'none';
+      document.getElementById('btnTop').style.display = 'none';
     }
   }
 
   topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
-
 }
 

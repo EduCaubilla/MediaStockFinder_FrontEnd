@@ -70,6 +70,12 @@ img:hover {
   font-weight: 100;
 }
 
+.search-box {
+  overflow: hidden;
+  background-color: white;
+  padding: 6px 2px;
+}
+
 /*
   -------- SECTIONS
 */
@@ -120,7 +126,8 @@ img:hover {
   display: inline-block;
 }
 
-.column img {
+.column img,
+.column video {
   vertical-align: middle;
   width: 100%;
   height: auto;
@@ -254,7 +261,8 @@ img:hover {
   max-height: 80vh;
 }
 
-.modal-body img {
+.modal-body img,
+.modal-body video {
   max-height: 75vh;
   max-width: 60vw;
   margin: 0 auto;

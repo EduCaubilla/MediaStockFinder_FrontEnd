@@ -40,27 +40,26 @@ export class PageVideoComponent implements OnInit {
     this.refreshUser();
 
     this.route.params.subscribe(params => {
-        // console.log(params.search);
-        this.type = params.type.toLowerCase();
-        this.id = params.id;
- 
-        console.log(this.type);
-        console.log(this.id);
-
-      });
+      // console.log(params.search);
+      this.type = params.type.toLowerCase();
+      this.id = params.id;
+      console.log(this.type);
+      console.log(this.id);
+    });
 
     this.response$ = this.request.searchOneVideo$(this.type, this.id);
 
     this.loading = false;
 
     return this.response$.subscribe(
-      (data) => {
-      this.item = data;
-
-      console.log(this.item);
-
-      },
-      (error) => console.log(error));
+      {
+        next: (data) => {
+          this.item = data;
+          console.log(this.item);
+        },
+        error: (error) => console.log(error)
+      }
+    );
   }
 
   refreshUser() {
@@ -72,12 +71,14 @@ export class PageVideoComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.request.newRefreshUser(this.user);
-      },
-      (error) => console.log(error)
+      {
+        next: (data) => {
+          console.log('VUELVE EL USER ACTUALIZADO ', data);
+          this.user = data.user;
+          this.request.newRefreshUser(this.user);
+        },
+        error: (error) => console.log(error)
+      }
     );
     }
   }
@@ -99,12 +100,14 @@ export class PageVideoComponent implements OnInit {
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
-      (data) => {
-        this.user = data;
-        console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-        alert('The image has been added on your Desk.')
-      },
-      (error) => console.log(error)
+      {
+        next: (data) => {
+          this.user = data;
+          console.log('VUELVE EL USER ACTUALIZADO ', this.user);
+          alert('The image has been added on your Desk.')
+        },
+        error: (error) => console.log(error)
+      }
     );
   }
 
@@ -113,25 +116,26 @@ export class PageVideoComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
     this.getOneVideoSave$(type, id);
   }
 
-  getOneVideoSave$(type, id){
+  getOneVideoSave$(type, id) {
     console.log(this.user);
 
     this.response$ = this.request.searchOneVideo$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
-        this.newItem = data;
-        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
-        this.updateUser$();
-      }, (error) => {
-        console.log(error)
+      {
+        next: (data) => {
+          this.newItem = data;
+          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          this.updateUser$();
+        },
+        error: (error) => console.log(error)
       }
     );
   }
@@ -139,5 +143,4 @@ export class PageVideoComponent implements OnInit {
   alert() {
     alert('You need to be logged in to save photos.')
   }
-
 }

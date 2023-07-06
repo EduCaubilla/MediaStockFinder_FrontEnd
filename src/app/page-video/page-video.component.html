@@ -38,7 +38,7 @@
             Download
           </a>
           <button type="button" class="btn btn-outline-secondary" [attr.data-id]="item[0].idSource"
-            [attr.data-font]="item[0].source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
+            [attr.data-source]="item[0].source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
             Add to My Desk
           </button>
           <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert" *ngIf="!isLogged">
@@ -55,7 +55,7 @@
                 <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                   Ooops
                 </h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>

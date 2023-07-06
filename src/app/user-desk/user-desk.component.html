@@ -18,21 +18,19 @@
               <th scope="col">Type</th>
               <th scope="col" class="text-center">Media</th>
               <th scope="col" class="text-center">Options</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-
+              <!-- <th scope="col"></th> -->
+              <!-- <th scope="col"></th> -->
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of arrList">
-              <!-- <th scope="row">1</th> -->
+            <tr *ngFor="let item of arrDesk">
               <th scope="row" class="lista my_title">{{ item.title }}</th>
               <th scope="row" class="lista">{{ item.description }}</th>
-              <th scope="row" class="lista">{{ item.font }}</th>
+              <th scope="row" class="lista">{{ item.source }}</th>
               <th scope="row" class="lista">{{ item.media }}</th>
               <th scope="row" class="lista text-center">
-                <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                  <img [src]=item?.imageThumb [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                <a href="#ref{{item.idSource}}" data-bs-toggle="modal" [attr.data-target]="'#ref' + item.idSource">
+                  <img [src]=item?.imageThumb [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
                     *ngIf="item.media === 'image'" />
                   <video width="255" height="170.8" oncanplay="this.muted=true" onmouseover="this.play()"
                     onmouseout="this.pause()" *ngIf="item.media === 'video'">
@@ -40,33 +38,32 @@
                   </video>
                 </a>
               </th>
-              <th scope="row" class="lista">
-                <a href="#ref{{item.idFont}}" data-toggle="modal" data-target="#ref{{item.idFont}}">
-                  <button class="btn btn-outline-secondary btn-sm">View</button>
+              <th scope="row" class="lista text-center">
+                <a href="#ref{{item.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
+                  <button class="btn btn-outline-secondary btn-sm mx-2">View</button>
                 </a>
-                <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                  [attr.data-media]="item?.media" [attr.data-id]="item?.idFont" [attr.data-font]="item?.font"
+                <button type="button" class="btn btn-outline-secondary btn-sm mx-2" data-bs-dismiss="modal"
+                  [attr.data-media]="item?.media" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
                   (click)="toMediaPage($event)">
                   Open
                 </button>
-              </th>
-              <th scope="row" class="lista">
-                <button class="btn btn-outline-secondary btn-sm" [attr.data-media]="item?.media"
-                  [attr.data-font]="item?.font" [attr.data-link]="item?.imageLarge" (click)="triggerDownload($event)">
+                <button class="btn btn-outline-secondary btn-sm mx-2" [attr.data-media]="item?.media" [attr.data-id]="item?.idSource"
+                  [attr.data-source]="item?.source" [attr.data-link]="item?.imageLarge" (click)="triggerDownload($event)">
                   Download
                 </button>
-                <button class="btn btn-outline-danger btn-sm" [attr.data-id]="item?._id" (click)="onDelete($event)">
+                <button class="btn btn-outline-danger btn-sm mx-2" [attr.data-id]="item?._id" (click)="onDelete($event)">
                   Delete
                 </button>
               </th>
-              <div class="modal fade" id="ref{{item.idFont}}" tabindex="-1" role="dialog">
+
+              <div class="modal fade" id="ref{{item.idSource}}" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h6 class="modal-title mr-auto" id="{{item.idFont}}Label">
-                        {{item.authorName}} | {{item.font}}
+                      <h6 class="modal-title mr-auto" id="{{item.idSource}}Label">
+                        {{item.authorName}} | {{item.source}}
                       </h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
@@ -75,7 +72,7 @@
                     </div>
                     <div class="videowrapper embed-responsive embed-responsive-16by9" style=" --aspect-ratio: 9 /
                         16;" *ngIf="item.media === 'video'">
-                      <a href="#ref{{item?.idFont}}" data-toggle="modal" data-target="#ref{{item?.idFont}}">
+                      <a href="#ref{{item?.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item?.idSource">
                         <video wwidth="960" height="540" frameborder="0" controls id="video" allowscriptaccess="always"
                           allow="autoplay">
                           <source [src]=item?.imageLarge type="video/mp4">
@@ -83,17 +80,17 @@
                       </a>
                     </div>
                     <div class="modal-footer">
-                      <div class="footer-text mr-auto align-bottom">
+                      <div class="footer-text m-auto align-bottom">
                         <h6>{{item.title}}</h6>
                         <p>{{item.description}}</p>
                       </div>
                       <a class="btn btn-outline-secondary btn-sm" [attr.data-media]="item?.media"
-                        [attr.data-font]="item?.font" [attr.data-link]="item?.imageLarge"
+                        [attr.data-source]="item?.source" [attr.data-link]="item?.imageLarge"
                         (click)="triggerDownload($event)">
                         Download
                       </a>
-                      <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal"
-                        [attr.data-id]="item?.idFont" [attr.data-font]="item?.font" (click)="toMediaPage($event)">
+                      <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"
+                        [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="toMediaPage($event)">
                         Open
                       </button>
                     </div>

@@ -76,11 +76,11 @@ img:hover {
   margin-right: 0.5rem;
 }
 
-/* .linkAuthorPage,
+.linkAuthorPage,
 .linkSourcePage {
   color: #a0a0a0;
   text-decoration: none;
-} */
+}
 
 .linkAuthorPage:hover {
   color: rgb(0, 204, 153);

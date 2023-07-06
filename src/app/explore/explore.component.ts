@@ -225,7 +225,7 @@ export class ExploreComponent implements OnInit {
   }
 
   toPhotoPage($event) {
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.type);
@@ -236,7 +236,7 @@ export class ExploreComponent implements OnInit {
   }
 
   toVideoPage($event) {
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
     this.id = $event.target.dataset.id;
 
     console.log(this.type);
@@ -248,14 +248,19 @@ export class ExploreComponent implements OnInit {
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
-    this.type = $event.target.dataset.font;
+    this.type = $event.target.dataset.source;
+    this.id = $event.target.dataset.id;
 
+    console.log("Datos descarga foto --------->");
     console.log(this.link);
     console.log(this.type);
+    console.log(this.id);
 
-    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.type}/${this.link}`;
+    const URL_API_DOWNLOADPHOTO = `${environment.API_URL}/photo/download/${this.id}/${this.type}/${this.link}`;
+
+    console.log(URL_API_DOWNLOADPHOTO);
+
     window.location.assign(URL_API_DOWNLOADPHOTO);
-    
   }
 
   triggerDownloadVideo($event) {
@@ -319,7 +324,7 @@ export class ExploreComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
@@ -364,7 +369,7 @@ export class ExploreComponent implements OnInit {
 
     console.log(id);
 
-    const type = $event.target.dataset.font;
+    const type = $event.target.dataset.source;
 
     console.log(type);
 
@@ -377,14 +382,16 @@ export class ExploreComponent implements OnInit {
     this.response$ = this.request.searchOneVideo$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
         this.newItem = data;
         console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
         this.updateUser$();
-      }, (error) => {
-        console.log(error)
+        }, 
+        error: (error) => {
+          console.log(error)
+        }
       }
     );
   }
-
 }

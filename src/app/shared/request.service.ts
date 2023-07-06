@@ -177,7 +177,6 @@ export class RequestService {
         JSON.stringify(user),
         { headers: this.headers }
       )
-
       .pipe(tap(data => {
         localStorage.setItem('isLogged', 'true');
         this.isLogged.next(true);
@@ -185,7 +184,7 @@ export class RequestService {
       }),
         catchError(error => {
           console.log(error);
-          return throwError(error);
+          return throwError(() => error);
         }));
   }
 
@@ -312,8 +311,7 @@ export class RequestService {
       }),
         catchError(error => {
           console.log(error);
-          return throwError(error);
+          return throwError(() => error);
         }));
   }
-
 }
