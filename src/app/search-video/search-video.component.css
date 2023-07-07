@@ -276,6 +276,10 @@ img:hover {
   margin-bottom: 0;
 }
 
+#loggedAlert .footer-text {
+  width: auto;
+}
+
 #btnTop {
   display: none;
   position: fixed;

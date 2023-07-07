@@ -4,9 +4,11 @@ main {
   padding-top: 6rem;
 }
 
-h3 {
-  font-size: 3rem;
-  font-weight: 200;
+h6 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: gray;
+  letter-spacing: 0.1rem;
 }
 
 p {
@@ -68,6 +70,10 @@ img:hover {
   height: auto;
   margin: 0 auto;
   padding: 5rem;
+}
+
+.loading img {
+  margin: 0 auto;
 }
 
 /*
@@ -303,6 +309,15 @@ img:hover {
   margin-bottom: 0;
 }
 
+#loggedAlert .footer-text {
+  width: auto;
+}
+
+#loggedAlert h3 {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
 /*
 
 ------------------- MEDIA QUERIES
@@ -338,10 +353,6 @@ img:hover {
 @media screen and (max-width: 799px) {
   main {
     font-size: 14px;
-  }
-
-  h3 {
-    font-size: 2.2rem;
   }
 
   .container-fluid {

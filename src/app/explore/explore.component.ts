@@ -48,7 +48,7 @@ export class ExploreComponent implements OnInit {
 
   constructor(private request: RequestService, private router: Router, private helper: HelperService) {
     this.loading = true;
-   }
+  }
 
   ngOnInit() {
 
@@ -68,13 +68,15 @@ export class ExploreComponent implements OnInit {
       this.response$ = this.request.searchUser$(this.id);
 
       return this.response$.subscribe(
-      (data) => {
-        console.log('VUELVE EL USER ACTUALIZADO ', data);
-        this.user = data.user;
-        this.request.newRefreshUser(this.user);
-      },
-      (error) => console.log(error)
-    );
+        {
+        next: (data) => {
+          console.log('VUELVE EL USER ACTUALIZADO ', data);
+          this.user = data.user;
+          this.request.newRefreshUser(this.user);
+        },
+        error: (error) => console.log(error)
+        }
+      );
     }
   }
 
@@ -83,45 +85,39 @@ export class ExploreComponent implements OnInit {
   }
 
   getCatNature$() {
+    this.showVideo = false;
     this.loading = true;
-
     this.cleanView();
-
     this.response$ = this.request.searchPhotosNature$();
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
 
-        this.arrPhotosNature = data;
+          this.arrPhotosNature = data;
 
-        this.helper.shuffle(this.arrPhotosNature);
+          this.helper.shuffle(this.arrPhotosNature);
 
-        const numberArr: number = Math.ceil(this.arrPhotosNature.length / 4);
+          const numberArr: number = Math.ceil(this.arrPhotosNature.length / 4);
 
-        [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosNature, numberArr);
+          [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosNature, numberArr);
 
-        this.loading = false;
-
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
-      },
-      (error) => console.log(error)
+          this.loading = false;
+        },
+        error: (error) => console.log(error)
+      }
     );
   }
 
   getCatPeople$() {
+    this.showVideo = false;
     this.loading = true;
-
     this.cleanView();
-
     this.response$ = this.request.searchPhotosPeople$();
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
 
         this.arrPhotosPeople = data;
 
@@ -132,82 +128,73 @@ export class ExploreComponent implements OnInit {
         [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosPeople, numberArr);
 
         this.loading = false;
-
-
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
-      (error) => console.log(error)
+        error: (error) => console.log(error)
+      }
     );
   }
 
   getCatFoodDrink$() {
+    this.showVideo = false;
     this.loading = true;
-
     this.cleanView();
-
     this.response$ = this.request.searchPhotosFoodDrink$();
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
 
-        this.arrPhotosFoodDrink = data;
+          this.arrPhotosFoodDrink = data;
 
-        this.helper.shuffle(this.arrPhotosFoodDrink);
+          this.helper.shuffle(this.arrPhotosFoodDrink);
 
-        const numberArr: number = Math.ceil(this.arrPhotosFoodDrink.length / 4);
+          const numberArr: number = Math.ceil(this.arrPhotosFoodDrink.length / 4);
 
-        [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosFoodDrink, numberArr);
+          [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosFoodDrink, numberArr);
 
-        this.loading = false;
-
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
-      },
-      (error) => console.log(error)
+          this.loading = false;
+        },
+        error: (error) => console.log(error)
+      }
     );
   }
 
   getCatLatest$() {
+    this.showVideo = false;
+    this.loading = true;
+    this.cleanView();
+
     this.response$ = this.request.searchPhotosLatest$();
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
 
-        this.arrPhotosLatest = data;
+          this.arrPhotosLatest = data;
 
-        this.helper.shuffle(this.arrPhotosLatest);
+          this.helper.shuffle(this.arrPhotosLatest);
 
-        const numberArr: number = Math.ceil(this.arrPhotosLatest.length / 4);
+          const numberArr: number = Math.ceil(this.arrPhotosLatest.length / 4);
 
-        [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosLatest, numberArr);
+          [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosLatest, numberArr);
 
-        this.loading = false;
-      },
-      (error) => console.log(error)
+          this.loading = false;
+        },
+        error: (error) => console.log(error)
+      }
     );
   }
 
   getVideos$() {
-
     this.loading = true;
-
     this.cleanView();
-
     this.showVideo = true;
 
     this.response$ = this.request.getVideos$();
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
         this.arrVideos = data;
 
         this.helper.shuffle(this.arrVideos);
@@ -219,7 +206,8 @@ export class ExploreComponent implements OnInit {
         this.loading = false;
 
       },
-      (error) => console.log(error)
+        error: (error) => console.log(error)
+      }
     );
 
   }
@@ -231,7 +219,6 @@ export class ExploreComponent implements OnInit {
     console.log(this.type);
     console.log(this.id);
 
-
     this.router.navigate([`/photo-page/${this.type}/${this.id}`]);
   }
 
@@ -241,7 +228,6 @@ export class ExploreComponent implements OnInit {
 
     console.log(this.type);
     console.log(this.id);
-
 
     this.router.navigate([`/video-page/${this.type}/${this.id}`]);
   }
@@ -293,7 +279,8 @@ export class ExploreComponent implements OnInit {
     this.response$ = this.request.getNextVideos$(this.page);
 
     return this.response$.subscribe(
-      (data) => {
+      {
+        next: (data) => {
         this.arrVideos = data;
 
         console.log(this.arrVideos);
@@ -306,14 +293,9 @@ export class ExploreComponent implements OnInit {
 
         this.loading = false;
 
-        // console.log(this.arr1);
-        // console.log(this.arr2);
-        // console.log(this.arr3);
-        // console.log(this.arr4);
-
-        // console.log(this.arrPhotosNature);
       },
-      (error) => console.log(error)
+        error: (error) => console.log(error)
+      }
     );
 
   }
@@ -339,13 +321,15 @@ export class ExploreComponent implements OnInit {
     this.response$ = this.request.searchOnePhoto$(type, id);
 
     return this.response$.subscribe(
-      (data) => {
-        this.newItem = data;
-        console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
-        this.updateUser$();
-      }, (error) => {
-        console.log(error)
-      }
+      {
+        next: (data) => {
+          this.newItem = data;
+          console.log('RECIBIMOS ITEM PARA AÑADIR ' + this.newItem);
+          this.updateUser$();
+        }, 
+        error: (error) => {
+          console.log(error)
+      }}
     );
   }
 
@@ -355,12 +339,14 @@ export class ExploreComponent implements OnInit {
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
-      (data) => {
+      {
+      next: (data) => {
         this.user = data;
         console.log('VUELVE EL USER ACTUALIZADO ', this.user);
         alert('The image has been added on your Desk.')
       },
-      (error) => console.log(error)
+      error: (error) => console.log(error)
+      }
     );
   }
 

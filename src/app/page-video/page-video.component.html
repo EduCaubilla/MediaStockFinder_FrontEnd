@@ -41,7 +41,7 @@
             [attr.data-source]="item[0].source" (click)="saveVideoUser$($event)" *ngIf="isLogged">
             Add to My Desk
           </button>
-          <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert" *ngIf="!isLogged">
+          <button class="btn btn-outline-secondary" data-bs-toggle="modal" [attr..data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
             Add to My Desk
           </button>
           <a type="button" class="btn btn-outline-secondary" [href]=item[0].imageSourceLink target="_blank">
@@ -65,10 +65,10 @@
               <div class="modal-footer">
                 <div class="footer-text align-bottom text center">
                   <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                    data-dismiss="modal">
+                    data-bs-dismiss="modal">
                     Login
                   </button>
-                  <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                  <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                     [routerLink]="['/signup']">
                     Register
                   </button>
@@ -82,4 +82,3 @@
   </div>
 
 </main>
-<!-- <div class="modal" id="loggedAlert" tabindex="-1" role="dialog"></div> -->

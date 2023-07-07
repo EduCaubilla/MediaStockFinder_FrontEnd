@@ -37,7 +37,6 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
-            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
           <div class="bottom-legend">
@@ -74,11 +73,10 @@
                 [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
               </div>
               <div >
-                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
               </div>
               <div>
-                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
               </div>
             </div>
           </div>
@@ -130,7 +128,7 @@
                     [attr.data-link]="item.imageLarge" [attr.data-source]="item.source" (click)="triggerDownloadPhoto($event)">
                     Download
                   </a>
-                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-dismiss="modal"
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
                     [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
@@ -149,7 +147,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -183,7 +181,6 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
-            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
             <img
               [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
@@ -238,11 +235,10 @@
                 [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
               </div>
               <div >
-                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
               </div>
               <div>
-                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
               </div>
             </div>
           </div>
@@ -336,7 +332,6 @@
                     type="button"
                     class="btn btn-outline-secondary btn-sm"
                     data-bs-toggle="modal"
-                    data-bs-dismiss="modal"
                     [attr.data-bs-target]="'#loggedAlert'"
                     *ngIf="!isLogged"
                   >
@@ -372,7 +367,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -404,7 +399,6 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource ">
-            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"/>
           </a>
 
@@ -455,12 +449,11 @@
                 <img class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.downloadLink" [attr.data-source]="item?.source"
                 [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
               </div>
-              <div >
-                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              <div>
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
               </div>
               <div>
-                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
               </div>
             </div>
           </div>
@@ -546,7 +539,6 @@
                     type="button"
                     class="btn btn-outline-secondary btn-sm"
                     data-bs-toggle="modal"
-                    data-bs-dismiss="modal"
                     [attr.data-bs-target]="'#loggedAlert'"
                     *ngIf="!isLogged"
                   >
@@ -582,7 +574,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -626,9 +618,8 @@
           <a
             href="#ref{{ item.idSource }}"
             data-bs-toggle="modal"
-            [attr.data-bs-target]="'#ref' + item.idSource "
-          >
-            <!-- style="background: url(../../assets/loader.gif) no-repeat"> -->
+            [attr.data-bs-target]="'#ref' + item.idSource ">
+
             <img
               [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
@@ -684,11 +675,10 @@
                 [attr.data-id]="item?.idSource" (click)="triggerDownloadPhoto($event)">
               </div>
               <div >
-                <img class="plusIcon" id="modalButton" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
               </div>
               <div>
-                <img class="plusIcon" id="modalButton" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveItemUser($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
               </div>
             </div>
           </div>
@@ -792,7 +782,6 @@
                     type="button"
                     class="btn btn-outline-secondary btn-sm"
                     data-bs-toggle="modal"
-                    data-bs-dismiss="modal"
                     [attr.data-bs-target]="'#loggedAlert'"
                     *ngIf="!isLogged"
                   >
@@ -828,7 +817,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -884,15 +873,35 @@
           </div>
           
           <div class="bottom-legend">
-            <div class="bottom-left-video">{{item?.authorName}} | {{item?.source}}</div>
+            <div class="bottom-left" *ngIf="item.source === 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
+            </div>
+            <div class="bottom-left" *ngIf="item.source === 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
+            </div>
             <div class="bottom-right-video">
-              <i class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
-                (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+              <div>
+                <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
+
           <div class="modal fade" id="ref{{item?.idSource}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -922,7 +931,7 @@
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
+                    [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -937,7 +946,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -980,13 +989,32 @@
           </div>
 
           <div class="bottom-legend">
-            <div class="bottom-left-video">{{item?.authorName}} | {{item?.source}}</div>
+            <div class="bottom-left" *ngIf="item.source === 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
+            </div>
+            <div class="bottom-left" *ngIf="item.source === 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
+            </div>
             <div class="bottom-right-video">
-              <i class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
-                (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+              <div>
+                <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -1019,7 +1047,7 @@
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
+                    [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -1034,7 +1062,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -1077,13 +1105,32 @@
           </div>
 
           <div class="bottom-legend">
-            <div class="bottom-left-video">{{item?.authorName}} | {{item?.source}}</div>
+            <div class="bottom-left" *ngIf="item.source === 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
+            </div>
+            <div class="bottom-left" *ngIf="item.source === 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
+            </div>
             <div class="bottom-right-video">
-              <i class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
-                (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+              <div>
+                <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -1116,7 +1163,7 @@
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
+                    [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -1131,7 +1178,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -1174,13 +1221,32 @@
           </div>
 
           <div class="bottom-legend">
-            <div class="bottom-left-video">{{item?.authorName}} | {{item?.source}}</div>
+            <div class="bottom-left" *ngIf="item.source === 'pexels'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pexels.com" target="_blank">
+                Pexels
+              </a>
+            </div>
+            <div class="bottom-left" *ngIf="item.source === 'pixabay'">
+              <a class="linkAuthor" [href]="item.authorLink" target="_blank">
+                {{ item.authorName }}</a>
+              via
+              <a class="linkSource" href="https://www.pixabay.com" target="_blank">
+                Pixabay
+              </a>
+            </div>
             <div class="bottom-right-video">
-              <i class="downloadIcon" src="../../assets/DownloadIcon.png" [attr.data-link]="item?.imageLarge" (click)="triggerDownloadVideo($event)"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" data-bs-dismiss="modal"
-                *ngIf="!isLogged"></i>
-              <i class="plusIcon" src="../../assets/PlusIcon.png" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"
-                (click)="saveVideoUser$($event)" *ngIf="isLogged"></i>
+              <div>
+                <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged" src="../../assets/PlusIcon.png">
+              </div>
+              <div>
+                <img class="plusIcon" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" (click)="saveVideoUser$($event)" *ngIf="isLogged" src="../../assets/PlusIcon.png">
+              </div>
             </div>
           </div>
 
@@ -1213,7 +1279,7 @@
                     Download
                   </a>
                   <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                    data-bs-dismiss="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
+                    [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
                     Add to My Desk
                   </button>
                   <button type="button" class="btn btn-outline-secondary btn-sm" [attr.data-id]="item?.idSource"
@@ -1228,7 +1294,7 @@
               </div>
             </div>
           </div>
-          <div class="modal" id="loggedAlert" tabindex="-1" role="dialog">
+          <div class="modal fade" id="loggedAlert" tabindex="-1" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">

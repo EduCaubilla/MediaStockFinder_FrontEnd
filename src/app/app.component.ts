@@ -27,12 +27,13 @@ export class AppComponent {
   }
 
   public onLogout(): void {
-    console.log('ENTRA LOG OUT');
+
+    let responseWarning = confirm('You are about to log out. \nThanks for your visit.');
+    if (!responseWarning) return;
 
     this.request.logoutUser();
     this.onCheckUser();
-    window.location.reload();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   public onCheckUser(): void {
