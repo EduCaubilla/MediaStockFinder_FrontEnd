@@ -38,8 +38,7 @@
             [attr.data-source]="item[0].source" (click)="triggerDownloadPhoto($event)">
             Download
           </a>
-          <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#loggedAlert"
-            *ngIf="!isLogged">
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" [attr.data-bs-target]="'#loggedAlert'" *ngIf="!isLogged">
             Add to My Desk
           </button>
           <button type="button" class="btn btn-outline-secondary " [attr.data-id]="item[0].idSource"
@@ -67,10 +66,10 @@
               <div class="modal-footer">
                 <div class="footer-text align-bottom text center">
                   <button type="button" class="btn btn-outline-secondary m-2" [routerLink]="['/login']"
-                    data-dismiss="modal">
+                    data-bs-dismiss="modal">
                     Login
                   </button>
-                  <button type="button" class="btn btn-outline-secondary m-2" data-dismiss="modal"
+                  <button type="button" class="btn btn-outline-secondary m-2" data-bs-dismiss="modal"
                     [routerLink]="['/signup']">
                     Register
                   </button>

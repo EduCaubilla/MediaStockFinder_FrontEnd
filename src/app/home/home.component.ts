@@ -134,9 +134,9 @@ export class HomeComponent implements OnInit {
   }
 
   getRandom$() {
+    this.showVideo = false;
     this.loading = true;
     this.cleanView();
-
     this.response$ = this.request.listRandom$();
 
     return this.response$.subscribe(
@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit {
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosRandom, numberArr);
           this.loading = false;
 
-          console.log("Primera carga de imágenes ----->");
+          console.log("Primera carga de imágenes Random ----->");
           console.log(data);
         },
 
@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCatNature$() {
-
+    this.showVideo = false;
     this.loading = true;
     this.cleanView();
     this.response$ = this.request.searchPhotosNature$();
@@ -171,6 +171,9 @@ export class HomeComponent implements OnInit {
           const numberArr: number = Math.ceil(this.arrPhotosNature.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosNature, numberArr);
           this.loading = false;
+
+          console.log("Carga de imágenes Nature ----->");
+          console.log(data);
         },
         error: (error) => console.log(error)
       }   
@@ -178,9 +181,9 @@ export class HomeComponent implements OnInit {
   }
 
   getCatPeople$() {
+    this.showVideo = false;
     this.loading = true;
     this.cleanView();
-
     this.response$ = this.request.searchPhotosPeople$();
 
     return this.response$.subscribe(
@@ -191,6 +194,9 @@ export class HomeComponent implements OnInit {
           const numberArr: number = Math.ceil(this.arrPhotosPeople.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosPeople, numberArr);
           this.loading = false;
+
+          console.log("Carga de imágenes People ----->");
+          console.log(data);
         },
         error: (error) => console.log(error)
       },   
@@ -198,6 +204,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCatFoodDrink$() {
+    this.showVideo = false;
     this.loading = true;
     this.cleanView();
     this.response$ = this.request.searchPhotosFoodDrink$();
@@ -210,6 +217,9 @@ export class HomeComponent implements OnInit {
           const numberArr: number = Math.ceil(this.arrPhotosFoodDrink.length / 4);
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrPhotosFoodDrink, numberArr);
           this.loading = false;
+
+          console.log("Carga de imágenes Food & Drink ----->");
+          console.log(data);
         },
         error: (error) => console.log(error)
       },
@@ -235,29 +245,13 @@ export class HomeComponent implements OnInit {
           [this.arr1, this.arr2, this.arr3, this.arr4] = this.helper.partitionArray(this.arrVideos, numberArr);
           this.loading = false;
 
-          console.log("Entrada array 2");
-          console.log(this.arr2);
-
-          console.log("Entrada array 3");
-          console.log(this.arr3);
-
-          console.log("Entrada array de vídeos");
-          console.log(this.arrVideos);
+          console.log("Carga de Vídeos ----->");
+          console.log(data);
         },
         error: (error) => console.log(error)
       },
     );
   }
-
-  // toVideoPage($event) {
-  //   this.type = $event.target.dataset.source;
-  //   this.id = $event.target.dataset.id;
-
-  //   console.log(this.type);
-  //   console.log(this.id);
-
-  //   this.router.navigate([`/video-page/${this.type}/${this.id}`]);
-  // }
 
   triggerDownloadPhoto($event) {
     this.link = $event.target.dataset.link;
@@ -332,9 +326,6 @@ export class HomeComponent implements OnInit {
       {
         next: (data) => {
           this.newItem = data;
-          console.log('RECIBIMOS ITEM PARA AÑADIR ----->');
-          console.log(data);
-          console.log(" ---------------------------------------------------- ");
           this.updateUser$();
         },
         error: (error) => {
@@ -344,15 +335,12 @@ export class HomeComponent implements OnInit {
   }
 
   updateUser$() {
-    console.log('ENVIAMOS ITEM PARA USER ', this.user);
     this.response$ = this.request.addUserItem$(this.newItem);
 
     return this.response$.subscribe(
       {
         next: (data) => {
           this.user = data;
-          console.log('VUELVE EL USER ACTUALIZADO ', this.user);
-          alert('The image has been added on your Desk.');
         },
         error: (error) => console.log(error)
       }
@@ -376,7 +364,6 @@ export class HomeComponent implements OnInit {
       {
         next: (data) => {
           this.newItem = data;
-          console.log('RECIBIMOS ITEM PARA AÑADIR ', this.newItem);
           this.updateUser$();
         }, 
         error: (error) => {

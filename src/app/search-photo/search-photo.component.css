@@ -12,6 +12,11 @@ h3 {
   font-weight: 200;
 }
 
+#loggedAlert h3 {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
 h6 {
   font-size: 1.3rem;
   font-weight: 300;
@@ -259,6 +264,10 @@ img:hover {
 
 .footer-text p {
   margin-bottom: 0;
+}
+
+#loggedAlert .footer-text {
+  width: auto;
 }
 
 #btnTop {

@@ -77,7 +77,7 @@ export class UserDeskComponent implements OnInit {
 
     this.response$ = this.request.updateUser$(this.user);
 
-    let responseWarning = confirm('Are you sure that you want to this item?');
+    let responseWarning = confirm('Are you sure that you want to delete this item?');
 
     if (!responseWarning) return;
 
