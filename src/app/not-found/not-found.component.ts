@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../shared/request.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-not-found',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })

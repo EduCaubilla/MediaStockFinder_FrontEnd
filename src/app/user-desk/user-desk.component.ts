@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../shared/request.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // Added RouterModule here
 import { UserInterface } from '../shared/interfaces/user-interface';
 import { HelperService } from '../shared/helper.service';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-desk',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './user-desk.component.html',
   styleUrls: ['./user-desk.component.css']
 })

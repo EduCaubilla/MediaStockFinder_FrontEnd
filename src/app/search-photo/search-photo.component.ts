@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // Added RouterModule here
+import { FormsModule } from '@angular/forms'; // Added FormsModule here
 import { HelperService } from '../shared/helper.service';
 import { environment } from 'src/environments/environment';
 import { UserInterface } from '../shared/interfaces/user-interface';
@@ -11,6 +12,8 @@ import { UserInterface } from '../shared/interfaces/user-interface';
 
 @Component({
   selector: 'app-search-photo',
+  standalone: true,
+  imports: [FormsModule, RouterModule],
   templateUrl: './search-photo.component.html',
   styleUrls: ['./search-photo.component.css']
 })

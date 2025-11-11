@@ -8,9 +8,13 @@ import { LegalComponent } from './legal/legal.component';
 
 
 @NgModule({
-  declarations: [AboutComponent, LicenseComponent, FAQsComponent, LegalComponent],
+  declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    AboutComponent,
+    LicenseComponent,
+    FAQsComponent,
+    LegalComponent
   ]
 })
 export class MoreModule { }
