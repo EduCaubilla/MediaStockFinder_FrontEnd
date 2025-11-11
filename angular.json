@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MediaStockFinder:build"
+            "buildTarget": "MediaStockFinder:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MediaStockFinder:build:production"
+              "buildTarget": "MediaStockFinder:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MediaStockFinder:build"
+            "buildTarget": "MediaStockFinder:build"
           }
         },
         "test": {
