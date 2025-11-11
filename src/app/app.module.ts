@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,33 +21,27 @@ import { UserDeskComponent } from './user-desk/user-desk.component';
 import { RequestService } from './shared/request.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
-  declarations: [],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    CommonModule,
-    AppComponent,
-    HomeComponent,
-    ExploreComponent,
-    LoginComponent,
-    SignupComponent,
-    NotFoundComponent,
-    SearchPhotoComponent,
-    SearchVideoComponent,
-    PagePhotoComponent,
-    PageVideoComponent,
-    UserDeskComponent
-  ],
-  providers: [
-    RequestService
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        RouterModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        CommonModule,
+        AppComponent,
+        HomeComponent,
+        ExploreComponent,
+        LoginComponent,
+        SignupComponent,
+        NotFoundComponent,
+        SearchPhotoComponent,
+        SearchVideoComponent,
+        PagePhotoComponent,
+        PageVideoComponent,
+        UserDeskComponent], providers: [
+        RequestService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
