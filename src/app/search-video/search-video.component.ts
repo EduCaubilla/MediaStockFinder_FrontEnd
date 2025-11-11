@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HelperService } from '../shared/helper.service';
+import { FormsModule } from '@angular/forms'; // Added FormsModule here
 import { environment } from 'src/environments/environment';
 import { UserInterface } from '../shared/interfaces/user-interface';
 
 
 @Component({
   selector: 'app-search-video',
+  standalone: true,
+  imports: [FormsModule, RouterModule],
   templateUrl: './search-video.component.html',
   styleUrls: ['./search-video.component.css']
 })

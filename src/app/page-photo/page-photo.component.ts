@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router'; // Added RouterModule here
 import { environment } from 'src/environments/environment';
 import { UserInterface } from '../shared/interfaces/user-interface';
 
 @Component({
   selector: 'app-page-photo',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './page-photo.component.html',
   styleUrls: ['./page-photo.component.css']
 })

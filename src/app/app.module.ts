@@ -22,7 +22,17 @@ import { RequestService } from './shared/request.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
+  declarations: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    CommonModule,
     AppComponent,
     HomeComponent,
     ExploreComponent,
@@ -34,17 +44,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PagePhotoComponent,
     PageVideoComponent,
     UserDeskComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    CommonModule
   ],
   providers: [
     RequestService

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // Added RouterModule here
 import { UserInterface } from '../shared/interfaces/user-interface';
 import { RequestService } from '../shared/request.service';
-import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, ReactiveFormsModule } from '@angular/forms'; // Added ReactiveFormsModule here
 
 @Component({
   selector: 'app-signup',
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })

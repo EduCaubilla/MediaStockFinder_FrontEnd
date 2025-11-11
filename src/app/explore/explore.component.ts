@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../shared/request.service';
 import { HelperService } from '../shared/helper.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserInterface } from '../shared/interfaces/user-interface';
 
 
 @Component({
   selector: 'app-explore',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.css']
 })
+
 export class ExploreComponent implements OnInit {
 
   arrPhotosRandom: Array<any>;
