@@ -21,27 +21,32 @@ import { UserDeskComponent } from './user-desk/user-desk.component';
 import { RequestService } from './shared/request.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({ declarations: [],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        RouterModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        NgbModule,
-        CommonModule,
-        AppComponent,
-        HomeComponent,
-        ExploreComponent,
-        LoginComponent,
-        SignupComponent,
-        NotFoundComponent,
-        SearchPhotoComponent,
-        SearchVideoComponent,
-        PagePhotoComponent,
-        PageVideoComponent,
-        UserDeskComponent], providers: [
-        RequestService,
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    CommonModule,
+    AppComponent,
+    HomeComponent,
+    ExploreComponent,
+    LoginComponent,
+    SignupComponent,
+    NotFoundComponent,
+    SearchPhotoComponent,
+    SearchVideoComponent,
+    PagePhotoComponent,
+    PageVideoComponent,
+    UserDeskComponent
+  ],
+  providers: [
+    RequestService,
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AppModule { }

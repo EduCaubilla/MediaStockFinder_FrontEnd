@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +14,7 @@ import { UserInterface } from '../shared/interfaces/user-interface';
 @Component({
   selector: 'app-search-photo',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './search-photo.component.html',
   styleUrls: ['./search-photo.component.css']
 })
@@ -62,7 +63,7 @@ export class SearchPhotoComponent implements OnInit {
     this.refreshUser();
 
     this.route.params.subscribe(params => {
-      // console.log(params.search);
+      console.log(params.search);
       this.search = params.search;
       this.searchWords = this.search.match(/[^,(?! )]+/g).join();
 
@@ -320,4 +321,15 @@ export class SearchPhotoComponent implements OnInit {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
+  getBottomValue(authorName: string): string {
+    const nameLength = authorName?.length || 0;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 1279 && screenWidth <= 1700 || screenWidth <= 800) {
+      if (nameLength >= 13) {
+        return '60px';
+      }
+    }
+    return '40px';
+  }
 }

@@ -76,6 +76,11 @@ export class HomeComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.cleanVideos();
+    this.cleanView();
+  }
+
   refreshUser() {
     this.id = localStorage.getItem('id');
     this.user = this.request.getUser();
@@ -236,6 +241,7 @@ export class HomeComponent implements OnInit {
 
   getVideos$() {
     this.loading = true;
+    this.cleanVideos();
     this.cleanView();
     this.showVideo = true;
     this.response$ = this.request.getVideos$();
@@ -255,6 +261,19 @@ export class HomeComponent implements OnInit {
         error: (error) => console.log(error)
       },
     );
+  }
+
+  cleanVideos() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video: HTMLVideoElement) => {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    });
+  }
+
+  handleVideoError(event: any) {
+    console.warn('Video loading interrupted:', event);
   }
 
   triggerDownloadPhoto($event) {
@@ -393,5 +412,17 @@ export class HomeComponent implements OnInit {
   topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  getBottomValue(authorName: string): string {
+    const nameLength = authorName?.length || 0;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 1279 && screenWidth <= 1700 || screenWidth <= 800) {
+      if (nameLength >= 13) {
+        return '60px';
+      }
+    }
+    return '40px';
   }
 }

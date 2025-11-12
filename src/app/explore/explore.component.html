@@ -39,7 +39,7 @@
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -112,9 +112,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -154,9 +152,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -181,13 +177,11 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
-            <img
-              [src]="item?.imageSmall"
+            <img [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
-              [attr.data-source]="item?.source"
-            />
+              [attr.data-source]="item?.source"/>
           </a>
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -307,9 +301,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -374,9 +366,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -402,7 +392,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"/>
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -514,9 +504,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -581,9 +569,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -615,19 +601,16 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <a
-            href="#ref{{ item.idSource }}"
+          <a href="#ref{{ item.idSource }}"
             data-bs-toggle="modal"
             [attr.data-bs-target]="'#ref' + item.idSource ">
 
-            <img
-              [src]="item?.imageSmall"
+            <img [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
-              [attr.data-source]="item?.source"
-            />
+              [attr.data-source]="item?.source"/>
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -683,12 +666,10 @@
             </div>
           </div>
 
-          <div
-            class="modal fade"
+          <div class="modal fade"
             id="ref{{ item.idSource }}"
             tabindex="-1"
-            role="dialog"
-          >
+            role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -757,9 +738,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -824,9 +803,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -872,7 +849,7 @@
             </a>
           </div>
           
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -909,9 +886,7 @@
                   <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
@@ -953,9 +928,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -988,7 +961,7 @@
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1025,9 +998,7 @@
                   <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
@@ -1069,9 +1040,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -1104,7 +1073,7 @@
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1141,9 +1110,7 @@
                   <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
@@ -1185,9 +1152,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -1220,7 +1185,7 @@
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1257,9 +1222,7 @@
                   <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
@@ -1301,9 +1264,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>

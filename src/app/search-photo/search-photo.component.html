@@ -34,7 +34,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
@@ -105,9 +105,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -149,9 +147,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -179,7 +175,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
@@ -249,9 +245,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -293,9 +287,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -323,7 +315,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
@@ -393,9 +385,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -437,9 +427,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -467,7 +455,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a> via <a class="linkSource" href="https://www.pexels.com" target="_blank">
@@ -537,9 +525,7 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
@@ -581,9 +567,7 @@
                   <h6 class="modal-title mr-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>

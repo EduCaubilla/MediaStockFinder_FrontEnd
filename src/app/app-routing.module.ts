@@ -18,7 +18,7 @@ import { UserDeskComponent } from './user-desk/user-desk.component';
 import { UserGuard } from './user.guard';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
