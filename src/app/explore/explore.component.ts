@@ -390,7 +390,7 @@ export class ExploreComponent implements OnInit {
     const screenWidth = window.innerWidth;
 
     if (screenWidth > 1279 && screenWidth <= 1700 || screenWidth <= 800) {
-      if (nameLength >= 13) {
+      if (nameLength > 11) {
         return '60px';
       }
     }
