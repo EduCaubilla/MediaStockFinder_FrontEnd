@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgbModule,
@@ -46,8 +45,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserDeskComponent
   ],
   providers: [
-    RequestService
-  ],
-  bootstrap: [AppComponent]
+    RequestService,
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule { }

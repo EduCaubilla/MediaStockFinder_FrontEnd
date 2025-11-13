@@ -141,26 +141,13 @@ img:hover {
   padding-right: 15px !important;
 }
 
-.video_wrapper {
-  position: relative;
-}
-
-.video_wrapper video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30%;
-  height: 30%;
-}
-
 .bottom-legend {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 40px;
+  bottom: 37px;
   padding: 5px 5px 5px 10px;
-  width: 380px;
 }
 
 .bottom-left {
@@ -219,7 +206,12 @@ img:hover {
   width: auto !important;
   margin: 0 0.3rem;
   border: none !important;
-  text-shadow: 0.5px 2px 3px rgba(124, 124, 124, 0);
+  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
+  text-shadow: 0px -2px -3px rgba(122, 122, 122, 1);
+  -moz-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
+  -moz-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
+  -webkit-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
+  -webkit-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
   cursor: pointer !important;
   opacity: 0;
   transition: opacity 1s;
@@ -278,6 +270,11 @@ img:hover {
 
 #loggedAlert .footer-text {
   width: auto;
+}
+
+#loggedAlert h3 {
+  font-size: 1.3rem;
+  font-weight: 100;
 }
 
 #btnTop {

@@ -39,7 +39,7 @@
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source" />
           </a>
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source == 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -85,7 +85,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -93,7 +93,7 @@
                       Pexels
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -101,7 +101,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
                     <a class="linkAuthor" href="{{
                               item.authorLink
                             }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -112,15 +112,13 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -151,12 +149,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -181,13 +177,11 @@
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
           <a href="#ref{{ item.idSource }}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item.idSource">
-            <img
-              [src]="item?.imageSmall"
+            <img [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
-              [attr.data-source]="item?.source"
-            />
+              [attr.data-source]="item?.source"/>
           </a>
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -246,7 +240,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a
                       class="linkAuthor"
                       [href]="item.authorLink"
@@ -264,7 +258,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'pixabay'"
                   >
@@ -285,7 +279,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'unsplash'"
                   >
@@ -307,15 +301,13 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -371,12 +363,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -402,7 +392,7 @@
             <img [src]="item?.imageSmall" [attr.data-id]="item?.idSource" [attr.data-source]="item?.source"/>
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -462,7 +452,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a> 
                     via 
@@ -471,7 +461,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'pixabay'"
                   >
@@ -492,7 +482,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'unsplash'"
                   >
@@ -514,15 +504,13 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -578,12 +566,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -615,19 +601,16 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <a
-            href="#ref{{ item.idSource }}"
+          <a href="#ref{{ item.idSource }}"
             data-bs-toggle="modal"
             [attr.data-bs-target]="'#ref' + item.idSource ">
 
-            <img
-              [src]="item?.imageSmall"
+            <img [src]="item?.imageSmall"
               [attr.data-id]="item?.idSource"
-              [attr.data-source]="item?.source"
-            />
+              [attr.data-source]="item?.source"/>
           </a>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a
@@ -683,17 +666,15 @@
             </div>
           </div>
 
-          <div
-            class="modal fade"
+          <div class="modal fade"
             id="ref{{ item.idSource }}"
             tabindex="-1"
-            role="dialog"
-          >
+            role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'pexels'"
                   >
@@ -714,7 +695,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'pixabay'"
                   >
@@ -735,7 +716,7 @@
                     </a>
                   </h6>
                   <h6
-                    class="modal-title mr-auto"
+                    class="modal-title me-auto"
                     id="{{ item.idSource }}Label"
                     *ngIf="item.source === 'unsplash'"
                   >
@@ -757,15 +738,13 @@
                       Unsplash
                     </a>
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mx-auto">
                   <img [src]="item?.imageLarge" />
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{ item.title }}</h6>
                     <p>{{ item.description }}</p>
                   </div>
@@ -821,12 +800,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -863,16 +840,16 @@
     <div class="row">
       <div class="column">
         <div class="container element" *ngFor="let item of arr1">
-          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+          <div class="text-center" style="--aspect-ratio: 9 / 16;">
             <a href="#ref{{item?.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item?.idSource">
-              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+              <video width="380" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
           
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getVideoBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -889,7 +866,7 @@
                 Pixabay
               </a>
             </div>
-            <div class="bottom-right-video">
+            <div class="bottom-right">
               <div>
                 <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
               </div>
@@ -906,15 +883,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
+                  <h6 class="modal-title me-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                  <div class="text-center embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
                       <source [src]="item?.imageMedium" type="video/mp4">
@@ -922,7 +897,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{item?.title}}</h6>
                     <p>{{item?.description}}</p>
                   </div>
@@ -950,12 +925,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -979,16 +952,16 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr2">
-          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+          <div class="text-center" style="--aspect-ratio: 9 / 16;">
             <a href="#ref{{item?.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item?.idSource">
-              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+              <video width="380" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getVideoBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1005,7 +978,7 @@
                 Pixabay
               </a>
             </div>
-            <div class="bottom-right-video">
+            <div class="bottom-right">
               <div>
                 <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
               </div>
@@ -1022,15 +995,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
+                  <h6 class="modal-title me-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                  <div class="text-center embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
                       <source [src]="item?.imageMedium" type="video/mp4">
@@ -1038,7 +1009,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{item?.title}}</h6>
                     <p>{{item?.description}}</p>
                   </div>
@@ -1066,12 +1037,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -1095,16 +1064,16 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr3">
-          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+          <div class="text-center" style="--aspect-ratio: 9 / 16;">
             <a href="#ref{{item?.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item?.idSource">
-              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+              <video width="380" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getVideoBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1121,7 +1090,7 @@
                 Pixabay
               </a>
             </div>
-            <div class="bottom-right-video">
+            <div class="bottom-right">
               <div>
                 <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
               </div>
@@ -1138,15 +1107,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
+                  <h6 class="modal-title me-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                  <div class="text-center embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
                       <source [src]="item?.imageMedium" type="video/mp4">
@@ -1154,7 +1121,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{item?.title}}</h6>
                     <p>{{item?.description}}</p>
                   </div>
@@ -1182,12 +1149,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>
@@ -1211,16 +1176,16 @@
       </div>
       <div class="column">
         <div class="container element" *ngFor="let item of arr4">
-          <div class="videowrapper text-center" style="--aspect-ratio: 9 / 16;">
+          <div class="text-center" style="--aspect-ratio: 9 / 16;">
             <a href="#ref{{item?.idSource}}" data-bs-toggle="modal" [attr.data-bs-target]="'#ref' + item?.idSource">
-              <video width="380" height="213,75" oncanplay="this.muted=true" onmouseover="this.play()"
+              <video width="380" oncanplay="this.muted=true" onmouseover="this.play()"
                 onmouseout="this.pause()">
                 <source [src]=item?.imageSmall type="video/mp4">
               </video>
             </a>
           </div>
 
-          <div class="bottom-legend">
+          <div class="bottom-legend" [style.bottom]="getVideoBottomValue(item.authorName)">
             <div class="bottom-left" *ngIf="item.source === 'pexels'">
               <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                 {{ item.authorName }}</a>
@@ -1237,7 +1202,7 @@
                 Pixabay
               </a>
             </div>
-            <div class="bottom-right-video">
+            <div class="bottom-right">
               <div>
                 <img class="downloadIcon" [attr.data-link]="item?.downloadLink" (click)="triggerDownloadVideo($event)" src="../../assets/DownloadIcon.png">
               </div>
@@ -1254,15 +1219,13 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{item?.idSource}}Label">
+                  <h6 class="modal-title me-auto" id="{{item?.idSource}}Label">
                     {{item?.authorName}} | {{item?.source}}
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="videowrapper embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
+                  <div class="text-center embed-responsive embed-responsive-16by9" style="--aspect-ratio: 9 / 16;">
                     <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
                       allow="autoplay">
                       <source [src]="item?.imageMedium" type="video/mp4">
@@ -1270,7 +1233,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <div class="footer-text mr-auto align-bottom">
+                  <div class="footer-text me-auto align-bottom">
                     <h6>{{item?.title}}</h6>
                     <p>{{item?.description}}</p>
                   </div>
@@ -1298,12 +1261,10 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <h3>You need to be logged in to save media.</h3>

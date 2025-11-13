@@ -1,6 +1,6 @@
 <main>
   <div class="container">
-    <div class="page-header pb-2 pt-4 mr-auto">
+    <div class="page-header pb-2 pt-4 me-auto">
       <!-- <h3 class="display-4" (click)="activeSearch()">{{search}}</h3> -->
       <h3>{{item[0]?.title}}</h3>
     </div>
@@ -10,7 +10,7 @@
     </div>
     <div class="container main mt-1 mb-3">
       <div class="row">
-        <div class="videowrapper embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive embed-responsive-16by9">
           <video width="1280" height="720" frameborder="0" controls id="video" allowscriptaccess="always"
             allow="autoplay" [src]=item[0]?.imageMedium type="video/mp4">
           </video>
@@ -32,7 +32,7 @@
             </a></h4>
           <p>{{item[0].description}}</p>
         </div>
-        <div class="buttons ml-auto align-self-center">
+        <div class="buttons ms-auto align-self-center">
           <a class="btn btn-outline-secondary" [attr.data-link]="item[0].imageLarge"
             (click)="triggerDownloadVideo($event)">
             Download
@@ -52,7 +52,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                <h6 class="modal-title me-auto" id="loggedAlertLabel">
                   Ooops
                 </h6>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
