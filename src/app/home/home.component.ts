@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
 
   ngOnDestroy() {
     this.cleanVideos();
-    this.cleanView();
   }
 
   refreshUser() {
@@ -258,22 +257,27 @@ export class HomeComponent implements OnInit {
           console.log("Carga de Vídeos ----->");
           console.log(data);
         },
-        error: (error) => console.log(error)
+        error: (error) => console.log(error),
+        complete: () => {
+          console.log('¡Request de vídeos completado!');
+          this.setVideos();
+        }
       },
     );
+  }
+
+  setVideos() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video: HTMLVideoElement) => {
+      video.muted = true;
+    });
   }
 
   cleanVideos() {
     const videos = document.querySelectorAll('video');
     videos.forEach((video: HTMLVideoElement) => {
       video.pause();
-      video.removeAttribute('src');
-      video.load();
     });
-  }
-
-  handleVideoError(event: any) {
-    console.warn('Video loading interrupted:', event);
   }
 
   triggerDownloadPhoto($event) {
@@ -418,11 +422,49 @@ export class HomeComponent implements OnInit {
     const nameLength = authorName?.length || 0;
     const screenWidth = window.innerWidth;
 
-    if (screenWidth > 1279 && screenWidth <= 1700 || screenWidth <= 800) {
+    if (screenWidth <= 1700 && screenWidth >= 1280) {
+      if(screenWidth <= 1500) {
+        if (nameLength >= 11) {
+          return '60px';
+        }
+      } else if(nameLength >= 15) {
+        return '60px';
+      }
+    } else if (screenWidth <= 800) {
+      if (screenWidth <= 650) {
+        if (nameLength >= 7) {
+          return '60px';
+        }
+      }
       if (nameLength >= 11) {
         return '60px';
       }
     }
     return '40px';
+  }
+
+  getVideoBottomValue(authorName: string): string {
+    const nameLength = authorName?.length || 0;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 1700 && screenWidth >= 1280) {
+      if(screenWidth <= 1500) {
+        if (nameLength >= 11) {
+          return '70px';
+        }
+      } else if(nameLength >= 15) {
+        return '70px';
+      }
+    } else if (screenWidth <= 800) {
+      if (screenWidth <= 650) {
+        if (nameLength >= 7) {
+          return '65px';
+        }
+      }
+      if (nameLength >= 11) {
+        return '65px';
+      }
+    }
+    return '50px';
   }
 }

@@ -1,9 +1,9 @@
 <main>
   <div class="container">
-    <div class="search-header px-3 py-2 pt-md-3 pb-md-2 mr-auto" *ngIf="!searchBox">
+    <div class="search-header px-3 py-2 pt-md-3 pb-md-2 me-auto" *ngIf="!searchBox">
       <h3 class="display-4" (click)="activeSearch()">{{search}}</h3>
     </div>
-    <div class="container px-3 py-2 pt-md-3 pb-md-2 mr-auto" *ngIf="searchBox">
+    <div class="container px-3 py-2 pt-md-3 pb-md-2 me-auto" *ngIf="searchBox">
       <form>
         <div class="form-row">
           <div class="col-8">
@@ -78,7 +78,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -86,7 +86,7 @@
                       Pexels
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -94,7 +94,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
                     <a class="linkAuthor" href="{{
                         item.authorLink
                       }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -144,7 +144,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -218,7 +218,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -226,7 +226,7 @@
                       Pexels
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -234,7 +234,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
                     <a class="linkAuthor" href="{{
                         item.authorLink
                       }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -284,7 +284,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -358,7 +358,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -366,7 +366,7 @@
                       Pexels
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -374,7 +374,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
                     <a class="linkAuthor" href="{{
                         item.authorLink
                       }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -424,7 +424,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -498,7 +498,7 @@
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pexels'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -506,7 +506,7 @@
                       Pexels
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'pixabay'">
                     <a class="linkAuthor" [href]="item.authorLink" target="_blank">
                       {{ item.authorName }}</a>
                     via
@@ -514,7 +514,7 @@
                       Pixabay
                     </a>
                   </h6>
-                  <h6 class="modal-title mr-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
+                  <h6 class="modal-title me-auto" id="{{ item.idSource }}Label" *ngIf="item.source === 'unsplash'">
                     <a class="linkAuthor" href="{{
                         item.authorLink
                       }}?utm_source=mediastockfinder&utm_medium=referral" target="_blank">
@@ -564,7 +564,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6 class="modal-title mr-auto" id="loggedAlertLabel">
+                  <h6 class="modal-title me-auto" id="loggedAlertLabel">
                     Ooops
                   </h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

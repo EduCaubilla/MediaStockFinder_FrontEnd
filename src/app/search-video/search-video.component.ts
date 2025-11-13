@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RequestService } from '../shared/request.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +13,7 @@ import { UserInterface } from '../shared/interfaces/user-interface';
 @Component({
   selector: 'app-search-video',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './search-video.component.html',
   styleUrls: ['./search-video.component.css']
 })
@@ -317,6 +318,31 @@ export class SearchVideoComponent implements OnInit {
   topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  getVideoBottomValue(authorName: string): string {
+    const nameLength = authorName?.length || 0;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 1700 && screenWidth >= 1280) {
+      if(screenWidth <= 1500) {
+        if (nameLength >= 11) {
+          return '70px';
+        }
+      } else if(nameLength >= 15) {
+        return '70px';
+      }
+    } else if (screenWidth <= 800) {
+      if (screenWidth <= 650) {
+        if (nameLength >= 7) {
+          return '60px';
+        }
+      }
+      if (nameLength >= 11) {
+        return '60px';
+      }
+    }
+    return '50px';
   }
 }
 

@@ -123,18 +123,6 @@ img:hover {
   padding-right: 15px !important;
 }
 
-.video_wrapper {
-  position: relative;
-}
-
-.video_wrapper video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30%;
-  height: 30%;
-}
-
 .main-bottom-left {
   color: white;
 }
@@ -244,25 +232,6 @@ img:hover {
   cursor: pointer;
 }
 
-.bottom-right-video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4.8rem;
-  color: rgba(255, 255, 255, 0);
-  position: relative;
-  font-weight: 100;
-  font-size: 1rem;
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 1);
-  -moz-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  -moz-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-  -webkit-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  -webkit-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-  transition: color 1s;
-  cursor: pointer;
-}
-
 .element:hover .bottom-right,
 .element:hover .downloadIcon,
 .element:hover .plusIcon {
@@ -280,16 +249,6 @@ img:hover {
   color: rgba(255, 255, 255, 1);
   text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
   text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-}
-
-.element:hover .bottom-right-video {
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  text-shadow: 0px -2px -3px rgba(122, 122, 122, 1);
-  -moz-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  -moz-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
-  -webkit-text-shadow: 0px 2px 3px rgba(124, 124, 124, 1);
-  -webkit-text-shadow: 0px -2px -3px rgba(122, 122, 122, 0.8);
 }
 
 .element .fas {
